@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Moon, Sun, Search, Command, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -35,16 +36,23 @@ const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+const NAV_LINKS = [
+  { title: "Components", href: "/components" },
+  { title: "Blocks", href: "/blocks" },
+  { title: "Updates", href: "/updates" },
+  { title: "Showcase", href: "/showcase" },
+  { title: "Docs", href: "/docs" },
+];
+
 export function Navbar() {
   const { setTheme, theme } = useTheme();
+  const pathname = usePathname();
   const [mounted, setMounted] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
-
-  const navLinks = ["MCP", "Blocks", "Icons", "Docs", "Pricing", "Examples"];
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
@@ -58,22 +66,29 @@ export function Navbar() {
             SnapJSX
             <span className="text-primary">/&gt;</span>
           </Link>
-          <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                href="#"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {item}
-              </Link>
-            ))}
+          <div className="hidden lg:flex items-center gap-6">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {link.title}
+                </Link>
+              );
+            })}
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           {/* Minimalist Search */}
-          <div className="hidden md:flex items-center gap-2 h-9 w-48 lg:w-64 rounded-md border border-input bg-background/50 px-3 text-sm text-muted-foreground hover:bg-accent transition-colors focus-within:ring-1 focus-within:ring-ring">
+          <div className="hidden md:flex items-center gap-2 h-9 w-48 xl:w-64 rounded-md border border-input bg-background/50 px-3 text-sm text-muted-foreground hover:bg-accent transition-colors focus-within:ring-1 focus-within:ring-ring">
             <Search className="h-4 w-4 shrink-0" />
             <input
               type="text"
@@ -118,7 +133,7 @@ export function Navbar() {
           </button>
 
           <button
-            className="md:hidden flex h-9 w-9 items-center justify-center rounded-md border border-input hover:bg-accent transition-colors"
+            className="lg:hidden flex h-9 w-9 items-center justify-center rounded-md border border-input hover:bg-accent transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -128,29 +143,55 @@ export function Navbar() {
             )}
           </button>
 
-          <button className="hidden sm:flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-primary hover:bg-primary/90 transition-all active:scale-95">
+          <Link
+            href="/docs"
+            className="hidden sm:flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-primary hover:bg-primary/90 transition-all active:scale-95"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full border-b border-border bg-background/95 backdrop-blur-lg animate-in slide-in-from-top-4 p-6">
+        <div className="lg:hidden absolute top-16 left-0 w-full border-b border-border bg-background/95 backdrop-blur-lg animate-in slide-in-from-top-4 p-6 shadow-xl">
           <div className="flex flex-col gap-6">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                href="#"
-                className="text-lg font-semibold text-foreground hover:text-primary transition-colors flex items-center justify-between"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {item}
-              </Link>
-            ))}
-            <div className="pt-6 border-t border-border">
-              <button className="w-full h-12 flex items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className={`text-lg font-semibold transition-colors flex items-center justify-between ${
+                    isActive ? "text-primary" : "text-foreground"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.title}
+                </Link>
+              );
+            })}
+
+            <div className="pt-6 border-t border-border flex flex-col gap-4">
+              <div className="flex items-center gap-4">
+                <Link
+                  href="#"
+                  className="flex-1 flex h-10 items-center justify-center rounded-md border border-input hover:bg-accent transition-colors text-muted-foreground"
+                >
+                  <GithubIcon />
+                  <span className="ml-2 text-sm font-medium">GitHub</span>
+                </Link>
+                <Link
+                  href="#"
+                  className="flex-1 flex h-10 items-center justify-center rounded-md border border-input hover:bg-accent transition-colors text-muted-foreground"
+                >
+                  <TwitterIcon />
+                  <span className="ml-2 text-sm font-medium">Twitter</span>
+                </Link>
+              </div>
+
+              <Link href="/docs" className="w-full h-12 flex items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground">
                 Get Started
-              </button>
+              </Link>
             </div>
           </div>
         </div>

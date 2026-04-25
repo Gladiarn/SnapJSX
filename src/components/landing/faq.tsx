@@ -1,0 +1,78 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { FAQ_DATA } from "@/content/landing-page";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+const CATEGORIES = Object.keys(FAQ_DATA) as (keyof typeof FAQ_DATA)[];
+
+export function FAQ() {
+  const [category, setCategory] = useState<keyof typeof FAQ_DATA>("about");
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const { title, description, questions } = FAQ_DATA[category];
+
+  return (
+    <section className="py-24 bg-transparent">
+      <div className="container mx-auto max-w-3xl px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tight mb-4">{title}</h2>
+          <p className="text-muted-foreground">{description}</p>
+        </div>
+
+        <div className="flex justify-center gap-2 mb-12 flex-wrap">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => {
+                setCategory(cat);
+                setOpenIndex(null);
+              }}
+              className={cn(
+                "px-4 py-2 rounded-full text-sm font-medium transition-all capitalize border",
+                category === cat
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-transparent border-border hover:border-primary/50 text-muted-foreground",
+              )}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div className="space-y-4">
+          {questions.map((faq, i) => (
+            <div
+              key={i}
+              className="rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden"
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="flex w-full items-center justify-between p-6 text-left hover:bg-accent/50 transition-colors"
+              >
+                <span className="font-semibold">{faq.question}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-5 w-5 transition-transform",
+                    openIndex === i && "rotate-180",
+                  )}
+                />
+              </button>
+              {openIndex === i && (
+                <div className="px-6 pb-6 text-muted-foreground text-sm leading-relaxed animate-in fade-in slide-in-from-top-2 duration-300">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

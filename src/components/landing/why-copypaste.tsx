@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { WHY_SNAPJSX_FEATURES } from "@/content/landing-page"
-import { Zap, Code, Shield, Palette, Check, Users } from "lucide-react"
+import * as React from "react";
+import { WHY_SNAPJSX_FEATURES } from "@/content/landing-page";
+import { Zap, Code, Shield, Palette, Check, Users } from "lucide-react";
 
 const icons = {
   zap: Zap,
@@ -11,32 +11,35 @@ const icons = {
   palette: Palette,
   check: Check,
   users: Users,
-}
+};
 
 export function WhySnapJSX() {
-  const [currentIndex, setCurrentIndex] = React.useState(0)
+  const [currentIndex, setCurrentIndex] = React.useState(0);
 
   React.useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % WHY_SNAPJSX_FEATURES.length)
-    }, 3000)
-    return () => clearInterval(timer)
-  }, [])
+      setCurrentIndex((prev) => (prev + 1) % WHY_SNAPJSX_FEATURES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="py-24 bg-transparent">
       <div className="container mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">Why SnapJSX?</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            Why SnapJSX?
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Built for developers who care about speed, quality, and maintainability.
+            Built for developers who care about speed, quality, and
+            maintainability.
           </p>
         </div>
 
         {/* Desktop: Grid / Mobile: Carousel */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {WHY_SNAPJSX_FEATURES.map((feature, idx) => {
-            const Icon = icons[feature.icon as keyof typeof icons]
+            const Icon = icons[feature.icon as keyof typeof icons];
             return (
               <div
                 key={feature.title}
@@ -48,9 +51,11 @@ export function WhySnapJSX() {
                   <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm">{feature.description}</p>
+                <p className="text-muted-foreground text-sm">
+                  {feature.description}
+                </p>
               </div>
-            )
+            );
           })}
         </div>
 
@@ -68,5 +73,5 @@ export function WhySnapJSX() {
         </div>
       </div>
     </section>
-  )
+  );
 }

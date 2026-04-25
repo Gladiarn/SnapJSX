@@ -1,17 +1,20 @@
 export const howItWorksSteps = [
   {
     title: "Browse Components",
-    description: "Explore our curated library of modern, high-performance UI snippets.",
+    description:
+      "Explore our curated library of modern, high-performance UI snippets.",
   },
   {
     title: "Copy & Paste",
-    description: "Grab the clean JSX code with one click and drop it into your project.",
+    description:
+      "Grab the clean JSX code with one click and drop it into your project.",
   },
   {
     title: "Customize & Ship",
-    description: "Tailor the styles to your brand and deploy your interface instantly.",
+    description:
+      "Tailor the styles to your brand and deploy your interface instantly.",
   },
-]
+];
 
 export const WHY_SNAPJSX_FEATURES = [
   {
@@ -21,7 +24,8 @@ export const WHY_SNAPJSX_FEATURES = [
   },
   {
     title: "Full Control",
-    description: "You own the source code. Modify it to fit your exact requirements.",
+    description:
+      "You own the source code. Modify it to fit your exact requirements.",
     icon: "code",
   },
   {
@@ -44,38 +48,65 @@ export const WHY_SNAPJSX_FEATURES = [
     description: "Join hundreds of developers building the future of the web.",
     icon: "users",
   },
-]
+];
 
 export const STATS = [
   { header: "200+", body: "components" },
   { header: "50K+", body: "developers" },
   { header: "0KB", body: "dependencies" },
   { header: "4.9★", body: "rating" },
-]
+];
 
 export const FAQ_DATA = {
   about: {
     title: "About SnapJSX",
-    description: "Learn more about our mission to provide the most accessible and clean component library for the modern web.",
+    description:
+      "Learn more about our mission to provide the most accessible and clean component library for the modern web.",
     questions: [
-      { question: "What is SnapJSX?", answer: "SnapJSX is a collection of high-quality, copy-pasteable React components built with performance and developer experience in mind." },
-      { question: "Can I contribute?", answer: "We love community contributions! Check our GitHub repository to see how you can help." }
-    ]
+      {
+        question: "What is SnapJSX?",
+        answer:
+          "SnapJSX is a collection of high-quality, copy-pasteable React components built with performance and developer experience in mind.",
+      },
+      {
+        question: "Can I contribute?",
+        answer:
+          "We love community contributions! Check our GitHub repository to see how you can help.",
+      },
+    ],
   },
   features: {
     title: "Features & Usage",
-    description: "Discover how to maximize your productivity using our feature-rich component set.",
+    description:
+      "Discover how to maximize your productivity using our feature-rich component set.",
     questions: [
-      { question: "Are these accessible?", answer: "Yes, all our components are built with accessibility as a first-class citizen." },
-      { question: "How do I customize themes?", answer: "You can easily customize the look and feel by modifying the CSS variables provided in our setup documentation." }
-    ]
+      {
+        question: "Are these accessible?",
+        answer:
+          "Yes, all our components are built with accessibility as a first-class citizen.",
+      },
+      {
+        question: "How do I customize themes?",
+        answer:
+          "You can easily customize the look and feel by modifying the CSS variables provided in our setup documentation.",
+      },
+    ],
   },
   pricing: {
     title: "Pricing & License",
-    description: "Everything you need to know about our licensing and pricing models.",
+    description:
+      "Everything you need to know about our licensing and pricing models.",
     questions: [
-      { question: "Is this free?", answer: "Yes, the core library is open source and free to use in both personal and commercial projects." },
-      { question: "Do you offer premium support?", answer: "We provide community support via Discord and paid consultancy services for enterprise integration." }
-    ]
-  }
-}
+      {
+        question: "Is this free?",
+        answer:
+          "Yes, the core library is open source and free to use in both personal and commercial projects.",
+      },
+      {
+        question: "Do you offer premium support?",
+        answer:
+          "We provide community support via Discord and paid consultancy services for enterprise integration.",
+      },
+    ],
+  },
+};

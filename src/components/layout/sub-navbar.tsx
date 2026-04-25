@@ -1,0 +1,26 @@
+"use client";
+
+import { Menu } from "lucide-react";
+
+export function SubNavbar({
+  onToggleSidebar,
+  activeSection,
+}: {
+  onToggleSidebar: () => void;
+  activeSection: string;
+}) {
+  return (
+    <div className="sticky top-16 z-30 w-full border-b border-border bg-background/95 backdrop-blur-md px-4 h-12 flex items-center gap-4">
+      <button
+        onClick={onToggleSidebar}
+        className="p-1.5 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+      >
+        <Menu className="w-4 h-4" />
+      </button>
+      <div className="text-sm text-muted-foreground">
+        Docs <span className="mx-2">/</span>{" "}
+        <span className="font-medium text-foreground">{activeSection}</span>
+      </div>
+    </div>
+  );
+}

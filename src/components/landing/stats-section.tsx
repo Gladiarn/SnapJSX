@@ -1,4 +1,4 @@
-import { STATS } from "@/content/landing-page"
+import { STATS } from "@/content/landing-page";
 
 export function StatsSection() {
   return (
@@ -18,5 +18,5 @@ export function StatsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

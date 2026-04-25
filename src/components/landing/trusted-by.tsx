@@ -1,4 +1,11 @@
-import { SiNextdotjs, SiTailwindcss, SiReact, SiTypescript, SiVercel, SiBiome } from "react-icons/si"
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiReact,
+  SiTypescript,
+  SiVercel,
+  SiBiome,
+} from "react-icons/si";
 
 export function TrustedBy() {
   const FRAMEWORKS = [
@@ -8,7 +15,7 @@ export function TrustedBy() {
     { name: "TypeScript", icon: SiTypescript },
     { name: "Vercel", icon: SiVercel },
     { name: "Biome", icon: SiBiome },
-  ]
+  ];
 
   return (
     <section className="py-12 border-y border-border bg-background">
@@ -28,5 +35,5 @@ export function TrustedBy() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,32 +1,36 @@
-"use client"
+"use client";
 
-import useEmblaCarousel from "embla-carousel-react"
+import useEmblaCarousel from "embla-carousel-react";
 
 const TESTIMONIALS = [
   {
-    quote: "SnapJSX saved me hours of styling. It’s like having a design system in my pocket.",
+    quote:
+      "SnapJSX saved me hours of styling. It’s like having a design system in my pocket.",
     author: "Alex Rivera",
-    role: "Senior Frontend Engineer"
+    role: "Senior Frontend Engineer",
   },
   {
-    quote: "The cleanest JSX I've ever copied. No bloat, just pure, functional beauty.",
+    quote:
+      "The cleanest JSX I've ever copied. No bloat, just pure, functional beauty.",
     author: "Sarah Chen",
-    role: "Fullstack Developer"
+    role: "Fullstack Developer",
   },
   {
-    quote: "Finally, a library that respects my time. The components just work out of the box.",
+    quote:
+      "Finally, a library that respects my time. The components just work out of the box.",
     author: "James Wilson",
-    role: "Product Designer"
+    role: "Product Designer",
   },
   {
-    quote: "The attention to detail in these components is unmatched. Truly production-ready.",
+    quote:
+      "The attention to detail in these components is unmatched. Truly production-ready.",
     author: "Elena Rodriguez",
-    role: "Lead Developer"
-  }
-]
+    role: "Lead Developer",
+  },
+];
 
 export function Testimonials() {
-  const [emblaRef] = useEmblaCarousel({ loop: false, align: "start" })
+  const [emblaRef] = useEmblaCarousel({ loop: false, align: "start" });
 
   return (
     <section className="py-24 bg-transparent overflow-hidden">
@@ -35,15 +39,19 @@ export function Testimonials() {
           Loved by Developers
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Hear what the community is saying about their experience building with SnapJSX.
+          Hear what the community is saying about their experience building with
+          SnapJSX.
         </p>
       </div>
-      
+
       <div className="container mx-auto max-w-7xl px-4 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
         <div className="embla overflow-hidden" ref={emblaRef}>
           <div className="flex gap-8 md:gap-6 cursor-grab active:cursor-grabbing">
             {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="flex-none w-[280px] sm:w-[320px] md:w-[400px] p-8 rounded-3xl border border-border/50 bg-card/30 backdrop-blur-md transition-all duration-300">
+              <div
+                key={i}
+                className="flex-none w-[280px] sm:w-[320px] md:w-[400px] p-8 rounded-3xl border border-border/50 bg-card/30 backdrop-blur-md transition-all duration-300"
+              >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
                     {t.author.charAt(0)}
@@ -62,5 +70,5 @@ export function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }
