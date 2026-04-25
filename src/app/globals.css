@@ -2,7 +2,9 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -32,49 +34,49 @@
 }
 
 :root {
-  --background: #FBFBFB;
-  --foreground: #0A0A0A;
-  --card: #FFFFFF;
-  --card-foreground: #0A0A0A;
-  --popover: #FFFFFF;
-  --popover-foreground: #0A0A0A;
-  --primary: #FFD700;
-  --primary-foreground: #0A0A0A;
+  --background: #fbfbfb;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #ffd700;
+  --primary-foreground: #0a0a0a;
   --primary-shadow: rgba(255, 215, 0, 0.2);
-  --secondary: #F4F4F5;
-  --secondary-foreground: #0A0A0A;
-  --muted: #F4F4F5;
-  --muted-foreground: #71717A;
-  --accent: #F4F4F5;
-  --accent-foreground: #0A0A0A;
-  --destructive: #EF4444;
-  --destructive-foreground: #FAFAFA;
-  --border: #E4E4E7;
-  --input: #E4E4E7;
-  --ring: #FFD700;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #0a0a0a;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #ffd700;
 }
 
 .dark {
-  --background: #0A0A0A;
-  --foreground: #FAFAFA;
-  --card: #0F0F0F;
-  --card-foreground: #FAFAFA;
-  --popover: #0F0F0F;
-  --popover-foreground: #FAFAFA;
-  --primary: #FFD700;
-  --primary-foreground: #0A0A0A;
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --card: #0f0f0f;
+  --card-foreground: #fafafa;
+  --popover: #0f0f0f;
+  --popover-foreground: #fafafa;
+  --primary: #ffd700;
+  --primary-foreground: #0a0a0a;
   --primary-shadow: rgba(255, 215, 0, 0.1);
-  --secondary: #1A1A1A;
-  --secondary-foreground: #FAFAFA;
-  --muted: #1A1A1A;
-  --muted-foreground: #A1A1AA;
-  --accent: #1A1A1A;
-  --accent-foreground: #FAFAFA;
-  --destructive: #7F1D1D;
-  --destructive-foreground: #FAFAFA;
-  --border: #27272A;
-  --input: #27272A;
-  --ring: #FFD700;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #fafafa;
+  --muted: #1a1a1a;
+  --muted-foreground: #a1a1aa;
+  --accent: #1a1a1a;
+  --accent-foreground: #fafafa;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #ffd700;
 }
 
 @layer base {
@@ -87,7 +89,8 @@
 }
 
 .grid-background {
-  background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
     linear-gradient(to bottom, var(--border) 1px, transparent 1px);
   background-size: 32px 32px;
   opacity: 0.03;
