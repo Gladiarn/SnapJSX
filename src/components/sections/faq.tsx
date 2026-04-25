@@ -30,7 +30,7 @@ export function FAQ() {
   return (
     <section className="py-24 ">
       <div className="container mx-auto max-w-3xl px-4">
-        <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Frequently Asked Questions.</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {FAQS.map((faq, i) => (
             <div
