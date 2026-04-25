@@ -1,10 +1,10 @@
 import {
+  SiBiome,
   SiNextdotjs,
-  SiTailwindcss,
   SiReact,
+  SiTailwindcss,
   SiTypescript,
   SiVercel,
-  SiBiome,
 } from "react-icons/si";
 
 export function TrustedBy() {

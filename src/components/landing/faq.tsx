@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { type ClassValue, clsx } from "clsx";
 import { ChevronDown } from "lucide-react";
-import { FAQ_DATA } from "@/content/landing-page";
-import { clsx, type ClassValue } from "clsx";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { FAQ_DATA } from "@/content/landing-page";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

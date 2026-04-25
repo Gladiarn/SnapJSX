@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { DOCS_SIDEBAR } from "@/content/docs-sidebar";
 import {
-  ChevronRight,
-  Search,
+  BarChart,
+  Bell,
   Book,
+  ChevronRight,
+  FileText,
   Layout,
   Loader2,
-  Bell,
   Menu,
-  FileText,
-  BarChart,
+  Search,
   X,
 } from "lucide-react";
+import { useState } from "react";
+import { DOCS_SIDEBAR } from "@/content/docs-sidebar";
 
 interface SidebarProps {
   activeSection: string;

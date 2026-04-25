@@ -1,8 +1,8 @@
 "use client";
 
+import { Check, Code, Palette, Shield, Users, Zap } from "lucide-react";
 import * as React from "react";
 import { WHY_SNAPJSX_FEATURES } from "@/content/landing-page";
-import { Zap, Code, Shield, Palette, Check, Users } from "lucide-react";
 
 const icons = {
   zap: Zap,

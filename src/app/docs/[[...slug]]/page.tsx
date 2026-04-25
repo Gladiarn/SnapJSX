@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { DOCS_CONTENT } from "@/content/docs";
-import { DOCS_SIDEBAR } from "@/content/docs-sidebar";
+import { useEffect, useState } from "react";
 import { Sidebar } from "@/components/docs/docs-sidebar";
 import { SubNavbar } from "@/components/layout/sub-navbar";
+import { DOCS_CONTENT } from "@/content/docs";
+import { DOCS_SIDEBAR } from "@/content/docs-sidebar";
 
 export default function DocPage({ params }: { params: { slug?: string[] } }) {
   const [activeSection, setActiveSection] = useState("Introduction");
