@@ -4,10 +4,9 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden pt-24 pb-24 md:pt-32 md:pb-32">
       {/* Background Effects */}
-      
-      <div className="absolute bottom-0 left-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 translate-y-1/2 rounded-full bg-primary/10 blur-[120px]" />
+
       <div className="absolute top-1/4 left-1/4 -z-10 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
-      <div className="absolute top-1/3 right-1/4 -z-10 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+      
 
       <div className="container mx-auto flex max-w-[1152px] flex-col items-center px-4 text-center">
         <div className="mb-6 flex items-center gap-2 rounded-full border border-border  px-4 py-1.5 text-xs font-medium backdrop-blur-sm">
