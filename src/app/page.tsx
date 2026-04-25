@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/hero";
 import { TrustedBy } from "@/components/sections/trusted-by";
 import { FamousComponents } from "@/components/sections/famous-components";
+import { StatsSection } from "@/components/sections/stats-section";
 import { WhySnapJSX } from "@/components/sections/why-copypaste";
 import { Testimonials } from "@/components/sections/testimonials";
 import { FAQ } from "@/components/sections/faq";
@@ -13,8 +14,9 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <FamousComponents />
-      <HowItWorks />
+      <StatsSection />
       <WhySnapJSX />
+      <HowItWorks />
       <Testimonials />
       <FAQ />
     </div>

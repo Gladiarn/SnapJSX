@@ -5,7 +5,7 @@ import { howItWorksSteps } from "@/content/landing-page";
 
 export function HowItWorks() {
   return (
-    <section className="py-24 bg-transparent relative z-10">
+    <section className="py-24 md:py-40 bg-transparent relative z-10 overflow-hidden">
       {/* Abstract Orbiting Background */}
       <div className="hidden md:block">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] border border-primary/10 rounded-full animate-[spin_20s_linear_infinite]" />

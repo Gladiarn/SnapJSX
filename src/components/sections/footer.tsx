@@ -23,9 +23,9 @@ export function Footer() {
   return (
     <footer className=" border-t border-border pt-16 pb-8">
       <div className="container mx-auto max-w-7xl px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        <div className="flex flex-wrap justify-between gap-12 mb-16">
           {FOOTER_LINKS.map((section) => (
-            <div key={section.title}>
+            <div key={section.title} className="min-w-[140px]">
               <h4 className="font-bold mb-4">{section.title}</h4>
               <ul className="space-y-2">
                 {section.links.map((link) => (
@@ -49,7 +49,7 @@ export function Footer() {
             <span className="text-primary">/&gt;</span>
           </div>
           <p className="text-xs text-muted-foreground text-center" suppressHydrationWarning>
-            © {new Date().getFullYear()} SnapJSX Component Registry. Built with precision.
+            © {new Date().getFullYear()} ICZB. Built with precision.
           </p>
         </div>
       </div>
