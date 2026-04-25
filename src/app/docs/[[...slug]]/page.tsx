@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "@/components/docs/docs-sidebar";
 import { SubNavbar } from "@/components/layout/sub-navbar";
-import { DOCS_CONTENT } from "@/content/docs";
+import { DocsContent } from "@/components/docs/docs-content";
 import { DOCS_SIDEBAR } from "@/content/docs-sidebar";
 
 export default function DocPage({ params }: { params: { slug?: string[] } }) {
@@ -34,45 +34,6 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
     return "Documentation";
   };
 
-  const renderContent = () => {
-    return (
-      <article className="max-w-4xl py-12 space-y-12">
-        <header className="space-y-4 border-b border-border pb-8">
-          <div className="text-primary font-medium text-sm tracking-wider uppercase tracking-widest">
-            {findCategory()}
-          </div>
-          <h1 className="text-5xl font-extrabold tracking-tight text-foreground">
-            {activeSection}
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-            Everything you need to know about implementing the {activeSection}{" "}
-            component in your SnapJSX projects.
-          </p>
-        </header>
-
-        <section className="prose dark:prose-invert prose-lg max-w-none">
-          <h2 className="text-2xl font-semibold mb-4">Overview</h2>
-          <p className="text-muted-foreground leading-relaxed">
-            SnapJSX components are designed to be lightweight and highly
-            customizable. The {activeSection} component follows our core
-            philosophy of providing clean, accessible, and dependency-free
-            markup that you can drop directly into your codebase.
-          </p>
-
-          <div className="my-8 p-6 rounded-2xl border border-border bg-card/30 backdrop-blur-sm">
-            <h3 className="text-lg font-semibold mb-2 text-foreground">
-              Usage Note
-            </h3>
-            <p className="text-muted-foreground text-sm">
-              Copy the code snippet below and adjust the CSS classes or
-              structure to fit your design system requirements.
-            </p>
-          </div>
-        </section>
-      </article>
-    );
-  };
-
   return (
     <div className="flex w-full min-h-screen bg-transparent">
       <Sidebar
@@ -88,7 +49,21 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
           activeSection={activeSection}
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
         />
-        <div className="px-8 md:px-12">{renderContent()}</div>
+        <div className="w-full px-6 py-10 md:px-10 lg:px-16 space-y-12">
+          <header className="space-y-4 pb-4">
+            <div className="text-primary font-bold text-xs tracking-[0.2em] uppercase">
+              {findCategory()}
+            </div>
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground">
+              {activeSection}
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
+              Everything you need to know about {activeSection} in SnapJSX. Copy, paste, and customize.
+            </p>
+          </header>
+
+          <DocsContent activeSection={activeSection} />
+        </div>
       </main>
     </div>
   );
