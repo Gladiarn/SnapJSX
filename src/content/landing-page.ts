@@ -45,3 +45,10 @@ export const WHY_SNAPJSX_FEATURES = [
     icon: "users",
   },
 ]
+
+export const STATS = [
+  { header: "200+", body: "Components" },
+  { header: "50K+", body: "Developers" },
+  { header: "0KB", body: "Dependencies" },
+  { header: "4.9★", body: "Rating" },
+]
