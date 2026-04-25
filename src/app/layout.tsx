@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/sections/navbar";
-import { Footer } from "@/components/sections/footer";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-foreground font-sans antialiased landing-grid`}
+        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-foreground font-sans antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider
@@ -39,9 +39,7 @@ export default function RootLayout({
         >
           <div className="flex min-h-screen flex-col">
             <Navbar />
-            <div className="flex-1">
-              {children}
-            </div>
+            <div className="flex-1">{children}</div>
             <Footer />
           </div>
         </ThemeProvider>

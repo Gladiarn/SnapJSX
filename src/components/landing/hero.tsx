@@ -6,7 +6,6 @@ export function Hero() {
       {/* Background Effects */}
 
       <div className="absolute top-1/4 left-1/4 -z-10 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
-      
 
       <div className="container mx-auto flex max-w-[1152px] flex-col items-center px-4 text-center">
         <div className="mb-6 flex items-center gap-2 rounded-full border border-border  px-4 py-1.5 text-xs font-medium backdrop-blur-sm">

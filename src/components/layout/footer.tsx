@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "next/link";
 
 const FOOTER_LINKS = [
   {
@@ -17,7 +17,7 @@ const FOOTER_LINKS = [
     title: "Legal",
     links: ["Privacy", "Terms", "License", "Cookies"],
   },
-]
+];
 
 export function Footer() {
   return (
@@ -48,11 +48,14 @@ export function Footer() {
             SnapJSX
             <span className="text-primary">/&gt;</span>
           </div>
-          <p className="text-xs text-muted-foreground text-center" suppressHydrationWarning>
+          <p
+            className="text-xs text-muted-foreground text-center"
+            suppressHydrationWarning
+          >
             © {new Date().getFullYear()} ICZB. Built with precision.
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }
