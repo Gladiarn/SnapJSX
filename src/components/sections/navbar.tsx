@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
+import { Command, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
-import { Moon, Sun, Search, Command, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import * as React from "react";
 
 // Simple social icon components to avoid issues with Lucide imports
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -90,7 +90,8 @@ export function Navbar() {
 
           {/* Social Icons */}
           <Link
-            href="#"
+            href="https://github.com/Gladiarn"
+            target="_blank"
             className="hidden sm:flex h-9 w-9 items-center justify-center rounded-md hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
           >
             <GithubIcon />

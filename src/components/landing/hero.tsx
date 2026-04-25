@@ -1,4 +1,4 @@
-import { Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 export function Hero() {
   return (

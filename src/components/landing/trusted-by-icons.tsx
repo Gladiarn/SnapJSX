@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 // Official brand-appropriate icons
 export const NextJsIcon = (props: React.SVGProps<SVGSVGElement>) => (

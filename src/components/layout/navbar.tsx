@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
+import { Command, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Moon, Sun, Search, Command, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import * as React from "react";
 
 // Simple social icon components to avoid issues with Lucide imports
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -39,9 +39,9 @@ const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const NAV_LINKS = [
   { title: "Components", href: "/components" },
   { title: "Blocks", href: "/blocks" },
-  { title: "Updates", href: "/updates" },
-  { title: "Showcase", href: "/showcase" },
   { title: "Docs", href: "/docs" },
+  { title: "Showcase", href: "/showcase" },
+  { title: "Updates", href: "/updates" },
 ];
 
 export function Navbar() {
@@ -105,13 +105,17 @@ export function Navbar() {
 
           {/* Social Icons */}
           <Link
-            href="#"
+            href="https://github.com/Gladiarn"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden sm:flex h-9 w-9 items-center justify-center rounded-md hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
           >
             <GithubIcon />
           </Link>
           <Link
             href="#"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden sm:flex h-9 w-9 items-center justify-center rounded-md hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
           >
             <TwitterIcon />
@@ -174,7 +178,9 @@ export function Navbar() {
             <div className="pt-6 border-t border-border flex flex-col gap-4">
               <div className="flex items-center gap-4">
                 <Link
-                  href="#"
+                  href="https://github.com/Gladiarn"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 flex h-10 items-center justify-center rounded-md border border-input hover:bg-accent transition-colors text-muted-foreground"
                 >
                   <GithubIcon />
@@ -182,6 +188,8 @@ export function Navbar() {
                 </Link>
                 <Link
                   href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 flex h-10 items-center justify-center rounded-md border border-input hover:bg-accent transition-colors text-muted-foreground"
                 >
                   <TwitterIcon />
@@ -189,7 +197,10 @@ export function Navbar() {
                 </Link>
               </div>
 
-              <Link href="/docs" className="w-full h-12 flex items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground">
+              <Link
+                href="/docs"
+                className="w-full h-12 flex items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground"
+              >
                 Get Started
               </Link>
             </div>

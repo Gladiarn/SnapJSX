@@ -1,15 +1,15 @@
-import { Hero } from "@/components/landing/hero";
-import { TrustedBy } from "@/components/landing/trusted-by";
 import { FamousComponents } from "@/components/landing/famous-components";
-import { StatsSection } from "@/components/landing/stats-section";
-import { WhySnapJSX } from "@/components/landing/why-copypaste";
-import { Testimonials } from "@/components/landing/testimonials";
 import { FAQ } from "@/components/landing/faq";
+import { Hero } from "@/components/landing/hero";
 import { HowItWorks } from "@/components/landing/how-it-works";
+import { StatsSection } from "@/components/landing/stats-section";
+import { Testimonials } from "@/components/landing/testimonials";
+import { TrustedBy } from "@/components/landing/trusted-by";
+import { WhySnapJSX } from "@/components/landing/why-copypaste";
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col bg-transparent landing-grid">
+    <div className="relative flex flex-col bg-transparent">
       <Hero />
       <TrustedBy />
       <FamousComponents />
