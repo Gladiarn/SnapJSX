@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { fetchComponent } from "@/services/component-service";
 
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ name: string }> },
 ) {
   const { name } = await params;

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ComponentCard } from "@/components/ui/component-card"
+import { ComponentCard } from "@/components/ui/component-card";
 
 const FAMOUS_COMPONENTS = [
   {
@@ -14,7 +14,7 @@ const FAMOUS_COMPONENTS = [
       </div>
     ),
     codeJsx: `function GlassCard() { return <div className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/20">...</div> }`,
-    codeHtml: `<div class="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/20">...</div>`
+    codeHtml: `<div class="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/20">...</div>`,
   },
   {
     title: "Infinite Scroll List",
@@ -23,7 +23,7 @@ const FAMOUS_COMPONENTS = [
     size: "4.1kb",
     preview: <div className="h-16 w-32 bg-muted/50 rounded-lg" />,
     codeJsx: `function ScrollList() { return <ul>...</ul> }`,
-    codeHtml: `<ul>...</ul>`
+    codeHtml: `<ul>...</ul>`,
   },
   {
     title: "Radial Context Menu",
@@ -32,16 +32,18 @@ const FAMOUS_COMPONENTS = [
     size: "3.2kb",
     preview: <div className="h-16 w-16 rounded-full bg-primary/20" />,
     codeJsx: `function RadialMenu() { return <div className="rounded-full">...</div> }`,
-    codeHtml: `<div class="rounded-full">...</div>`
-  }
-]
+    codeHtml: `<div class="rounded-full">...</div>`,
+  },
+];
 
 export function FamousComponents() {
   return (
     <section className="py-24 bg-transparent">
       <div className="container mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">Famous Components</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            Famous Components
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Our most loved snippets, optimized for performance and style.
           </p>
@@ -54,5 +56,5 @@ export function FamousComponents() {
         </div>
       </div>
     </section>
-  )
+  );
 }

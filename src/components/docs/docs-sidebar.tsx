@@ -9,7 +9,6 @@ import {
   Layout,
   Loader2,
   Menu,
-  Search,
   X,
 } from "lucide-react";
 import { useState } from "react";
@@ -101,7 +100,9 @@ export function Sidebar({
                             {item.subItems.map((sub) => (
                               <li key={sub}>
                                 <button
-                                  onClick={() => onSectionChange(`${item.name}-${sub}`)}
+                                  onClick={() =>
+                                    onSectionChange(`${item.name}-${sub}`)
+                                  }
                                   className={`w-full text-left px-2 py-1 rounded-md text-xs transition-colors ${
                                     activeSection === `${item.name}-${sub}`
                                       ? "bg-primary/10 text-primary font-medium"
@@ -117,7 +118,9 @@ export function Sidebar({
                       </div>
                     ) : (
                       <button
-                        onClick={() => onSectionChange(`${section.title}-${item.name}`)}
+                        onClick={() =>
+                          onSectionChange(`${section.title}-${item.name}`)
+                        }
                         className={`w-full text-left px-2 py-1.5 rounded-md text-sm transition-colors ${
                           activeSection === `${section.title}-${item.name}`
                             ? "bg-primary/10 text-primary font-medium border border-primary/20"

@@ -9,7 +9,8 @@ export default function UpdatesPage() {
       version: "v0.1.1",
       date: "April 26, 2026",
       title: "Registry-Driven Documentation Expansion",
-      summary: "Refactored the documentation architecture to be fully registry-driven and modular.",
+      summary:
+        "Refactored the documentation architecture to be fully registry-driven and modular.",
       details: [
         "Implemented GenericCategoryPage for scalable UI component showcasing.",
         "Transitioned to a strictly scoped navigation identifier system (Category-SubItem) for precise routing.",

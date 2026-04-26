@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { DocsContent } from "@/components/docs/docs-content";
 import { Sidebar } from "@/components/docs/docs-sidebar";
 import { SubNavbar } from "@/components/layout/sub-navbar";
-import { DocsContent } from "@/components/docs/docs-content";
 import { useDocsStore } from "@/lib/store";
 
 export default function DocPage({ params }: { params: { slug?: string[] } }) {
@@ -26,7 +26,7 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
         section.items.some(
           (item: any) =>
             item.name === activeSection ||
-            (item.subItems && item.subItems.includes(activeSection)),
+            item.subItems?.includes(activeSection),
         )
       ) {
         return section.category || section.title;
@@ -59,7 +59,8 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
               {activeSection}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
-              Everything you need to know about {activeSection} in SnapJSX. Copy, paste, and customize.
+              Everything you need to know about {activeSection} in SnapJSX.
+              Copy, paste, and customize.
             </p>
           </header>
 

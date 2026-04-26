@@ -10,7 +10,6 @@ import { WhySnapJSX } from "@/components/landing/why-copypaste";
 export default function Home() {
   return (
     <div className="relative flex flex-col bg-transparent">
-
       <Hero />
       <TrustedBy />
       <FamousComponents />
