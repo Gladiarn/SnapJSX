@@ -1,5 +1,3 @@
-import React from "react";
-
 interface ComponentPlaceholderProps {
   title: string;
 }
@@ -14,7 +12,8 @@ export function ComponentPlaceholder({ title }: ComponentPlaceholderProps) {
         <div className="space-y-2">
           <h3 className="text-xl font-semibold">Under Construction</h3>
           <p className="text-muted-foreground max-w-sm">
-            We're currently working on the detailed documentation and code examples for {title}. Check back soon!
+            We're currently working on the detailed documentation and code
+            examples for {title}. Check back soon!
           </p>
         </div>
       </div>
@@ -28,7 +27,10 @@ export function ComponentPlaceholder({ title }: ComponentPlaceholderProps) {
             "Accessibility (WAI-ARIA) compliant markup",
             "Copy-paste ready Tailwind CSS",
           ].map((item) => (
-            <li key={item} className="flex items-center gap-3 p-4 rounded-lg border border-border bg-card/50">
+            <li
+              key={item}
+              className="flex items-center gap-3 p-4 rounded-lg border border-border bg-card/50"
+            >
               <div className="h-2 w-2 rounded-full bg-primary" />
               <span className="text-sm font-medium">{item}</span>
             </li>

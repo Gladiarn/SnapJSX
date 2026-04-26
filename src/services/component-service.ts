@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 export async function fetchComponent(name: string) {
   // Logic from the original route.ts, refactored into a service.
   // In a real registry, this would query a database or CMS.

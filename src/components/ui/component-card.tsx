@@ -1,26 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Copy, Code2 } from "lucide-react"
+import { Code2, Copy } from "lucide-react";
+import { useState } from "react";
 
 interface ComponentCardProps {
-  title: string
-  category: string
-  description: string
-  size: string
-  preview: React.ReactNode
-  codeJsx: string
-  codeHtml: string
+  title: string;
+  category: string;
+  description: string;
+  size: string;
+  preview: React.ReactNode;
+  codeJsx: string;
+  codeHtml: string;
 }
 
-export function ComponentCard({ title, description, category, size, preview, codeJsx, codeHtml }: ComponentCardProps) {
-  const [showCode, setShowCode] = useState(false)
-  const [lang, setLang] = useState<"jsx" | "html">("jsx")
+export function ComponentCard({
+  title,
+  description,
+  category,
+  size,
+  preview,
+  codeJsx,
+  codeHtml,
+}: ComponentCardProps) {
+  const [showCode, setShowCode] = useState(false);
+  const [lang, setLang] = useState<"jsx" | "html">("jsx");
 
   const copyToClipboard = () => {
-    const code = lang === "jsx" ? codeJsx : codeHtml
-    navigator.clipboard.writeText(code)
-  }
+    const code = lang === "jsx" ? codeJsx : codeHtml;
+    navigator.clipboard.writeText(code);
+  };
 
   return (
     <div className="group relative flex flex-col rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/50">
@@ -36,21 +44,18 @@ export function ComponentCard({ title, description, category, size, preview, cod
 
       {/* Preview Area */}
       <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-background border border-border flex items-center justify-center mb-4">
-        {/* Chessboard Grid Background */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.04] dark:opacity-[0.08]"
           style={{
-            backgroundImage: "linear-gradient(45deg, var(--muted-foreground) 25%, transparent 25%, transparent 75%, var(--muted-foreground) 75%, var(--muted-foreground)), linear-gradient(45deg, var(--muted-foreground) 25%, transparent 25%, transparent 75%, var(--muted-foreground) 75%, var(--foreground))",
+            backgroundImage:
+              "linear-gradient(45deg, var(--muted-foreground) 25%, transparent 25%, transparent 75%, var(--muted-foreground) 75%, var(--muted-foreground)), linear-gradient(45deg, var(--muted-foreground) 25%, transparent 25%, transparent 75%, var(--muted-foreground) 75%, var(--foreground))",
             backgroundSize: "14px 14px",
-            backgroundPosition: "0 0, 7px 7px"
+            backgroundPosition: "0 0, 7px 7px",
           }}
         />
 
-        {/* Isolated Preview Container */}
         <div className="relative z-10 flex items-center justify-center p-8">
-          <div className="bg-card rounded-lg p-6 shadow-sm">
-            {preview}
-          </div>
+          <div className="bg-card rounded-lg p-6 shadow-sm">{preview}</div>
         </div>
       </div>
 
@@ -80,27 +85,31 @@ export function ComponentCard({ title, description, category, size, preview, cod
       </div>
 
       {/* Code Viewer */}
-      {showCode && (
-        <div className="mt-4 p-4 rounded-lg bg-muted text-xs font-mono overflow-auto max-h-64">
+      <div
+        className={`mt-4 rounded-lg bg-muted text-xs font-mono overflow-hidden transition-all duration-200 ease-in-out ${
+          showCode ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="p-4">
           <div className="flex gap-2 mb-2">
-            <button 
+            <button
               type="button"
-              onClick={() => setLang("jsx")} 
+              onClick={() => setLang("jsx")}
               className={`px-2 py-1 rounded ${lang === "jsx" ? "bg-primary text-primary-foreground" : "bg-background"}`}
             >
               JSX
             </button>
-            <button 
+            <button
               type="button"
-              onClick={() => setLang("html")} 
+              onClick={() => setLang("html")}
               className={`px-2 py-1 rounded ${lang === "html" ? "bg-primary text-primary-foreground" : "bg-background"}`}
             >
               HTML/CSS
             </button>
           </div>
-          <pre>{lang === "jsx" ? codeJsx : codeHtml}</pre>
+          <pre className="overflow-auto">{lang === "jsx" ? codeJsx : codeHtml}</pre>
         </div>
-      )}
+      </div>
     </div>
-  )
+  );
 }

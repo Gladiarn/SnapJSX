@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
-import { ReactNode } from "react";
+import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 interface PrimaryButtonProps {
-  children: ReactNode;
+  children?: ReactNode;
   onClick?: () => void;
   icon?: LucideIcon;
   disabled?: boolean;
