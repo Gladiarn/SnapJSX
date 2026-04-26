@@ -44,7 +44,6 @@ export function ComponentCard({
 
       {/* Preview Area */}
       <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-background border border-border flex items-center justify-center mb-4">
-        {/* Chessboard Grid Background */}
         <div
           className="absolute inset-0 opacity-[0.04] dark:opacity-[0.08]"
           style={{
@@ -55,7 +54,6 @@ export function ComponentCard({
           }}
         />
 
-        {/* Isolated Preview Container */}
         <div className="relative z-10 flex items-center justify-center p-8">
           <div className="bg-card rounded-lg p-6 shadow-sm">{preview}</div>
         </div>
@@ -87,8 +85,12 @@ export function ComponentCard({
       </div>
 
       {/* Code Viewer */}
-      {showCode && (
-        <div className="mt-4 p-4 rounded-lg bg-muted text-xs font-mono overflow-auto max-h-64">
+      <div
+        className={`mt-4 rounded-lg bg-muted text-xs font-mono overflow-hidden transition-all duration-200 ease-in-out ${
+          showCode ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="p-4">
           <div className="flex gap-2 mb-2">
             <button
               type="button"
@@ -105,9 +107,9 @@ export function ComponentCard({
               HTML/CSS
             </button>
           </div>
-          <pre>{lang === "jsx" ? codeJsx : codeHtml}</pre>
+          <pre className="overflow-auto">{lang === "jsx" ? codeJsx : codeHtml}</pre>
         </div>
-      )}
+      </div>
     </div>
   );
 }
