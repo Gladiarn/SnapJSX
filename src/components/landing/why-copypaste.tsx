@@ -66,13 +66,17 @@ export function WhySnapJSX() {
 
         {/* Mobile Carousel Dots */}
         <div className="md:hidden flex justify-center gap-2 mt-8">
-          {WHY_SNAPJSX_FEATURES.map((_, idx) => (
+          {WHY_SNAPJSX_FEATURES.map((feature) => (
             <button
               type="button"
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
+              key={feature.title}
+              onClick={() =>
+                setCurrentIndex(WHY_SNAPJSX_FEATURES.indexOf(feature))
+              }
               className={`h-2 rounded-full transition-all ${
-                idx === currentIndex ? "w-8 bg-primary" : "w-2 bg-border"
+                WHY_SNAPJSX_FEATURES.indexOf(feature) === currentIndex
+                  ? "w-8 bg-primary"
+                  : "w-2 bg-border"
               }`}
             />
           ))}

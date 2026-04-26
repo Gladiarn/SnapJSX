@@ -7,7 +7,9 @@ import { SubNavbar } from "@/components/layout/sub-navbar";
 import { useDocsStore } from "@/lib/store";
 
 export default function DocPage({ params }: { params: { slug?: string[] } }) {
-  const [activeSection, setActiveSection] = useState("Introduction");
+  const [activeSection, setActiveSection] = useState(
+    "Getting Started-Introduction",
+  );
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { sidebarData } = useDocsStore();
 
