@@ -1,0 +1,16 @@
+{
+  "name": "BouncingDots",
+  "category": "Loaders",
+  "type": "UI Component",
+  "description": "Rhythmic bouncing animation for loading states.",
+  "props": [
+    {
+      "name": "className",
+      "type": "string",
+      "required": false,
+      "description": "Custom CSS classes."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

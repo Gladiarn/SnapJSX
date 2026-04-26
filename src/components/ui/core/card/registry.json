@@ -1,0 +1,28 @@
+{
+  "name": "Card",
+  "category": "Core Components",
+  "type": "UI Component",
+  "description": "Premium container component with hover elevation.",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "description": "Main heading for the card."
+    },
+    {
+      "name": "subtitle",
+      "type": "string",
+      "required": false,
+      "description": "Subheading or description."
+    },
+    {
+      "name": "hoverable",
+      "type": "boolean",
+      "default": "true",
+      "description": "Enables lift-up animation on hover."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

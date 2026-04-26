@@ -13,7 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { DOCS_SIDEBAR } from "@/content/docs-sidebar";
+import { useDocsStore } from "@/lib/store";
 
 interface SidebarProps {
   activeSection: string;
@@ -29,6 +29,7 @@ export function Sidebar({
   onToggle,
 }: SidebarProps) {
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
+  const { sidebarData } = useDocsStore();
 
   const toggleGroup = (name: string) => {
     setOpenGroups((prev) => ({ ...prev, [name]: !prev[name] }));
@@ -74,7 +75,7 @@ export function Sidebar({
         </div>
 
         <nav className="space-y-6">
-          {DOCS_SIDEBAR.map((section, idx) => (
+          {sidebarData.map((section, idx) => (
             <div key={section.title} className="px-2">
               {idx > 0 && <div className="border-t border-border/50 mb-6" />}
               <div className="flex items-center gap-2 mb-3 text-muted-foreground text-xs tracking-wide font-medium uppercase">
@@ -100,9 +101,9 @@ export function Sidebar({
                             {item.subItems.map((sub) => (
                               <li key={sub}>
                                 <button
-                                  onClick={() => onSectionChange(sub)}
+                                  onClick={() => onSectionChange(`${item.name}-${sub}`)}
                                   className={`w-full text-left px-2 py-1 rounded-md text-xs transition-colors ${
-                                    activeSection === sub
+                                    activeSection === `${item.name}-${sub}`
                                       ? "bg-primary/10 text-primary font-medium"
                                       : "text-muted-foreground hover:text-foreground"
                                   }`}
@@ -116,9 +117,9 @@ export function Sidebar({
                       </div>
                     ) : (
                       <button
-                        onClick={() => onSectionChange(item.name)}
+                        onClick={() => onSectionChange(`${section.title}-${item.name}`)}
                         className={`w-full text-left px-2 py-1.5 rounded-md text-sm transition-colors ${
-                          activeSection === item.name
+                          activeSection === `${section.title}-${item.name}`
                             ? "bg-primary/10 text-primary font-medium border border-primary/20"
                             : "text-foreground hover:bg-muted"
                         }`}

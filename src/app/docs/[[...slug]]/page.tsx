@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { Sidebar } from "@/components/docs/docs-sidebar";
 import { SubNavbar } from "@/components/layout/sub-navbar";
 import { DocsContent } from "@/components/docs/docs-content";
-import { DOCS_SIDEBAR } from "@/content/docs-sidebar";
+import { useDocsStore } from "@/lib/store";
 
 export default function DocPage({ params }: { params: { slug?: string[] } }) {
   const [activeSection, setActiveSection] = useState("Introduction");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const { sidebarData } = useDocsStore();
 
   useEffect(() => {
     if (params.slug && params.slug.length > 0) {
@@ -20,7 +21,7 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
   }, [params.slug]);
 
   const findCategory = () => {
-    for (const section of DOCS_SIDEBAR as any) {
+    for (const section of sidebarData) {
       if (
         section.items.some(
           (item: any) =>
@@ -43,7 +44,7 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
       />
       <main
-        className={`flex-1 transition-all duration-300 ${isSidebarOpen ? "md:ml-64" : "ml-0"}`}
+        className={`flex-1 min-w-0 transition-all duration-300 ${isSidebarOpen ? "md:ml-64" : "ml-0"}`}
       >
         <SubNavbar
           activeSection={activeSection}
