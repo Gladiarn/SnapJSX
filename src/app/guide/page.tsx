@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import { MaintenancePlaceholder } from "@/components/ui/core/maintenance/maintenance-placeholder";
 
 export default function GuidePage() {
   return (
@@ -16,14 +17,7 @@ export default function GuidePage() {
         </p>
       </header>
       
-      <div className="prose dark:prose-invert max-w-none">
-        <p>This guide section is currently under development. Here you will find tutorials on:</p>
-        <ul>
-          <li>Advanced Framer Motion integration</li>
-          <li>Building custom UI blocks from scratch</li>
-          <li>Architecting your own registry systems</li>
-        </ul>
-      </div>
+      <MaintenancePlaceholder />
     </main>
   );
 }

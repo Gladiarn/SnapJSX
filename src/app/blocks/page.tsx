@@ -1,3 +1,5 @@
+import { MaintenancePlaceholder } from "@/components/ui/core/maintenance/maintenance-placeholder";
+
 export default function BlocksPage() {
   return (
     <main className="container mx-auto max-w-6xl px-4 py-24">
@@ -13,6 +15,8 @@ export default function BlocksPage() {
           High-level functional blocks pre-assembled for rapid development.
         </p>
       </header>
+
+      <MaintenancePlaceholder />
     </main>
   );
 }
