@@ -2,20 +2,20 @@ import Link from "next/link";
 
 const FOOTER_LINKS = [
   {
-    title: "Product",
-    links: ["Components", "Blocks", "Icons", "Templates"],
+    title: "SnapJSX",
+    links: ["Components", "Blocks", "Icons", "Templates"], // 4 links
   },
   {
     title: "Resources",
-    links: ["Documentation", "Showcase", "Blog", "Tutorials"],
+    links: ["Guide", "API Reference", "Showcase", "Blog", "Roadmap"], // 5 links
   },
   {
     title: "Community",
-    links: ["GitHub", "Discord", "Twitter", "Authors"],
+    links: ["GitHub", "Discord", "Twitter", "Contributing"], // 4 links
   },
   {
-    title: "Legal",
-    links: ["Privacy", "Terms", "License", "Cookies"],
+    title: "Legal & Support",
+    links: ["Privacy", "Terms", "License", "Security", "Status"], // 5 links
   },
 ];
 

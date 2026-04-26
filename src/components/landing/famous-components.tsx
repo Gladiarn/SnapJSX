@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, type Variants } from "framer-motion";
 import { ComponentCard } from "@/components/ui/component-card";
 
 const FAMOUS_COMPONENTS = [
@@ -37,6 +38,23 @@ const FAMOUS_COMPONENTS = [
 ];
 
 export function FamousComponents() {
+  const container: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 },
+    },
+  };
+
+  const item: Variants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
+  };
+
   return (
     <section className="py-24 bg-transparent">
       <div className="container mx-auto max-w-7xl px-4">
@@ -49,11 +67,19 @@ export function FamousComponents() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
+        >
           {FAMOUS_COMPONENTS.map((comp) => (
-            <ComponentCard key={comp.title} {...comp} />
+            <motion.div key={comp.title} variants={item}>
+              <ComponentCard {...comp} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

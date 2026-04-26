@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Check, Code, Palette, Shield, Users, Zap } from "lucide-react";
 import * as React from "react";
 import { WHY_SNAPJSX_FEATURES } from "@/content/landing-page";
@@ -41,20 +42,24 @@ export function WhySnapJSX() {
           {WHY_SNAPJSX_FEATURES.map((feature, idx) => {
             const Icon = icons[feature.icon as keyof typeof icons];
             return (
-              <div
+              <motion.div
                 key={feature.title}
-                className={`p-6 rounded-2xl border border-border bg-card/50 backdrop-blur-sm transition-all hover:scale-[1.02] hover:border-primary/50 hover:shadow-lg ${
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className={`p-6 rounded-2xl border border-border bg-card/50 backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-lg ${
                   idx === currentIndex ? "block" : "hidden md:block"
                 }`}
               >
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary shadow-[0_0_10px_-2px_rgba(255,215,0,0.3)]">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
                   <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground text-sm">
                   {feature.description}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -63,6 +68,7 @@ export function WhySnapJSX() {
         <div className="md:hidden flex justify-center gap-2 mt-8">
           {WHY_SNAPJSX_FEATURES.map((_, idx) => (
             <button
+              type="button"
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`h-2 rounded-full transition-all ${

@@ -9,7 +9,8 @@ export default function UpdatesPage() {
       version: "v0.1.2",
       date: "April 26, 2026",
       title: "UI Performance Optimization & Routing Stability",
-      summary: "Refined navigation routing and optimized component animations for a snappier feel.",
+      summary:
+        "Refined navigation routing and optimized component animations for a snappier feel.",
       details: [
         "Replaced Framer Motion code viewer animations with optimized CSS transitions to eliminate layout lag.",
         "Strictly coupled sidebar navigation to component registry using full-path identifiers.",

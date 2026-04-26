@@ -107,7 +107,9 @@ export function ComponentCard({
               HTML/CSS
             </button>
           </div>
-          <pre className="overflow-auto">{lang === "jsx" ? codeJsx : codeHtml}</pre>
+          <pre className="overflow-auto">
+            {lang === "jsx" ? codeJsx : codeHtml}
+          </pre>
         </div>
       </div>
     </div>

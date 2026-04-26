@@ -13,10 +13,11 @@ export default function GuidePage() {
           Developer Guide
         </h1>
         <p className="text-lg text-muted-foreground max-w-lg">
-          Master the SnapJSX ecosystem with in-depth tutorials, best practices, and conceptual deep-dives.
+          Master the SnapJSX ecosystem with in-depth tutorials, best practices,
+          and conceptual deep-dives.
         </p>
       </header>
-      
+
       <MaintenancePlaceholder />
     </main>
   );

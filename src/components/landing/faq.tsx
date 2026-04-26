@@ -1,6 +1,7 @@
 "use client";
 
 import { type ClassValue, clsx } from "clsx";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -46,7 +47,7 @@ export function FAQ() {
           ))}
         </div>
 
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
@@ -57,7 +58,7 @@ export function FAQ() {
               key={i}
               variants={{
                 hidden: { opacity: 0, y: 10 },
-                show: { opacity: 1, y: 0, transition: { delay: i * 0.1 } }
+                show: { opacity: 1, y: 0, transition: { delay: i * 0.1 } },
               }}
               className="rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden"
             >

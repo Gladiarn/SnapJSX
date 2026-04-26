@@ -46,8 +46,8 @@ export function Testimonials() {
             Loved by Developers
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Hear what the community is saying about their experience building with
-            SnapJSX.
+            Hear what the community is saying about their experience building
+            with SnapJSX.
           </p>
         </div>
 

@@ -16,7 +16,7 @@ export default function ShowcasePage() {
           See what developers have built using the SnapJSX ecosystem.
         </p>
       </header>
-      
+
       <MaintenancePlaceholder />
     </main>
   );

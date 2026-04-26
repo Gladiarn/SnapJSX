@@ -16,7 +16,7 @@ export default function ComponentsPage() {
           Browse our library of high-performance, accessible React components.
         </p>
       </header>
-      
+
       <MaintenancePlaceholder />
     </main>
   );

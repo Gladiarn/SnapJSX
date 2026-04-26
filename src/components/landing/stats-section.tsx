@@ -1,23 +1,29 @@
 "use client";
 
-import { motion, useSpring, useTransform, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useInView, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { STATS } from "@/content/landing-page";
 
 function Counter({ value }: { value: string }) {
   const nodeRef = useRef(null);
   const isInView = useInView(nodeRef, { once: true, amount: 0.5 });
-  
-  // Extract number if present
-  const numericValue = parseInt(value.replace(/[^0-9]/g, ""), 10);
-  const suffix = value.replace(/[0-9]/g, "");
+
+  const isFloat = value.includes(".");
+  const numericValue = parseFloat(value.replace(/[^0-9.]/g, ""));
+  const suffix = value.replace(/[0-9.]/g, "");
 
   const count = useSpring(0, {
     stiffness: 70,
     damping: 15,
   });
 
-  const display = useTransform(count, (latest) => Math.floor(latest));
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    return count.on("change", (latest) => {
+      setDisplay(isFloat ? parseFloat(latest.toFixed(1)) : Math.floor(latest));
+    });
+  }, [count, isFloat]);
 
   useEffect(() => {
     if (isInView) {
@@ -27,7 +33,7 @@ function Counter({ value }: { value: string }) {
 
   return (
     <div ref={nodeRef} className="flex justify-center">
-      <motion.span>{display}</motion.span>
+      <span>{display}</span>
       <span>{suffix}</span>
     </div>
   );

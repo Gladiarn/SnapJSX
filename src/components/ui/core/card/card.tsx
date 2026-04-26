@@ -11,7 +11,6 @@ interface CardProps {
   hoverable?: boolean;
 }
 
-
 /**
  * Card - A minimalist container for grouping related content.
  */

@@ -100,7 +100,9 @@ export function Sidebar({
                             {item.subItems.map((sub) => (
                               <li key={sub}>
                                 <button
-                                  onClick={() => onSectionChange(`${section.title}-${sub}`)}
+                                  onClick={() =>
+                                    onSectionChange(`${section.title}-${sub}`)
+                                  }
                                   className={`w-full text-left px-2 py-1 rounded-md text-xs transition-colors ${
                                     activeSection === `${section.title}-${sub}`
                                       ? "bg-primary/10 text-primary font-medium"
@@ -109,7 +111,6 @@ export function Sidebar({
                                 >
                                   {sub}
                                 </button>
-
                               </li>
                             ))}
                           </ul>
