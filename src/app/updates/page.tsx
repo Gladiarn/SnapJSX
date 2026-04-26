@@ -8,13 +8,17 @@ export default function UpdatesPage() {
     {
       version: "v0.1.3",
       date: "April 26, 2026",
-      title: "Architecture Stabilization & Routing Precision",
-      summary: "Refined registry-based routing and established a permanent stability baseline.",
+      title: "Architecture Stabilization & Registry-Driven Routing",
+      summary: "Completed a comprehensive refactor of the documentation architecture for extreme scalability.",
       details: [
-        "Implemented strict routing hierarchy (Category-Subcategory) for documentation.",
-        "Refactored DocsContent to be a purely registry-driven dispatcher, removing hardcoded routes.",
-        "Standardized 'All' tab galleries using GenericCategoryPage.",
-        "Conducted a comprehensive codebase cleanup: enforced accessibility standards (A11y), resolved TypeScript type errors, and finalized linting compliance.",
+        "Registry Hub: Consolidated all UI block definitions into a centralized, type-safe registry-hub.",
+        "Generic Rendering: Replaced category-specific pages with a single, reusable 'GenericCategoryPage' engine.",
+        "Routing Precision: Standardized sidebar navigation to 'Category-Subcategory' paths for rock-solid routing.",
+        "Mobile Responsiveness: Optimized grid layouts and code viewers to account for fixed-width sidebar constraints.",
+        "Performance Tuning: Replaced heavy Framer Motion height-transitions with GPU-accelerated CSS to eliminate scroll lag.",
+        "Accessibility: Resolved all A11y warnings including missing button types and SVG titles.",
+        "Code Quality: Cleaned codebase of linting regressions (noArrayIndexKey, unused imports, explicit types).",
+        "Fullstack Readiness: Transitioned all static documentation data into a stateful pattern to facilitate future backend integration."
       ],
     },
     {
