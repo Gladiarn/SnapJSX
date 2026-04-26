@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { ComponentCard } from "@/components/ui/component-card";
 
 export interface ComponentVariant {
@@ -19,29 +19,37 @@ interface GenericCategoryPageProps {
   variants: ComponentVariant[];
 }
 
-export function GenericCategoryPage({ title, description, activeSection, variants }: GenericCategoryPageProps) {
-  
+export function GenericCategoryPage({
+  title,
+  description,
+  activeSection,
+  variants,
+}: GenericCategoryPageProps) {
   const renderContent = () => {
     // 1. Identify if we are in "All" mode
     const isAll = activeSection.endsWith("-All");
-    
+
     // 2. Identify the target subcategory/component
     // Sidebar sends "Category-SubItem" (e.g., "Buttons-Primary Button")
-    const activeSub = activeSection.includes("-") ? activeSection.split("-")[1] : activeSection;
+    const activeSub = activeSection.includes("-")
+      ? activeSection.split("-")[1]
+      : activeSection;
 
     // 3. Filter logic
-    const filteredVariants = isAll 
-        ? variants 
-        : variants.filter((c) => c.subcategory === activeSub || c.title === activeSub);
-    
+    const filteredVariants = isAll
+      ? variants
+      : variants.filter(
+          (c) => c.subcategory === activeSub || c.title === activeSub,
+        );
+
     if (filteredVariants.length > 0) {
-        return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-                {filteredVariants.map((item) => (
-                    <ComponentCard key={item.title} {...item} />
-                ))}
-            </div>
-        )
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          {filteredVariants.map((item) => (
+            <ComponentCard key={item.title} {...item} />
+          ))}
+        </div>
+      );
     }
 
     return (

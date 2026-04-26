@@ -56,11 +56,16 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
               {findCategory()}
             </div>
             <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground">
-              {activeSection.includes("-") ? activeSection.split("-")[1] : activeSection}
+              {activeSection.includes("-")
+                ? activeSection.split("-")[1]
+                : activeSection}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
-              Everything you need to know about {activeSection.includes("-") ? activeSection.split("-")[1] : activeSection} in SnapJSX.
-              Copy, paste, and customize.
+              Everything you need to know about{" "}
+              {activeSection.includes("-")
+                ? activeSection.split("-")[1]
+                : activeSection}{" "}
+              in SnapJSX. Copy, paste, and customize.
             </p>
           </header>
 

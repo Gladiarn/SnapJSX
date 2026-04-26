@@ -6,10 +6,10 @@ import { howItWorksSteps } from "@/content/landing-page";
 export function HowItWorks() {
   return (
     <section className="py-24 md:py-40 bg-transparent relative z-10 overflow-hidden">
-      {/* Abstract Orbiting Background */}
-      <div className="hidden md:block">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] border border-primary/10 rounded-full animate-[spin_20s_linear_infinite]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] border border-primary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+      {/* Background Orbiting Rings - Static/Minimal Motion */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-30">
+        <div className="w-[400px] h-[400px] md:w-[600px] md:h-[600px] border border-primary/20 rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[400px] md:h-[400px] border border-primary/30 rounded-full" />
       </div>
 
       <div className="container mx-auto max-w-7xl px-4 relative z-10">
@@ -22,18 +22,17 @@ export function HowItWorks() {
           </p>
         </div>
 
-        {/* Mobile-first timeline layout */}
-        <div className="flex flex-col gap-8 max-w-sm mx-auto md:max-w-none md:flex-row md:justify-between md:gap-12 relative">
+        <div className="flex flex-col gap-8 max-w-sm mx-auto md:max-w-none md:flex-row md:justify-between md:gap-12">
           {howItWorksSteps.map((step, index) => (
             <motion.div
               key={step.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex-1 flex flex-row md:flex-col items-center text-left md:text-center relative gap-6 md:gap-0"
             >
-              <div className="shrink-0 flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full border border-primary/20 bg-background text-primary text-xl md:text-2xl font-mono font-bold shadow-[0_0_20px_-5px_rgba(255,215,0,0.2)]">
+              <div className="shrink-0 flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full border border-primary/20 bg-background text-primary text-xl md:text-2xl font-mono font-bold">
                 0{index + 1}
               </div>
 

@@ -1,11 +1,11 @@
 import { Sparkles } from "lucide-react";
-import { ComponentVariant } from "@/components/docs/sections/generic-category-page";
 import React from "react";
+import type { ComponentVariant } from "@/components/docs/sections/generic-category-page";
 // We import the components only for the "preview" function, not the code snippet strings.
 import { PrimaryButton } from "@/components/ui/buttons/primary-button/primary-button";
-import { Spinner } from "@/components/ui/loaders/spinner/spinner";
-import { BouncingDots } from "@/components/ui/loaders/bouncing-dots/bouncing-dots";
 import { Card } from "@/components/ui/core/card/card";
+import { BouncingDots } from "@/components/ui/loaders/bouncing-dots/bouncing-dots";
+import { Spinner } from "@/components/ui/loaders/spinner/spinner";
 
 export const RegistryHub: Record<string, ComponentVariant[]> = {
   "Core Components": [

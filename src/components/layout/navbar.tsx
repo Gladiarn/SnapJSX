@@ -39,7 +39,7 @@ const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const NAV_LINKS = [
   { title: "Components", href: "/components" },
   { title: "Blocks", href: "/blocks" },
-  { title: "Docs", href: "/docs" },
+  { title: "Guide", href: "/guide" },
   { title: "Showcase", href: "/showcase" },
   { title: "Updates", href: "/updates" },
 ];
@@ -62,7 +62,7 @@ export function Navbar() {
             href="/"
             className="font-mono text-xl font-bold tracking-tighter"
           >
-            <span className="text-primary">&lt;/</span>
+            <span className="text-primary">&lt;</span>
             SnapJSX
             <span className="text-primary">/&gt;</span>
           </Link>

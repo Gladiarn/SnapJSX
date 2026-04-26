@@ -2,20 +2,20 @@ import Link from "next/link";
 
 const FOOTER_LINKS = [
   {
-    title: "Product",
-    links: ["Components", "Blocks", "Icons", "Templates"],
+    title: "SnapJSX",
+    links: ["Components", "Blocks", "Icons", "Templates"], // 4 links
   },
   {
     title: "Resources",
-    links: ["Documentation", "Showcase", "Blog", "Tutorials"],
+    links: ["Guide", "API Reference", "Showcase", "Blog", "Roadmap"], // 5 links
   },
   {
     title: "Community",
-    links: ["GitHub", "Discord", "Twitter", "Authors"],
+    links: ["GitHub", "Discord", "Twitter", "Contributing"], // 4 links
   },
   {
-    title: "Legal",
-    links: ["Privacy", "Terms", "License", "Cookies"],
+    title: "Legal & Support",
+    links: ["Privacy", "Terms", "License", "Security", "Status"], // 5 links
   },
 ];
 
@@ -44,7 +44,7 @@ export function Footer() {
         </div>
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="font-mono text-sm font-bold tracking-tighter">
-            <span className="text-primary">&lt;/</span>
+            <span className="text-primary">&lt;</span>
             SnapJSX
             <span className="text-primary">/&gt;</span>
           </div>
