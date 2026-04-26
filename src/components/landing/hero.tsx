@@ -34,6 +34,7 @@ export function Hero() {
           <button className="flex h-12 items-center justify-center rounded-lg border border-input  px-8 py-3 text-base font-semibold hover:bg-accent transition-all active:scale-95">
             Learn More
           </button>
+          
         </div>
 
         {/* Animated Illustration Placeholder */}
