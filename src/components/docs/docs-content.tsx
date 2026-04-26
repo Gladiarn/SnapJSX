@@ -17,87 +17,69 @@ interface DocsContentProps {
 
 export function DocsContent({ activeSection }: DocsContentProps) {
   switch (activeSection) {
+    // Getting Started
+    case "Getting Started-Introduction":
     case "Introduction":
       return <Introduction />;
+    case "Getting Started-Installation":
     case "Installation":
       return <Installation />;
+    case "Getting Started-Quick Start":
     case "Quick Start":
       return <QuickStart />;
+    case "Getting Started-Customization":
     case "Customization":
       return <Customization />;
-// Core Components
-case "Buttons":
-  return (
-    <GenericCategoryPage
-      title="Buttons"
-      description="SnapJSX button variants are built for clean integration."
-      activeSection={activeSection}
-      variants={[
-        {
-          title: "Primary Button",
-          category: "Buttons",
-          description: "Main call-to-action button.",
-          size: "0.45kb",
-          preview: <PrimaryButton icon={Sparkles}>Primary Button</PrimaryButton>,
-          codeJsx: `<PrimaryButton icon={Sparkles}>Primary Button</PrimaryButton>`,
-          codeHtml: `<button class="...">...</button>`
-        }
-      ]}
-    />
-  );
-case "Primary Button":
-  return (
-    <GenericCategoryPage
-      title="Buttons"
-      description="SnapJSX button variants are built for clean integration."
-      activeSection="Primary Button"
-      variants={[
-        {
-          title: "Primary Button",
-          category: "Buttons",
-          description: "Main call-to-action button.",
-          size: "0.45kb",
-          preview: <PrimaryButton icon={Sparkles}>Primary Button</PrimaryButton>,
-          codeJsx: `<PrimaryButton icon={Sparkles}>Primary Button</PrimaryButton>`,
-          codeHtml: `<button class="...">...</button>`
-        }
-      ]}
-    />
-  );
-case "Cards":
-case "Basic Card":
-  return (
-    <GenericCategoryPage
-      title="Cards"
-      description="Versatile containers for content display."
-      activeSection={activeSection}
-      variants={[
-        {
-          title: "Basic Card",
-          category: "Cards",
-          description: "Standard container with hover elevation.",
-          size: "0.35kb",
-          preview: <Card title="Card Title" subtitle="Subtitle">Card content.</Card>,
-          codeJsx: `<Card title="Title" subtitle="Subtitle">Content</Card>`,
-          codeHtml: `<div class="bg-white border p-8 rounded-[2rem]">...</div>`
-        }
-      ]}
-    />
-  );
+    
+    // Core Components
+    case "Core Components-Buttons":
+    case "Buttons-All":
+    case "Buttons-Primary Button":
+      return (
+        <GenericCategoryPage
+          title="Buttons"
+          description="SnapJSX button variants are built for clean integration."
+          activeSection={activeSection}
+          variants={[
+            {
+              title: "Buttons-Primary Button",
+              category: "Buttons",
+              description: "Main call-to-action button.",
+              size: "0.45kb",
+              preview: <PrimaryButton icon={Sparkles}>Primary Button</PrimaryButton>,
+              codeJsx: `<PrimaryButton icon={Sparkles}>Primary Button</PrimaryButton>`,
+              codeHtml: `<button class="...">...</button>`
+            }
+          ]}
+        />
+      );
 
-case "Inputs":
-case "Modals":
-case "Dropdowns":
-  return <ComponentPlaceholder title={activeSection} />;
-
+    case "Core Components-Cards":
+    case "Cards-All":
+    case "Cards-Basic Card":
+      return (
+        <GenericCategoryPage
+          title="Cards"
+          description="Versatile containers for content display."
+          activeSection={activeSection}
+          variants={[
+            {
+              title: "Cards-Basic Card",
+              category: "Cards",
+              description: "Standard container with hover elevation.",
+              size: "0.35kb",
+              preview: <Card title="Card Title" subtitle="Subtitle">Card content.</Card>,
+              codeJsx: `<Card title="Title" subtitle="Subtitle">Content</Card>`,
+              codeHtml: `<div class="bg-white border p-8 rounded-[2rem]">...</div>`
+            }
+          ]}
+        />
+      );
 
     // Loaders
     case "Loaders-All":
-    case "Loaders":
-    case "Spinners-All":
-    case "Spinners-Spinner":
-    case "Pulse-All":
-    case "Pulse-Bouncing Dots":
+    case "Loaders-Spinners":
+    case "Loaders-Pulse":
       return (
         <GenericCategoryPage
           title="Loaders"
@@ -105,7 +87,7 @@ case "Dropdowns":
           activeSection={activeSection}
           variants={[
             {
-              title: "Spinners-Spinner",
+              title: "Loaders-Spinners-Spinner",
               category: "Loaders",
               description: "Smooth rotation loader.",
               size: "0.25kb",
@@ -114,7 +96,7 @@ case "Dropdowns":
               codeHtml: `<div class="..."></div>`
             },
             {
-              title: "Pulse-Bouncing Dots",
+              title: "Loaders-Pulse-Bouncing Dots",
               category: "Loaders",
               description: "Rhythmic bouncing dots.",
               size: "0.3kb",

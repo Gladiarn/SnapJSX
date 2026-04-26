@@ -6,6 +6,18 @@ import { useState } from "react";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.1",
+      date: "April 26, 2026",
+      title: "Registry-Driven Documentation Expansion",
+      summary: "Refactored the documentation architecture to be fully registry-driven and modular.",
+      details: [
+        "Implemented GenericCategoryPage for scalable UI component showcasing.",
+        "Transitioned to a strictly scoped navigation identifier system (Category-SubItem) for precise routing.",
+        "Automated sidebar navigation with explicit 'All' tabs for every category.",
+        "Standardized component registration with local and global registry manifests.",
+      ],
+    },
+    {
       version: "v0.1.0",
       date: "April 25, 2026",
       title: "Initial Launch & Component Library Setup",
