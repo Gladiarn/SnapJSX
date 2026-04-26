@@ -106,9 +106,6 @@ export default function UpdatesPage() {
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
           Development Log
         </h1>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
-          Development Log
-        </h1>
         <p className="text-lg text-muted-foreground max-w-lg">
           Tracking the evolution of SnapJSX, from architectural shifts to
           feature releases.
