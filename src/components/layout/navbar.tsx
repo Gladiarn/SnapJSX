@@ -62,7 +62,7 @@ export function Navbar() {
             href="/"
             className="font-mono text-xl font-bold tracking-tighter"
           >
-            <span className="text-primary">&lt;/</span>
+            <span className="text-primary">&lt;</span>
             SnapJSX
             <span className="text-primary">/&gt;</span>
           </Link>
