@@ -14,8 +14,8 @@ export default function Home() {
       <TrustedBy />
       <FamousComponents />
       <StatsSection />
-      <HowItWorks />
       <WhySnapJSX />
+      <HowItWorks />
       <Testimonials />
       <FAQ />
     </div>
