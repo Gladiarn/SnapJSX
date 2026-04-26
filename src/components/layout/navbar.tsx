@@ -39,7 +39,7 @@ const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const NAV_LINKS = [
   { title: "Components", href: "/components" },
   { title: "Blocks", href: "/blocks" },
-  { title: "Docs", href: "/docs" },
+  { title: "Guide", href: "/guide" },
   { title: "Showcase", href: "/showcase" },
   { title: "Updates", href: "/updates" },
 ];
