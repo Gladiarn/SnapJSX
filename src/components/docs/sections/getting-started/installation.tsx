@@ -1,9 +1,32 @@
-import React from "react";
-import { INSTALLATION_DATA } from "@/content/docs-content-data";
+import React, { useState } from "react";
 import { Terminal, CheckCircle2 } from "lucide-react";
 
 export function Installation() {
-  const { prerequisites, steps } = INSTALLATION_DATA;
+  const [data] = useState({
+    title: "Installation",
+    description: "Get started with SnapJSX in your React + Tailwind CSS project in less than 5 minutes.",
+    prerequisites: [
+      "React 18+ installed in your project",
+      "Tailwind CSS v3.0+ configured",
+      "A bundler like Vite, Next.js, or Create React App"
+    ],
+    steps: [
+      {
+        title: "Step 1: Install Tailwind CSS",
+        description: "If you haven't already, install and configure Tailwind CSS in your project:",
+        code: "npm install -D tailwindcss postcss autoprefixer\nnpx tailwindcss init -p",
+        language: "bash"
+      },
+      {
+        title: "Step 2: Configure Tailwind",
+        description: "Add the following to your tailwind.config.js:",
+        code: "/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  content: [\n    \"./src/**/*.{js,ts,jsx,tsx}\",\n  ],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n}",
+        language: "javascript"
+      }
+    ]
+  });
+
+  const { prerequisites, steps } = data;
 
   return (
     <div className="w-full space-y-12">

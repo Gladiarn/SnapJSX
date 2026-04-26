@@ -1,0 +1,30 @@
+{
+  "name": "SnapJSX Component Registry",
+  "version": "1.0.0",
+  "components": [
+    {
+      "name": "PrimaryButton",
+      "path": "src/components/ui/buttons/primary-button/primary-button.tsx",
+      "category": "Buttons",
+      "metadata": "src/components/ui/buttons/primary-button/registry.json"
+    },
+    {
+      "name": "Spinner",
+      "path": "src/components/ui/loaders/spinner/spinner.tsx",
+      "category": "Loaders",
+      "metadata": "src/components/ui/loaders/spinner/registry.json"
+    },
+    {
+      "name": "BouncingDots",
+      "path": "src/components/ui/loaders/bouncing-dots/bouncing-dots.tsx",
+      "category": "Loaders",
+      "metadata": "src/components/ui/loaders/bouncing-dots/registry.json"
+    },
+    {
+      "name": "Card",
+      "path": "src/components/ui/core/card/card.tsx",
+      "category": "Core Components",
+      "metadata": "src/components/ui/core/card/registry.json"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "PrimaryButton",
+  "category": "Buttons",
+  "type": "UI Component",
+  "description": "Main call-to-action button with hover and tap animations.",
+  "props": [
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "required": true,
+      "description": "Button label or content."
+    },
+    {
+      "name": "icon",
+      "type": "LucideIcon",
+      "required": false,
+      "description": "Optional icon to display before label."
+    },
+    {
+      "name": "onClick",
+      "type": "function",
+      "required": false,
+      "description": "Click event handler."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Disables user interaction."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}

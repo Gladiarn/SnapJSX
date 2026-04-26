@@ -1,0 +1,17 @@
+{
+  "name": "Spinner",
+  "category": "Loaders",
+  "type": "UI Component",
+  "description": "Smooth rotation loader built with Framer Motion.",
+  "props": [
+    {
+      "name": "size",
+      "type": "enum",
+      "options": ["sm", "md", "lg"],
+      "default": "md",
+      "description": "The size of the spinner."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

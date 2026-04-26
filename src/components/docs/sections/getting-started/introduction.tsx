@@ -1,5 +1,4 @@
-import React from "react";
-import { INTRODUCTION_DATA } from "@/content/docs-content-data";
+import React, { useState } from "react";
 import { Copy, Code2, Package } from "lucide-react";
 
 const IconMap: Record<string, any> = {
@@ -9,7 +8,52 @@ const IconMap: Record<string, any> = {
 };
 
 export function Introduction() {
-  const { features, philosophy, credits } = INTRODUCTION_DATA;
+  const [data] = useState({
+    title: "Introduction",
+    description: "SnapJSX is a collection of beautiful, accessible, and production-ready React components built with Tailwind CSS. No npm packages, no dependencies—just pure JSX you can copy and paste into your project.",
+    features: [
+      {
+        title: "Copy & Paste",
+        description: "Browse components, copy the code, paste into your project. That's it.",
+        icon: "Copy"
+      },
+      {
+        title: "Full Ownership",
+        description: "The code lives in your project. Modify and customize however you want.",
+        icon: "Code2"
+      },
+      {
+        title: "Zero Dependencies",
+        description: "No package.json bloat. No version conflicts. No security vulnerabilities.",
+        icon: "Package"
+      }
+    ],
+    philosophy: {
+      title: "Philosophy",
+      description: "Modern component libraries often come with heavy dependencies and opinionated abstractions. SnapJSX takes a different approach:",
+      points: [
+        {
+          title: "Full Ownership",
+          description: "You own the code, not a package manager"
+        },
+        {
+          title: "Zero Dependencies",
+          description: "No security vulnerabilities from third parties"
+        },
+        {
+          title: "Fully Customizable",
+          description: "Modify without fighting framework abstractions"
+        },
+        {
+          title: "Minimal Bundle",
+          description: "Ship only what you use, nothing more"
+        }
+      ]
+    },
+    credits: "Inspired by shadcn/ui, Radix UI, and the amazing React community. Built with love for developers who value simplicity and control."
+  });
+
+  const { features, philosophy, credits } = data;
 
   return (
     <div className="w-full space-y-12">
