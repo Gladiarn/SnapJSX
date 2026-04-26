@@ -54,13 +54,13 @@ export function Testimonials() {
         <div className="container mx-auto max-w-7xl px-4 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="flex gap-8 md:gap-6 cursor-grab active:cursor-grabbing">
-              {TESTIMONIALS.map((t, i) => (
+              {TESTIMONIALS.map((t) => (
                 <motion.div
-                  key={i}
+                  key={t.author}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  transition={{ duration: 0.5 }}
                   className="flex-none w-[280px] sm:w-[320px] md:w-[400px] p-8 rounded-3xl border border-border/50 bg-card/30 backdrop-blur-md transition-all duration-300"
                 >
                   <div className="flex items-center gap-4 mb-6">

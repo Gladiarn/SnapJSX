@@ -55,7 +55,7 @@ export function FAQ() {
         >
           {questions.map((faq, i) => (
             <motion.div
-              key={i}
+              key={faq.question}
               variants={{
                 hidden: { opacity: 0, y: 10 },
                 show: { opacity: 1, y: 0, transition: { delay: i * 0.1 } },

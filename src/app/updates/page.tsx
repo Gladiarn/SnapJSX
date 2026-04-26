@@ -6,6 +6,22 @@ import { useState } from "react";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.3",
+      date: "April 26, 2026",
+      title: "Architecture Stabilization & Registry-Driven Routing",
+      summary: "Completed a comprehensive refactor of the documentation architecture for extreme scalability.",
+      details: [
+        "Registry Hub: Consolidated all UI block definitions into a centralized, type-safe registry-hub.",
+        "Generic Rendering: Replaced category-specific pages with a single, reusable 'GenericCategoryPage' engine.",
+        "Routing Precision: Standardized sidebar navigation to 'Category-Subcategory' paths for rock-solid routing.",
+        "Mobile Responsiveness: Optimized grid layouts and code viewers to account for fixed-width sidebar constraints.",
+        "Performance Tuning: Replaced heavy Framer Motion height-transitions with GPU-accelerated CSS to eliminate scroll lag.",
+        "Accessibility: Resolved all A11y warnings including missing button types and SVG titles.",
+        "Code Quality: Cleaned codebase of linting regressions (noArrayIndexKey, unused imports, explicit types).",
+        "Fullstack Readiness: Transitioned all static documentation data into a stateful pattern to facilitate future backend integration."
+      ],
+    },
+    {
       version: "v0.1.2",
       date: "April 26, 2026",
       title: "UI Performance Optimization & Routing Stability",
