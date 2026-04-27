@@ -7,6 +7,17 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.8",
+      date: "April 28, 2026",
+      title: "UI/UX: SubNavbar Breadcrumb Refinement",
+      summary:
+        "Refactored the sub-navigation breadcrumbs for better visual hierarchy and clarity.",
+      details: [
+        "Updated SubNavbar to parse activeSection slugs, replacing hyphens with '/' separators to display a breadcrumb-style navigation path.",
+        "Applied capitalization styling to breadcrumb segments for a more professional UI appearance.",
+      ],
+    },
+    {
       version: "v0.1.7",
       date: "April 27, 2026",
       title: "Navigation UX: Persistent Sidebar Accordions",

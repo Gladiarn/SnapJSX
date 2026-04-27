@@ -18,9 +18,11 @@ export function SubNavbar({
       >
         <Menu className="w-4 h-4" />
       </button>
-      <div className="text-sm text-muted-foreground">
+      <div className="text-sm text-muted-foreground capitalize">
         Docs <span className="mx-2">/</span>{" "}
-        <span className="font-medium text-foreground">{activeSection}</span>
+        <span className="font-medium text-foreground">
+          {activeSection.replace(/-/g, " / ")}
+        </span>
       </div>
     </div>
   );
