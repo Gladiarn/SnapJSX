@@ -11,20 +11,17 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useState } from "react";
-import { useDocsStore } from "@/lib/store";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useDocsStore } from "@/lib/store";
 
 interface SidebarProps {
   isOpen: boolean;
   onToggle: () => void;
 }
 
-export function Sidebar({
-  isOpen,
-  onToggle,
-}: SidebarProps) {
+export function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
   const { sidebarData } = useDocsStore();
   const pathname = usePathname();
@@ -100,7 +97,7 @@ export function Sidebar({
                         {openGroups[item.name] && (
                           <ul className="pl-4 mt-1 space-y-1">
                             {item.subItems.map((sub) => {
-                              const path = `/docs/${section.title.toLowerCase().replace(/\s+/g, '-')}/${item.name.toLowerCase().replace(/\s+/g, '-')}/${sub.toLowerCase().replace(/\s+/g, '-')}`;
+                              const path = `/docs/${section.title.toLowerCase().replace(/\s+/g, "-")}/${item.name.toLowerCase().replace(/\s+/g, "-")}/${sub.toLowerCase().replace(/\s+/g, "-")}`;
                               return (
                                 <li key={sub}>
                                   <Link
@@ -121,9 +118,11 @@ export function Sidebar({
                       </div>
                     ) : (
                       <Link
-                        href={`/docs/${section.title.toLowerCase().replace(/\s+/g, '-')}/${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        href={`/docs/${section.title.toLowerCase().replace(/\s+/g, "-")}/${item.name.toLowerCase().replace(/\s+/g, "-")}`}
                         className={`block w-full text-left px-2 py-1.5 rounded-md text-sm transition-colors ${
-                          isActive(`/docs/${section.title.toLowerCase().replace(/\s+/g, '-')}/${item.name.toLowerCase().replace(/\s+/g, '-')}`)
+                          isActive(
+                            `/docs/${section.title.toLowerCase().replace(/\s+/g, "-")}/${item.name.toLowerCase().replace(/\s+/g, "-")}`,
+                          )
                             ? "bg-primary/10 text-primary font-medium border border-primary/20"
                             : "text-foreground hover:bg-muted"
                         }`}

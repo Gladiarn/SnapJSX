@@ -11,10 +11,8 @@ import {
   Layout,
   Menu,
   Search,
-  Settings,
   Sparkles,
   X,
-  Zap,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -118,7 +116,7 @@ export function SearchModal() {
           index.push({
             title: sub,
             description: `${sub} in ${item.name}`,
-            url: `/docs/${section.title.replace(/\s+/g, "-")}-${item.name.replace(/\s+/g, "-")}`,
+            url: `/docs/${section.title.toLowerCase().replace(/\s+/g, "-")}/${item.name.toLowerCase().replace(/\s+/g, "-")}/${sub.toLowerCase().replace(/\s+/g, "-")}`,
             sectionPath: `${section.title}-${sub}`,
             category: section.title,
             icon: <FileCode className="w-4 h-4" />,
@@ -177,12 +175,7 @@ export function SearchModal() {
       }
       if (e.key === "Enter" && flattenedItems[selectedIndex]) {
         e.preventDefault();
-        router.push("/docs");
-        window.dispatchEvent(
-          new CustomEvent("sidebar-change", {
-            detail: flattenedItems[selectedIndex].sectionPath,
-          }),
-        );
+        router.push(flattenedItems[selectedIndex].url);
         onClose();
       }
     };
@@ -238,9 +231,9 @@ export function SearchModal() {
                   {[
                     {
                       title: "Introduction",
-                      sectionPath: "Getting Started-Introduction",
+                      url: "/docs/getting-started/introduction",
                       icon: <BookOpen className="w-4 h-4" />,
-                      isDocs: true,
+                      isDocs: false,
                     },
                     {
                       title: "All Components",
@@ -265,16 +258,8 @@ export function SearchModal() {
                       type="button"
                       key={item.title}
                       onClick={() => {
-                        if (item.isDocs) {
-                          router.push("/docs");
-                          window.dispatchEvent(
-                            new CustomEvent("sidebar-change", {
-                              detail: item.sectionPath,
-                            }),
-                          );
-                        } else {
-                          router.push(item.url || "/");
-                        }
+                        router.push(item.url || "/");
+
                         onClose();
                       }}
                       className="group flex w-full items-center justify-start gap-4 px-6 py-3 border-l-2 border-transparent cursor-pointer hover:bg-accent/30 hover:border-primary/30"
@@ -309,13 +294,13 @@ export function SearchModal() {
                             item={item}
                             isSelected={idx === selectedIndex}
                             onSelect={(section) => {
-                              router.push("/docs");
-                              window.dispatchEvent(
-                                new CustomEvent("sidebar-change", {
-                                  detail: section,
-                                }),
+                              const selectedItem = flattenedItems.find(
+                                (i) => i.sectionPath === section,
                               );
-                              onClose();
+                              if (selectedItem) {
+                                router.push(selectedItem.url);
+                                onClose();
+                              }
                             }}
                           />
                         );

@@ -7,10 +7,11 @@ import { Introduction } from "./sections/getting-started/introduction";
 import { QuickStart } from "./sections/getting-started/quick-start";
 
 interface DocsContentProps {
-  activeSection: string; // This is now a slug like "getting-started-introduction"
+  activeSection: string;
+  slug: string[];
 }
 
-export function DocsContent({ activeSection }: DocsContentProps) {
+export function DocsContent({ activeSection, slug }: DocsContentProps) {
   // 1. Handle Static Pages
   switch (activeSection) {
     case "getting-started-introduction":
@@ -26,22 +27,24 @@ export function DocsContent({ activeSection }: DocsContentProps) {
   }
 
   // 2. Registry-Driven Dynamic Routing
-  // activeSection is like "core-components-buttons" or "core-components-buttons-primary-button"
-  const parts = activeSection.split("-");
-  const categorySlug = `${parts[0]}-${parts[1]}`; // e.g., "core-components"
-  
-  // Find category in RegistryHub. Keys are like "Core Components". 
-  // Let's normalize RegistryHub keys for lookup.
+  // slug is [title, category, sub?] or [title, "all"]
+  const [titleSlug, categorySlug, ..._rest] = slug;
+
+  // Find category in RegistryHub. Keys are like "Core Components".
   const categoryKey = Object.keys(RegistryHub).find(
-    (key) => key.toLowerCase().replace(/\s+/g, "-") === categorySlug
+    (key) => key.toLowerCase().replace(/\s+/g, "-") === titleSlug,
   );
 
   if (categoryKey && RegistryHub[categoryKey]) {
+    // If route is /docs/{title}/all
+    const _isAll = categorySlug === "all";
+
     return (
       <GenericCategoryPage
         title={categoryKey}
         description={`Explore all ${categoryKey.toLowerCase()} components.`}
         activeSection={activeSection}
+        slug={slug}
         variants={RegistryHub[categoryKey]}
       />
     );

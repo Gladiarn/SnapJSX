@@ -18,6 +18,12 @@
 - **Stability**: Verified the build stability and confirmed that sidebar navigation reliably maps to variant-specific implementation views.
 
 
+### [2026-04-27] - v0.1.3: Advanced Routing & Search Alignment
+- **"All" Route Support**: Added native support for `/docs/{title}/all` routes, allowing users to view all components in a category without subcategory filtering.
+- **Search Modal URL Alignment**: Updated the `SearchModal` component to construct URLs using the canonical `/docs/{title}/{category}/{subcategory}` path format instead of the legacy hyphenated format.
+- **Deep Routing Logic**: Refined `DocsContent` and `GenericCategoryPage` to process the full URL `slug`, ensuring consistent filtering across both direct sidebar navigation and search-driven navigation.
+- **Linting & Stability**: Performed automated code cleanup (Biome) to resolve unused imports and type-safety warnings, ensuring production build integrity.
+
 ## 4. Immediate Action Plan
 - [ ] **Task 2**: Continue component creation for remaining sidebar categories (Inputs, Modals, Dropdowns).
 - [ ] **Task 3**: Implement mobile-responsive patterns for complex navigational components.
