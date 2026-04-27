@@ -7,6 +7,17 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.9",
+      date: "April 28, 2026",
+      title: "UI/UX: Breadcrumb Refactoring",
+      summary:
+        "Refined sub-navbar navigation path to use explicit page titles and subtitles.",
+      details: [
+        "Updated SubNavbar to accept 'title' and 'subtitle' props from the DocPage, providing cleaner and more reliable breadcrumb paths compared to string-parsing the active slug.",
+        "Ensured breadcrumbs only display sub-titles that differ from the category title, preventing redundant UI labels.",
+      ],
+    },
+    {
       version: "v0.1.8",
       date: "April 28, 2026",
       title: "UI/UX: SubNavbar Breadcrumb Refinement",

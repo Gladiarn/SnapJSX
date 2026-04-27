@@ -4,10 +4,12 @@ import { Menu } from "lucide-react";
 
 export function SubNavbar({
   onToggleSidebar,
-  activeSection,
+  title,
+  subtitle,
 }: {
   onToggleSidebar: () => void;
-  activeSection: string;
+  title: string;
+  subtitle: string;
 }) {
   return (
     <div className="sticky top-16 z-30 w-full border-b border-border bg-background/95 backdrop-blur-md px-4 h-12 flex items-center gap-4">
@@ -20,9 +22,13 @@ export function SubNavbar({
       </button>
       <div className="text-sm text-muted-foreground capitalize">
         Docs <span className="mx-2">/</span>{" "}
-        <span className="font-medium text-foreground">
-          {activeSection.replace("-", " / ").replace(/-/g, " ")}
-        </span>
+        <span className="font-medium text-foreground">{title}</span>
+        {subtitle && subtitle.toLowerCase() !== title.toLowerCase() && (
+          <>
+            <span className="mx-2">/</span>
+            <span className="font-medium text-foreground">{subtitle}</span>
+          </>
+        )}
       </div>
     </div>
   );
