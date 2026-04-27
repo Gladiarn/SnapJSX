@@ -1,46 +1,106 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
 import {
-  Search,
   ArrowRight,
-  Hash,
-  FileCode,
-  Blocks,
-  X,
-  Sparkles,
-  BookOpen,
-  Layout,
-  Bell,
-  Menu,
   BarChart,
-  Command,
+  Bell,
+  Blocks,
+  BookOpen,
+  FileCode,
+  Hash,
+  Layout,
+  Menu,
+  Search,
+  Settings,
+  Sparkles,
+  X,
+  Zap,
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDocsStore } from "@/lib/store";
-
-interface SearchModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
 
 interface SearchItem {
   title: string;
   description: string;
   url: string;
+  sectionPath: string;
   category: string;
   subcategory?: string;
+  icon?: React.ReactNode;
 }
 
-export function SearchModal({ isOpen, onClose }: SearchModalProps) {
+function getCategoryIcon(category: string) {
+  switch (category) {
+    case "Getting Started":
+      return <Sparkles className="w-4 h-4" />;
+    case "Core Components":
+      return <Layout className="w-4 h-4" />;
+    case "Loaders":
+      return <Hash className="w-4 h-4" />;
+    case "Notifications":
+      return <Bell className="w-4 h-4" />;
+    case "Navigation":
+      return <Menu className="w-4 h-4" />;
+    case "Data Display":
+      return <BarChart className="w-4 h-4" />;
+    case "General":
+      return <Blocks className="w-4 h-4" />;
+    default:
+      return <BookOpen className="w-4 h-4" />;
+  }
+}
+
+const ResultItem = memo(
+  ({
+    item,
+    isSelected,
+    onSelect,
+  }: {
+    item: SearchItem;
+    isSelected: boolean;
+    onSelect: (section: string) => void;
+  }) => (
+    <button
+      type="button"
+      onClick={() => onSelect(item.sectionPath)}
+      className={`group flex w-full items-center justify-start gap-4 px-6 py-3 border-l-2 cursor-pointer text-left ${
+        isSelected
+          ? "bg-accent/80 border-primary text-primary"
+          : "bg-transparent border-transparent hover:bg-accent/30"
+      }`}
+    >
+      <div className="flex-1 text-left">
+        <div
+          className={`font-medium text-sm ${isSelected ? "text-primary" : "text-foreground group-hover:text-primary"}`}
+        >
+          {item.title}
+        </div>
+        <div className="text-xs text-muted-foreground text-left line-clamp-1">
+          {item.description}
+        </div>
+      </div>
+      <ArrowRight
+        className={`w-4 h-4 flex-shrink-0 text-primary/60 ${isSelected ? "opacity-100 translate-x-0" : "opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2"}`}
+      />
+    </button>
+  ),
+);
+
+ResultItem.displayName = "ResultItem";
+
+export function SearchModal() {
+  const isOpen = useDocsStore((state) => state.isSearchOpen);
+  const setIsSearchOpen = useDocsStore((state) => state.setIsSearchOpen);
+  const sidebarData = useDocsStore((state) => state.sidebarData);
+
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { sidebarData } = useDocsStore();
 
-  // Focus input on open
+  const onClose = useCallback(() => setIsSearchOpen(false), [setIsSearchOpen]);
+
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
@@ -49,232 +109,215 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
   }, [isOpen]);
 
-  // Flatten searchable data
-  const searchIndex = useMemo(() => {
+  const { filteredGroups, flattenedItems } = useMemo(() => {
     const index: SearchItem[] = [];
-
-    // Static Main Pages
-    index.push(
-      { title: "Components", description: "Browse the full component library", url: "/docs/Core Components-Buttons", category: "General" },
-      { title: "Blocks", description: "Pre-built page sections for your apps", url: "/blocks", category: "General" },
-      { title: "Guide", description: "Developer tutorials and deep-dives", url: "/guide", category: "General" },
-      { title: "Showcase", description: "Community inspiration and builds", url: "/showcase", category: "General" },
-      { title: "Updates", description: "Latest version history and logs", url: "/updates", category: "General" }
-    );
-
-    // Sidebar Data (Recursive indexing)
     sidebarData.forEach((section) => {
       section.items.forEach((item) => {
-        // Index the group/subcategory (e.g., Buttons, Spinners)
-        index.push({
-          title: item.name,
-          description: `All ${item.name} components and variants`,
-          url: `/docs/${section.title}-${item.name}`,
-          category: section.title,
-          subcategory: item.name,
-        });
-
-        // Index specific sub-items (e.g., Primary Button, Spinner)
         item.subItems.forEach((sub) => {
           if (sub === "All") return;
           index.push({
             title: sub,
-            description: `${sub} implementation for ${item.name}`,
-            url: `/docs/${section.title}-${item.name}-${sub}`,
+            description: `${sub} in ${item.name}`,
+            url: `/docs/${section.title.replace(/\s+/g, "-")}-${item.name.replace(/\s+/g, "-")}`,
+            sectionPath: `${section.title}-${sub}`,
             category: section.title,
-            subcategory: item.name,
+            icon: <FileCode className="w-4 h-4" />,
           });
         });
       });
     });
 
-    return index;
-  }, [sidebarData]);
-
-  // Filtered and Grouped Results
-  const filteredGroups = useMemo(() => {
-    if (!query) return [];
+    if (!query) return { filteredGroups: [], flattenedItems: [] };
 
     const searchLower = query.toLowerCase();
-    const filtered = searchIndex.filter(
+    const filtered = index.filter(
       (item) =>
         item.title.toLowerCase().includes(searchLower) ||
         item.description.toLowerCase().includes(searchLower) ||
-        item.category.toLowerCase().includes(searchLower) ||
-        item.subcategory?.toLowerCase().includes(searchLower)
+        item.category.toLowerCase().includes(searchLower),
     );
 
-    // Group by category
-    const groups: Record<string, SearchItem[]> = {};
+    const groupsMap: Record<string, SearchItem[]> = {};
+    const flat: SearchItem[] = [];
+
     filtered.forEach((item) => {
-      if (!groups[item.category]) groups[item.category] = [];
-      groups[item.category].push(item);
+      if (!groupsMap[item.category]) groupsMap[item.category] = [];
+      groupsMap[item.category].push(item);
+      flat.push(item);
     });
 
-    return Object.entries(groups).map(([name, items]) => ({
+    const groups = Object.entries(groupsMap).map(([name, items]) => ({
       name,
       items,
       icon: getCategoryIcon(name),
     }));
-  }, [query, searchIndex]);
 
-  // Flattened filtered items for keyboard navigation
-  const flattenedFiltered = useMemo(() => 
-    filteredGroups.flatMap(group => group.items), 
-  [filteredGroups]);
+    return { filteredGroups: groups, flattenedItems: flat };
+  }, [query, sidebarData]);
 
-  // Handle Keyboard Navigation
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
-
       if (e.key === "Escape") onClose();
-      
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        setSelectedIndex((prev) => (prev + 1) % flattenedFiltered.length);
+        setSelectedIndex((prev) => (prev + 1) % (flattenedItems.length || 1));
       }
       if (e.key === "ArrowUp") {
         e.preventDefault();
-        setSelectedIndex((prev) => (prev - 1 + flattenedFiltered.length) % flattenedFiltered.length);
+        setSelectedIndex(
+          (prev) =>
+            (prev - 1 + (flattenedItems.length || 1)) %
+            (flattenedItems.length || 1),
+        );
       }
-      if (e.key === "Enter" && flattenedFiltered[selectedIndex]) {
+      if (e.key === "Enter" && flattenedItems[selectedIndex]) {
         e.preventDefault();
-        router.push(flattenedFiltered[selectedIndex].url);
+        router.push("/docs");
+        window.dispatchEvent(
+          new CustomEvent("sidebar-change", {
+            detail: flattenedItems[selectedIndex].sectionPath,
+          }),
+        );
         onClose();
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     if (isOpen) document.body.style.overflow = "hidden";
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose, flattenedFiltered, selectedIndex, router]);
+  }, [isOpen, onClose, flattenedItems, selectedIndex, router]);
 
   if (!isOpen) return null;
 
-  function getCategoryIcon(category: string) {
-    switch (category) {
-      case "Getting Started": return <Sparkles className="w-4 h-4" />;
-      case "Core Components": return <Layout className="w-4 h-4" />;
-      case "Loaders": return <Hash className="w-4 h-4" />;
-      case "Notifications": return <Bell className="w-4 h-4" />;
-      case "Navigation": return <Menu className="w-4 h-4" />;
-      case "Data Display": return <BarChart className="w-4 h-4" />;
-      case "General": return <Blocks className="w-4 h-4" />;
-      default: return <BookOpen className="w-4 h-4" />;
-    }
-  }
+  let runningIndex = 0;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-background/80 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
+    <div className="fixed inset-0 z-[9999] overflow-y-auto">
+      <button
+        type="button"
+        className="fixed inset-0 w-full h-full cursor-default bg-background/80 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
         onClick={onClose}
+        aria-label="Close search"
       />
-
-      {/* Modal */}
       <div className="relative min-h-screen flex items-start justify-center p-4 pt-[10vh]">
-        <div className="relative w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl shadow-primary/10 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
-          {/* Search Input */}
-          <div className="flex items-center gap-3 px-6 py-5 border-b border-border/50">
-            <Search className="w-5 h-5 text-primary flex-shrink-0" />
+        <div className="relative w-full max-w-2xl bg-card border border-border/50 rounded-2xl shadow-[0_0_50px_-12px_rgba(255,215,0,0.1)] overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="flex items-center gap-3 px-6 py-4 border-b border-border/50">
+            <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
             <input
               ref={inputRef}
               type="text"
-              placeholder="Search components, categories, and documentation..."
+              placeholder="Search components, blocks, and documentation..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 bg-transparent text-lg outline-none placeholder:text-muted-foreground font-medium"
+              className="flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground"
             />
-            <div className="flex items-center gap-2">
-              <kbd className="hidden sm:inline-flex h-6 select-none items-center gap-1 rounded border border-border bg-muted px-2 font-mono text-[10px] font-bold text-muted-foreground opacity-100">
-                ESC
-              </kbd>
-              <button
-                type="button"
-                onClick={onClose}
-                className="p-1.5 rounded-lg hover:bg-accent transition-colors"
-              >
-                <X className="w-4 h-4 text-muted-foreground" />
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-1.5 rounded-md hover:bg-accent transition-colors"
+            >
+              <X className="w-4 h-4 text-muted-foreground" />
+            </button>
           </div>
 
-          {/* Results Area */}
-          <div className="max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-primary/20">
+          <div className="max-h-[60vh] overflow-y-auto translate-z-0">
             {query === "" ? (
               <div className="py-8">
-                <div className="px-6 py-2 flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4">
-                  <Sparkles className="w-3 h-3 text-primary" />
-                  Quick Access
+                <div className="px-6 py-2 flex items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                  <Sparkles className="w-4 h-4" />
+                  Quick Links
                 </div>
-                <div className="grid gap-1 px-3">
+                <div className="mt-2">
                   {[
-                    { title: "Introduction", url: "/docs", icon: <BookOpen className="w-4 h-4" /> },
-                    { title: "Browse Components", url: "/docs/Core Components-Buttons", icon: <Layout className="w-4 h-4" /> },
-                    { title: "Developer Guide", url: "/guide", icon: <Blocks className="w-4 h-4" /> },
-                    { title: "Project Roadmap", url: "/updates", icon: <Hash className="w-4 h-4" /> },
+                    {
+                      title: "Introduction",
+                      sectionPath: "Getting Started-Introduction",
+                      icon: <BookOpen className="w-4 h-4" />,
+                      isDocs: true,
+                    },
+                    {
+                      title: "All Components",
+                      url: "/components",
+                      icon: <FileCode className="w-4 h-4" />,
+                      isDocs: false,
+                    },
+                    {
+                      title: "Blocks",
+                      url: "/blocks",
+                      icon: <Blocks className="w-4 h-4" />,
+                      isDocs: false,
+                    },
+                    {
+                      title: "Latest Updates",
+                      url: "/updates",
+                      icon: <Hash className="w-4 h-4" />,
+                      isDocs: false,
+                    },
                   ].map((item) => (
-                    <Link
-                      key={item.url}
-                      href={item.url}
-                      onClick={onClose}
-                      className="group flex items-center gap-4 px-3 py-4 rounded-xl hover:bg-primary/5 border border-transparent hover:border-primary/20 transition-all"
+                    <button
+                      type="button"
+                      key={item.title}
+                      onClick={() => {
+                        if (item.isDocs) {
+                          router.push("/docs");
+                          window.dispatchEvent(
+                            new CustomEvent("sidebar-change", {
+                              detail: item.sectionPath,
+                            }),
+                          );
+                        } else {
+                          router.push(item.url || "/");
+                        }
+                        onClose();
+                      }}
+                      className="group flex w-full items-center justify-start gap-4 px-6 py-3 border-l-2 border-transparent cursor-pointer hover:bg-accent/30 hover:border-primary/30"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-accent border border-border flex items-center justify-center text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all">
+                      <div className="w-8 h-8 rounded-lg bg-accent border border-border flex items-center justify-center text-muted-foreground group-hover:border-primary/30 group-hover:text-primary">
                         {item.icon}
                       </div>
-                      <div className="flex-1">
-                        <div className="font-bold text-sm group-hover:text-primary transition-colors">
+                      <div className="flex-1 text-left">
+                        <div className="font-medium text-sm text-foreground group-hover:text-primary">
                           {item.title}
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                    </Link>
+                      <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2" />
+                    </button>
                   ))}
                 </div>
               </div>
             ) : filteredGroups.length > 0 ? (
               <div className="py-4">
                 {filteredGroups.map((group) => (
-                  <div key={group.name} className="mb-4 last:mb-0">
-                    <div className="px-6 py-2 flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-[0.2em] bg-primary/5">
+                  <div key={group.name}>
+                    <div className="px-6 py-2 flex items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide bg-muted/30">
                       {group.icon}
                       {group.name}
                     </div>
-                    <div className="mt-1 px-2">
-                      {group.items.map((item) => {
-                        const isSelected = flattenedFiltered[selectedIndex]?.url === item.url;
+                    <div className="mt-1">
+                      {group.items.map((item, itemIdx) => {
+                        const idx = runningIndex++;
                         return (
-                          <Link
-                            key={item.url}
-                            href={item.url}
-                            onClick={onClose}
-                            className={`group flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${
-                              isSelected 
-                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" 
-                                : "hover:bg-accent"
-                            }`}
-                            onMouseEnter={() => setSelectedIndex(flattenedFiltered.indexOf(item))}
-                          >
-                            <div className="flex-1">
-                              <div className={`font-bold text-sm ${isSelected ? "text-primary-foreground" : "text-foreground"}`}>
-                                {item.title}
-                              </div>
-                              <div className={`text-xs ${isSelected ? "text-primary-foreground/70" : "text-muted-foreground"} line-clamp-1`}>
-                                {item.subcategory ? `${item.subcategory} • ` : ""}{item.description}
-                              </div>
-                            </div>
-                            <div className={`flex items-center gap-2 ${isSelected ? "opacity-100" : "opacity-0"} transition-opacity`}>
-                              <span className="text-[10px] font-black uppercase tracking-widest">Select</span>
-                              <Command className="w-3 h-3" />
-                            </div>
-                          </Link>
+                          <ResultItem
+                            key={`${item.sectionPath}-${itemIdx}`}
+                            item={item}
+                            isSelected={idx === selectedIndex}
+                            onSelect={(section) => {
+                              router.push("/docs");
+                              window.dispatchEvent(
+                                new CustomEvent("sidebar-change", {
+                                  detail: section,
+                                }),
+                              );
+                              onClose();
+                            }}
+                          />
                         );
                       })}
                     </div>
@@ -282,31 +325,32 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 ))}
               </div>
             ) : (
-              <div className="py-16 text-center">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-muted mb-6">
-                  <Search className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">No results for "{query}"</h3>
-                <p className="text-sm text-muted-foreground max-w-xs mx-auto">
-                  Try searching for a component name, category, or guide topic.
+              <div className="py-12 text-center">
+                <p className="text-sm text-muted-foreground">
+                  No results for "{query}"
                 </p>
               </div>
             )}
           </div>
 
-          {/* Shortcut Hints */}
-          <div className="hidden sm:flex items-center justify-center gap-8 py-4 border-t border-border/50 bg-muted/20 text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">
-            <div className="flex items-center gap-2">
-              <kbd className="rounded bg-background border border-border px-1.5 py-0.5 shadow-sm text-[9px]">↑↓</kbd>
-              <span>Navigate</span>
+          <div className="flex items-center justify-center gap-6 py-4 border-t border-border/50 bg-muted/30 text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
+            <div className="hidden sm:flex items-center gap-1.5">
+              <kbd className="rounded border border-border bg-background px-1.5 py-0.5 font-mono text-xs">
+                ↑↓
+              </kbd>
+              <span>to navigate</span>
             </div>
-            <div className="flex items-center gap-2">
-              <kbd className="rounded bg-background border border-border px-1.5 py-0.5 shadow-sm text-[9px]">↵</kbd>
-              <span>Select</span>
+            <div className="flex items-center gap-1.5">
+              <kbd className="rounded border border-border bg-background px-1.5 py-0.5 font-mono text-xs">
+                ESC
+              </kbd>
+              <span>to close</span>
             </div>
-            <div className="flex items-center gap-2">
-              <kbd className="rounded bg-background border border-border px-1.5 py-0.5 shadow-sm text-[9px]">ESC</kbd>
-              <span>Close</span>
+            <div className="flex items-center gap-1.5">
+              <kbd className="rounded border border-border bg-background px-1.5 py-0.5 font-mono text-xs">
+                ↵
+              </kbd>
+              <span>to select</span>
             </div>
           </div>
         </div>

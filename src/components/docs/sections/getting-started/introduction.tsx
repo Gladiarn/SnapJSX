@@ -8,16 +8,14 @@ import {
   Server,
   Settings,
   ShieldCheck,
-  Zap,
 } from "lucide-react";
-import React, { useState } from "react";
+import type React from "react";
 
-const IconMap: Record<string, any> = {
+const IconMap: Record<string, React.ElementType> = {
   Copy,
   Code2,
   Package,
   ShieldCheck,
-  Zap,
   Layers,
   GitBranch,
   Server,
@@ -26,7 +24,7 @@ const IconMap: Record<string, any> = {
 };
 
 export function Introduction() {
-  const [data] = useState({
+  const data = {
     title: "Introduction",
     features: [
       {
@@ -127,7 +125,7 @@ export function Introduction() {
     },
     credits:
       "Inspired by shadcn/ui, Radix UI, and the amazing React community. Built with love for developers who value simplicity and control.",
-  });
+  };
 
   const {
     features,

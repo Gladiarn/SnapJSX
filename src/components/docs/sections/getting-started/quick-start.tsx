@@ -40,7 +40,16 @@ export function QuickStart() {
         title: "3. First Component",
         description:
           "Let's create your first button. Paste this code into `src/components/ui/button.tsx`.",
-        code: 'export function Button({ children, className = "", ...props }) {\n  return (\n    <button \n      className={`px-4 py-2 bg-primary text-white rounded-lg transition-all active:scale-95 ${className}`}\n      {...props}\n    >\n      {children}\n    </button>\n  );\n}',
+        code: `export function Button({ children, className = "", ...props }) {
+  return (
+    <button 
+      className={\`px-4 py-2 bg-primary text-white rounded-lg transition-all active:scale-95 \${className}\`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}`,
         language: "typescript",
       },
     ],

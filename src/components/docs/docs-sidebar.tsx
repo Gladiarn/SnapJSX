@@ -11,7 +11,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDocsStore } from "@/lib/store";
 
 interface SidebarProps {
@@ -29,6 +29,16 @@ export function Sidebar({
 }: SidebarProps) {
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
   const { sidebarData } = useDocsStore();
+
+  useEffect(() => {
+    const handleSectionChange = (event: Event) => {
+      const customEvent = event as CustomEvent<string>;
+      onSectionChange(customEvent.detail);
+    };
+    window.addEventListener("sidebar-change", handleSectionChange);
+    return () =>
+      window.removeEventListener("sidebar-change", handleSectionChange);
+  }, [onSectionChange]);
 
   const toggleGroup = (name: string) => {
     setOpenGroups((prev) => ({ ...prev, [name]: !prev[name] }));
@@ -61,7 +71,7 @@ export function Sidebar({
     >
       <div className="px-4 py-8 w-64">
         <div className="md:hidden flex justify-end mb-4">
-          <button onClick={onToggle}>
+          <button type="button" onClick={onToggle}>
             <X />
           </button>
         </div>
@@ -87,6 +97,7 @@ export function Sidebar({
                     {item.subItems.length > 0 ? (
                       <div>
                         <button
+                          type="button"
                           onClick={() => toggleGroup(item.name)}
                           className="flex items-center justify-between w-full px-2 py-1.5 rounded-md text-sm text-foreground hover:bg-muted transition-colors"
                         >
@@ -100,6 +111,7 @@ export function Sidebar({
                             {item.subItems.map((sub) => (
                               <li key={sub}>
                                 <button
+                                  type="button"
                                   onClick={() =>
                                     onSectionChange(`${section.title}-${sub}`)
                                   }
@@ -118,6 +130,7 @@ export function Sidebar({
                       </div>
                     ) : (
                       <button
+                        type="button"
                         onClick={() =>
                           onSectionChange(`${section.title}-${item.name}`)
                         }

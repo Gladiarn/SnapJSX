@@ -38,9 +38,9 @@ export function Installation() {
           Before using SnapJSX components, make sure you have:
         </p>
         <ul className="grid gap-3 sm:grid-cols-2">
-          {prerequisites.map((item, i) => (
+          {prerequisites.map((item) => (
             <li
-              key={i}
+              key={item}
               className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card/50"
             >
               <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
@@ -68,6 +68,7 @@ export function Installation() {
                     </span>
                   </div>
                   <button
+                    type="button"
                     onClick={() => navigator.clipboard.writeText(step.code)}
                     className="text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest font-bold"
                   >

@@ -30,6 +30,7 @@ export function FAQ() {
         <div className="flex justify-center gap-2 mb-12 flex-wrap">
           {CATEGORIES.map((cat) => (
             <button
+              type="button"
               key={cat}
               onClick={() => {
                 setCategory(cat);
@@ -63,6 +64,7 @@ export function FAQ() {
               className="rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden"
             >
               <button
+                type="button"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="flex w-full items-center justify-between p-6 text-left hover:bg-accent/50 transition-colors"
               >

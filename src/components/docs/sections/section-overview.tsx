@@ -30,7 +30,10 @@ const PreviewMap: Record<string, React.ReactNode> = {
     </Card>
   ),
   "Secondary Button": (
-    <button className="px-4 py-2 border border-border rounded-lg font-medium">
+    <button
+      type="button"
+      className="px-4 py-2 border border-border rounded-lg font-medium"
+    >
       Secondary Button
     </button>
   ),

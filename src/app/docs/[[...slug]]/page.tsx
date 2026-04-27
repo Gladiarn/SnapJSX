@@ -1,12 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { DocsContent } from "@/components/docs/docs-content";
 import { Sidebar } from "@/components/docs/docs-sidebar";
 import { SubNavbar } from "@/components/layout/sub-navbar";
-import { useDocsStore } from "@/lib/store";
+import { type SidebarItem, useDocsStore } from "@/lib/store";
 
-export default function DocPage({ params }: { params: { slug?: string[] } }) {
+export default function DocPage({
+  params,
+}: {
+  params: Promise<{ slug?: string[] }>;
+}) {
+  const { slug } = use(params);
   const [activeSection, setActiveSection] = useState(
     "Getting Started-Introduction",
   );
@@ -14,19 +19,19 @@ export default function DocPage({ params }: { params: { slug?: string[] } }) {
   const { sidebarData } = useDocsStore();
 
   useEffect(() => {
-    if (params.slug && params.slug.length > 0) {
-      const lastSlug = params.slug[params.slug.length - 1];
+    if (slug && slug.length > 0) {
+      const lastSlug = slug[slug.length - 1];
       const formatted =
         lastSlug.charAt(0).toUpperCase() + lastSlug.slice(1).replace(/-/g, " ");
       setActiveSection(formatted);
     }
-  }, [params.slug]);
+  }, [slug]);
 
   const findCategory = () => {
     for (const section of sidebarData) {
       if (
         section.items.some(
-          (item: any) =>
+          (item: SidebarItem) =>
             item.name === activeSection ||
             item.subItems?.includes(activeSection),
         )
