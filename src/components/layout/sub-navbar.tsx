@@ -21,7 +21,7 @@ export function SubNavbar({
       <div className="text-sm text-muted-foreground capitalize">
         Docs <span className="mx-2">/</span>{" "}
         <span className="font-medium text-foreground">
-          {activeSection.replace(/-/g, " / ")}
+          {activeSection.replace("-", " / ").replace(/-/g, " ")}
         </span>
       </div>
     </div>
