@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import type React from "react";
 import { ComponentCard } from "@/components/ui/component-card";
 
@@ -20,25 +21,21 @@ interface GenericCategoryPageProps {
   variants: ComponentVariant[];
 }
 
-export function GenericCategoryPage({
+export const GenericCategoryPage = memo(function GenericCategoryPage({
   title,
   description,
   activeSection,
   slug,
   variants,
 }: GenericCategoryPageProps) {
-  const renderContent = () => {
-    // slug is [title, category, subcategory]
+  const filteredVariants = useMemo(() => {
     const [_titleSlug, categorySlug, subcategorySlug] = slug;
 
-    // Helper to kebab-case a string
     const toKebab = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
 
-    const filteredVariants = variants.filter((c) => {
-      // If "all", show all in this title/category
+    return variants.filter((c) => {
       if (categorySlug === "all") return true;
 
-      // Match category/component name (e.g. "Buttons")
       if (
         toKebab(c.category) !== categorySlug &&
         toKebab(c.subcategory) !== categorySlug
@@ -46,30 +43,13 @@ export function GenericCategoryPage({
         return false;
       }
 
-      // If we have a subcategory/variant name (e.g. "Primary Button")
       if (subcategorySlug) {
         return toKebab(c.title) === subcategorySlug;
       }
 
       return true;
     });
-
-    if (filteredVariants.length > 0) {
-      return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-          {filteredVariants.map((item) => (
-            <ComponentCard key={item.title} {...item} />
-          ))}
-        </div>
-      );
-    }
-
-    return (
-      <div className="p-12 border border-dashed border-border rounded-2xl text-center text-muted-foreground">
-        No components found for "{activeSection}".
-      </div>
-    );
-  };
+  }, [slug, variants]);
 
   return (
     <div className="w-full space-y-8">
@@ -77,7 +57,18 @@ export function GenericCategoryPage({
         <h2 className="text-3xl font-black tracking-tight">{title}</h2>
         <p className="text-lg text-muted-foreground">{description}</p>
       </div>
-      {renderContent()}
+
+      {filteredVariants.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          {filteredVariants.map((item) => (
+            <ComponentCard key={item.title} {...item} />
+          ))}
+        </div>
+      ) : (
+        <div className="p-12 border border-dashed border-border rounded-2xl text-center text-muted-foreground">
+          No components found for "{activeSection}".
+        </div>
+      )}
     </div>
   );
-}
+});

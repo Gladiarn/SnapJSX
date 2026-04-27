@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { RegistryHub } from "@/lib/registry-hub";
 import { ComponentPlaceholder } from "./sections/component-placeholder";
 import { GenericCategoryPage } from "./sections/generic-category-page";
@@ -11,34 +12,38 @@ interface DocsContentProps {
   slug: string[];
 }
 
-export function DocsContent({ activeSection, slug }: DocsContentProps) {
+export const DocsContent = memo(function DocsContent({
+  activeSection,
+  slug,
+}: DocsContentProps) {
   // 1. Handle Static Pages
-  switch (activeSection) {
-    case "getting-started-introduction":
-      return <Introduction />;
-    case "getting-started-installation":
-      return <Installation />;
-    case "getting-started-quick-start":
-      return <QuickStart />;
-    case "getting-started-customization":
-      return <Customization />;
-    default:
-      break;
-  }
+  const staticContent = useMemo(() => {
+    switch (activeSection) {
+      case "getting-started-introduction":
+        return <Introduction />;
+      case "getting-started-installation":
+        return <Installation />;
+      case "getting-started-quick-start":
+        return <QuickStart />;
+      case "getting-started-customization":
+        return <Customization />;
+      default:
+        return null;
+    }
+  }, [activeSection]);
+
+  if (staticContent) return staticContent;
 
   // 2. Registry-Driven Dynamic Routing
-  // slug is [title, category, sub?] or [title, "all"]
   const [titleSlug, categorySlug, ..._rest] = slug;
 
-  // Find category in RegistryHub. Keys are like "Core Components".
-  const categoryKey = Object.keys(RegistryHub).find(
-    (key) => key.toLowerCase().replace(/\s+/g, "-") === titleSlug,
-  );
+  const categoryKey = useMemo(() => {
+    return Object.keys(RegistryHub).find(
+      (key) => key.toLowerCase().replace(/\s+/g, "-") === titleSlug,
+    );
+  }, [titleSlug]);
 
   if (categoryKey && RegistryHub[categoryKey]) {
-    // If route is /docs/{title}/all
-    const _isAll = categorySlug === "all";
-
     return (
       <GenericCategoryPage
         title={categoryKey}
@@ -51,4 +56,4 @@ export function DocsContent({ activeSection, slug }: DocsContentProps) {
   }
 
   return <ComponentPlaceholder title={activeSection} />;
-}
+});

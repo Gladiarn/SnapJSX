@@ -7,6 +7,19 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.6",
+      date: "April 27, 2026",
+      title: "Performance Optimization: Routing & Rendering",
+      summary:
+        "Optimized documentation navigation responsiveness through memoization and improved rendering logic.",
+      details: [
+        "Implemented React.memo and useMemo across DocsContent and GenericCategoryPage to prevent redundant re-renders during route transitions.",
+        "Optimized registry lookup logic by memoizing category identification, significantly reducing overhead on navigation.",
+        "Refactored variant filtering in GenericCategoryPage into a stable memoized hook, ensuring component lists only re-calculate when URL parameters change.",
+        "Maintained structural integrity and scalability while achieving a snappier, more responsive navigation experience.",
+      ],
+    },
+    {
       version: "v0.1.5",
       date: "April 27, 2026",
       title: "Advanced Routing & Search Modal Refinement",
