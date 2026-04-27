@@ -192,6 +192,18 @@ export function Navbar() {
               );
             })}
 
+            <button
+              type="button"
+              onClick={() => {
+                setIsSearchOpen(true);
+                setIsMenuOpen(false);
+              }}
+              className="flex items-center gap-2 h-12 w-full rounded-md border border-input bg-background/50 px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-all"
+            >
+              <Search className="h-4 w-4 shrink-0" />
+              <span>Search components...</span>
+            </button>
+
             <div className="pt-6 border-t border-border flex flex-col gap-4">
               <div className="flex items-center gap-4">
                 <Link

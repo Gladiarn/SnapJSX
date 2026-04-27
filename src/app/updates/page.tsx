@@ -7,6 +7,52 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.11",
+      date: "April 28, 2026",
+      title: "UI/UX: Enhanced Navigation & Breadcrumbs",
+      summary:
+        "Refined navigation path clarity and improved search accessibility on mobile devices.",
+      details: [
+        "SubNavbar Breadcrumbs: Refactored to use semantic 'title' and 'subtitle' props derived from page state. This provides cleaner breadcrumb paths (e.g., 'Core Components / Primary Button') compared to slug-parsing, while dynamically hiding redundant labels.",
+        "Mobile Search Integration: Added a dedicated search trigger button to the mobile navigation menu, ensuring search functionality is accessible on all device sizes.",
+        "UX Consistency: Search trigger in mobile menu automatically handles UI state by closing the menu upon invocation.",
+      ],
+    },
+    {
+      version: "v0.1.10",
+      date: "April 28, 2026",
+      title: "UI/UX: Global Scrollbar Design",
+      summary:
+        "Standardized scrollbar appearance across the application to match the site's gold theme.",
+      details: [
+        "Implemented custom thin scrollbar styles in globals.css using system variables.",
+        "Ensured scrollbar track is transparent and the thumb matches the brand 'primary' color with a subtle hover effect.",
+        "Maintained cross-browser compatibility with standard CSS scrollbar properties.",
+      ],
+    },
+    {
+      version: "v0.1.9",
+      date: "April 28, 2026",
+      title: "UI/UX: Breadcrumb Refactoring",
+      summary:
+        "Refined sub-navbar navigation path to use explicit page titles and subtitles.",
+      details: [
+        "Updated SubNavbar to accept 'title' and 'subtitle' props from the DocPage, providing cleaner and more reliable breadcrumb paths compared to string-parsing the active slug.",
+        "Ensured breadcrumbs only display sub-titles that differ from the category title, preventing redundant UI labels.",
+      ],
+    },
+    {
+      version: "v0.1.8",
+      date: "April 28, 2026",
+      title: "UI/UX: SubNavbar Breadcrumb Refinement",
+      summary:
+        "Refactored the sub-navigation breadcrumbs for better visual hierarchy and clarity.",
+      details: [
+        "Updated SubNavbar to parse activeSection slugs, replacing hyphens with '/' separators to display a breadcrumb-style navigation path.",
+        "Applied capitalization styling to breadcrumb segments for a more professional UI appearance.",
+      ],
+    },
+    {
       version: "v0.1.7",
       date: "April 27, 2026",
       title: "Navigation UX: Persistent Sidebar Accordions",

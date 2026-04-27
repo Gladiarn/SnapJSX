@@ -70,7 +70,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] border-r border-border bg-background overflow-y-auto overflow-x-hidden scrollbar-thin transition-all duration-300 z-40 ${isOpen ? "w-64" : "w-0 opacity-0 md:opacity-100 md:w-0"}`}
+      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] border-r border-border bg-background overflow-y-auto overflow-x-hidden custom-scrollbar transition-all duration-300 z-40 ${isOpen ? "w-64" : "w-0 opacity-0 md:opacity-100 md:w-0"}`}
     >
       <div className="px-4 py-8 w-64">
         <div className="md:hidden flex justify-end mb-4">
@@ -78,7 +78,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
             <X />
           </button>
         </div>
-        <div className="mb-6 px-2 pr-1">
+        <div className="mb-6 px-2 pr-3">
           <input
             type="text"
             placeholder="Search..."

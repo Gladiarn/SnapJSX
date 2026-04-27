@@ -38,7 +38,8 @@ export default function DocPage({
         className={`flex-1 min-w-0 transition-all duration-300 ${isSidebarOpen ? "md:ml-64" : "ml-0"}`}
       >
         <SubNavbar
-          activeSection={activeSection}
+          title={title}
+          subtitle={subtitle}
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
         />
         <div className="w-full px-6 py-10 md:px-10 lg:px-16 space-y-12">
