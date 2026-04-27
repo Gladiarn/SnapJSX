@@ -23,7 +23,7 @@ export const useDocsStore = create<DocsStore>((set) => ({
   setIsSearchOpen: (open) => set({ isSearchOpen: open }),
   sidebarData: [
     {
-      title: "Getting Started",
+      title: "Getting-Started",
       category: "Guides",
       items: [
         { name: "Introduction", subItems: [] },
@@ -33,7 +33,7 @@ export const useDocsStore = create<DocsStore>((set) => ({
       ],
     },
     {
-      title: "Core Components",
+      title: "Core-Components",
       category: "UI Components",
       items: [
         {
@@ -112,7 +112,7 @@ export const useDocsStore = create<DocsStore>((set) => ({
       ],
     },
     {
-      title: "Data Display",
+      title: "Data-Display",
       category: "Components",
       items: [
         { name: "All", subItems: [] },

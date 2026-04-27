@@ -7,40 +7,42 @@ import { Introduction } from "./sections/getting-started/introduction";
 import { QuickStart } from "./sections/getting-started/quick-start";
 
 interface DocsContentProps {
-  activeSection: string;
+  activeSection: string; // This is now a slug like "getting-started-introduction"
 }
 
 export function DocsContent({ activeSection }: DocsContentProps) {
   // 1. Handle Static Pages
   switch (activeSection) {
-    case "Getting Started-Introduction":
-    case "Introduction":
+    case "getting-started-introduction":
       return <Introduction />;
-    case "Getting Started-Installation":
-    case "Installation":
+    case "getting-started-installation":
       return <Installation />;
-    case "Getting Started-Quick Start":
-    case "Quick Start":
+    case "getting-started-quick-start":
       return <QuickStart />;
-    case "Getting Started-Customization":
-    case "Customization":
+    case "getting-started-customization":
       return <Customization />;
     default:
       break;
   }
 
   // 2. Registry-Driven Dynamic Routing
-  // Find which category matches any part of the activeSection path
+  // activeSection is like "core-components-buttons" or "core-components-buttons-primary-button"
   const parts = activeSection.split("-");
-  const category = Object.keys(RegistryHub).find((key) => parts.includes(key));
+  const categorySlug = `${parts[0]}-${parts[1]}`; // e.g., "core-components"
+  
+  // Find category in RegistryHub. Keys are like "Core Components". 
+  // Let's normalize RegistryHub keys for lookup.
+  const categoryKey = Object.keys(RegistryHub).find(
+    (key) => key.toLowerCase().replace(/\s+/g, "-") === categorySlug
+  );
 
-  if (category && RegistryHub[category]) {
+  if (categoryKey && RegistryHub[categoryKey]) {
     return (
       <GenericCategoryPage
-        title={category}
-        description={`Explore all ${category.toLowerCase()} components.`}
+        title={categoryKey}
+        description={`Explore all ${categoryKey.toLowerCase()} components.`}
         activeSection={activeSection}
-        variants={RegistryHub[category]}
+        variants={RegistryHub[categoryKey]}
       />
     );
   }
