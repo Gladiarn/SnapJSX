@@ -7,6 +7,18 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.10",
+      date: "April 28, 2026",
+      title: "UI/UX: Global Scrollbar Design",
+      summary:
+        "Standardized scrollbar appearance across the application to match the site's gold theme.",
+      details: [
+        "Implemented custom thin scrollbar styles in globals.css using system variables.",
+        "Ensured scrollbar track is transparent and the thumb matches the brand 'primary' color with a subtle hover effect.",
+        "Maintained cross-browser compatibility with standard CSS scrollbar properties.",
+      ],
+    },
+    {
       version: "v0.1.9",
       date: "April 28, 2026",
       title: "UI/UX: Breadcrumb Refactoring",
