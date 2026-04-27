@@ -7,6 +7,18 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.11",
+      date: "April 28, 2026",
+      title: "UI/UX: Enhanced Navigation & Breadcrumbs",
+      summary:
+        "Refined navigation path clarity and improved search accessibility on mobile devices.",
+      details: [
+        "SubNavbar Breadcrumbs: Refactored to use semantic 'title' and 'subtitle' props derived from page state. This provides cleaner breadcrumb paths (e.g., 'Core Components / Primary Button') compared to slug-parsing, while dynamically hiding redundant labels.",
+        "Mobile Search Integration: Added a dedicated search trigger button to the mobile navigation menu, ensuring search functionality is accessible on all device sizes.",
+        "UX Consistency: Search trigger in mobile menu automatically handles UI state by closing the menu upon invocation.",
+      ],
+    },
+    {
       version: "v0.1.10",
       date: "April 28, 2026",
       title: "UI/UX: Global Scrollbar Design",

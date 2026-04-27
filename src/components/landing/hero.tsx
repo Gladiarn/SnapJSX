@@ -67,7 +67,8 @@ export function Hero() {
             Browse Components
             <ArrowRight className="h-4 w-4" />
           </button>
-          <Link href="/guide"
+          <Link
+            href="/guide"
             type="button"
             className="flex h-12 items-center justify-center rounded-lg border border-input px-8 py-3 text-base font-semibold hover:bg-accent transition-all active:scale-95"
           >
