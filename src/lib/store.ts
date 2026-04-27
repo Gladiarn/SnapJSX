@@ -14,9 +14,13 @@ export interface SidebarSection {
 interface DocsStore {
   sidebarData: SidebarSection[];
   setSidebarData: (data: SidebarSection[]) => void;
+  isSearchOpen: boolean;
+  setIsSearchOpen: (open: boolean) => void;
 }
 
 export const useDocsStore = create<DocsStore>((set) => ({
+  isSearchOpen: false,
+  setIsSearchOpen: (open) => set({ isSearchOpen: open }),
   sidebarData: [
     {
       title: "Getting Started",

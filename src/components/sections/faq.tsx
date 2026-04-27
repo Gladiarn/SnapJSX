@@ -39,7 +39,7 @@ export function FAQ() {
         <div className="space-y-4">
           {FAQS.map((faq, i) => (
             <div
-              key={i}
+              key={faq.question}
               className="rounded-xl border border-border  overflow-hidden"
             >
               <button

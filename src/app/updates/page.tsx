@@ -2,14 +2,31 @@
 
 import { ChevronDown, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { Pagination } from "@/components/ui/pagination";
 
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.4",
+      date: "April 27, 2026",
+      title: "Search Modal Implementation & Performance Optimization",
+      summary:
+        "Engineered a high-performance, registry-driven Command Palette (Search Modal) and refined global navigation sync.",
+      details: [
+        "Initial Implementation: Architected a global Search Modal with a decoupled state-driven interface, allowing it to render at the root level.",
+        "Routing Engine: Implemented custom event-based synchronization between the Modal and the Sidebar to ensure atomic routing transitions without URL fragment pollution.",
+        "Performance Tuning: Eliminated React render bottlenecks by moving hover-states to CSS, optimizing list indexing with useMemo, and memoizing ResultItems.",
+        "UX Polish: Refined visual aesthetics by removing clunky transition effects in favor of instantaneous, reactive interactions.",
+        "Stability: Stabilized component indexing by tightly coupling the search engine to the central sidebar store, automatically reflecting any registry changes.",
+        "Quality Assurance: Rigorously linted for A11y, resolved strict routing issues, and verified production stability via full-stack build checks.",
+      ],
+    },
+    {
       version: "v0.1.3",
       date: "April 26, 2026",
       title: "Architecture Stabilization & Registry-Driven Routing",
-      summary: "Completed a comprehensive refactor of the documentation architecture for extreme scalability.",
+      summary:
+        "Completed a comprehensive refactor of the documentation architecture for extreme scalability.",
       details: [
         "Registry Hub: Consolidated all UI block definitions into a centralized, type-safe registry-hub.",
         "Generic Rendering: Replaced category-specific pages with a single, reusable 'GenericCategoryPage' engine.",
@@ -18,7 +35,7 @@ export default function UpdatesPage() {
         "Performance Tuning: Replaced heavy Framer Motion height-transitions with GPU-accelerated CSS to eliminate scroll lag.",
         "Accessibility: Resolved all A11y warnings including missing button types and SVG titles.",
         "Code Quality: Cleaned codebase of linting regressions (noArrayIndexKey, unused imports, explicit types).",
-        "Fullstack Readiness: Transitioned all static documentation data into a stateful pattern to facilitate future backend integration."
+        "Fullstack Readiness: Transitioned all static documentation data into a stateful pattern to facilitate future backend integration.",
       ],
     },
     {
@@ -121,6 +138,20 @@ export default function UpdatesPage() {
     },
   ]);
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [inputValue, setInputValue] = useState("1");
+  const itemsPerPage = 5;
+
+  const totalPages = Math.ceil(updatesLog.length / itemsPerPage);
+  const paginatedUpdates = updatesLog.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
+  const handlePagination = (page: number) => {
+    setCurrentPage(page);
+    setInputValue(page.toString());
+  };
 
   const toggleItem = (version: string) => {
     setOpenItems((prev) => ({ ...prev, [version]: !prev[version] }));
@@ -142,59 +173,59 @@ export default function UpdatesPage() {
         </p>
       </header>
 
-      {/* Scrollable Timeline Container */}
-      <div className="max-h-[800px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-primary/20">
-        <div className="relative border-l-2 border-border ml-2 space-y-12">
-          {updatesLog.map((update) => (
-            <div key={update.version} className="relative pl-8">
-              {/* Timeline Node */}
-              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-background bg-primary ring-2 ring-primary/20" />
-
-              <div className="bg-card/50 rounded-3xl p-8 border border-border/50 hover:border-primary/30 transition-colors duration-200 will-change-transform">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-primary font-mono font-bold text-lg">
-                    {update.version}
-                  </span>
-                  <span className="text-sm text-muted-foreground font-medium">
-                    {update.date}
-                  </span>
-                </div>
-
-                <h3 className="text-2xl font-bold text-foreground mb-3">
-                  {update.title}
-                </h3>
-                <p className="text-muted-foreground mb-6">{update.summary}</p>
-
-                {openItems[update.version] && (
-                  <ul className="space-y-3 mb-6 border-t border-border/50 pt-6 animate-in slide-in-from-top-2">
-                    {update.details.map((detail, dIdx) => (
-                      <li
-                        key={dIdx}
-                        className="flex gap-3 text-sm text-foreground/80"
-                      >
-                        <span className="text-primary mt-1">✦</span> {detail}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => toggleItem(update.version)}
-                  className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider hover:text-primary/80 transition-colors"
-                >
-                  {openItems[update.version]
-                    ? "Hide technical logs"
-                    : "Read full technical logs"}
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${openItems[update.version] ? "rotate-180" : ""}`}
-                  />
-                </button>
+      <div className="relative border-l-2 border-border ml-2 space-y-12">
+        {paginatedUpdates.map((update) => (
+          <div key={update.version} className="relative pl-8">
+            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-background bg-primary ring-2 ring-primary/20" />
+            <div className="bg-card/50 rounded-3xl p-8 border border-border/50 hover:border-primary/30 transition-colors duration-200 will-change-transform">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-primary font-mono font-bold text-lg">
+                  {update.version}
+                </span>
+                <span className="text-sm text-muted-foreground font-medium">
+                  {update.date}
+                </span>
               </div>
+              <h3 className="text-2xl font-bold text-foreground mb-3">
+                {update.title}
+              </h3>
+              <p className="text-muted-foreground mb-6">{update.summary}</p>
+              {openItems[update.version] && (
+                <ul className="space-y-3 mb-6 border-t border-border/50 pt-6 animate-in slide-in-from-top-2">
+                  {update.details.map((detail) => (
+                    <li
+                      key={detail}
+                      className="flex gap-3 text-sm text-foreground/80"
+                    >
+                      <span className="text-primary mt-1">✦</span> {detail}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <button
+                type="button"
+                onClick={() => toggleItem(update.version)}
+                className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider hover:text-primary/80 transition-colors"
+              >
+                {openItems[update.version]
+                  ? "Hide technical logs"
+                  : "Read full technical logs"}
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${openItems[update.version] ? "rotate-180" : ""}`}
+                />
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePagination={handlePagination}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
     </main>
   );
 }
