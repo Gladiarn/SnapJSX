@@ -15,7 +15,7 @@ export interface ComponentVariant {
 interface GenericCategoryPageProps {
   title: string;
   description: string;
-  activeSection: string;
+  activeSection: string; // e.g. "core-components-buttons" or "core-components-buttons-primary-button"
   variants: ComponentVariant[];
 }
 
@@ -26,21 +26,31 @@ export function GenericCategoryPage({
   variants,
 }: GenericCategoryPageProps) {
   const renderContent = () => {
-    // 1. Identify if we are in "All" mode
-    const isAll = activeSection.endsWith("-All");
+    // e.g. activeSection: "core-components-buttons" -> ["core", "components", "buttons"]
+    // we want to filter by the third part "buttons" if it exists, or show all
+    const parts = activeSection.split("-");
+    const filterTerm = parts.length > 2 ? parts[2] : null;
+    const subFilterTerm = parts.length > 3 ? parts.slice(3).join("-") : null;
 
-    // 2. Identify the target subcategory/component
-    // Sidebar sends "Category-SubItem" (e.g., "Buttons-Primary Button")
-    const activeSub = activeSection.includes("-")
-      ? activeSection.split("-")[1]
-      : activeSection;
+    // Helper to kebab-case a string
+    const toKebab = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
 
-    // 3. Filter logic
-    const filteredVariants = isAll
-      ? variants
-      : variants.filter(
-          (c) => c.subcategory === activeSub || c.title === activeSub,
-        );
+    const filteredVariants = variants.filter((c) => {
+      // If no filter term, show all
+      if (!filterTerm) return true;
+      
+      // Match category/component name (e.g. "Buttons")
+      if (toKebab(c.subcategory) !== filterTerm && toKebab(c.title) !== filterTerm) {
+        return false;
+      }
+      
+      // If we have a subcategory/variant name (e.g. "Primary Button")
+      if (subFilterTerm) {
+        return toKebab(c.title) === subFilterTerm;
+      }
+      
+      return true;
+    });
 
     if (filteredVariants.length > 0) {
       return (
