@@ -7,6 +7,21 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.5",
+      date: "April 27, 2026",
+      title: "Advanced Routing & Search Modal Refinement",
+      summary:
+        "Refined deep-linking architecture and streamlined navigation paths for enhanced developer experience.",
+      details: [
+        "Implemented native support for '/docs/{title}/all' routes, enabling users to view the entire library for a category without subcategory-level filtering.",
+        "Refactored Search Modal URL construction to follow the canonical '/docs/{title}/{category}/{subcategory}' path format, ensuring direct routing parity with the sidebar navigation.",
+        "Synchronized search results with the primary routing engine; clicking a search result now triggers native Next.js router navigation rather than custom event dispatching, fixing potential state inconsistencies.",
+        "Standardized slug processing across DocsContent and GenericCategoryPage, ensuring that URL segments are correctly parsed for both 'all' routes and granular component filtering.",
+        "Cleaned up the Search Modal component, removing unused imports and refactoring the logic for list item selection and routing, leading to improved code readability and maintainability.",
+        "Rigorous quality assurance: executed full linting (Biome) to resolve unused imports, type mismatches, and radix-missing warnings, followed by a successful production build (Next.js 16.2.4).",
+      ],
+    },
+    {
       version: "v0.1.4",
       date: "April 27, 2026",
       title: "Search Modal Implementation & Performance Optimization",

@@ -15,7 +15,8 @@ export interface ComponentVariant {
 interface GenericCategoryPageProps {
   title: string;
   description: string;
-  activeSection: string; // e.g. "core-components-buttons" or "core-components-buttons-primary-button"
+  activeSection: string;
+  slug: string[];
   variants: ComponentVariant[];
 }
 
@@ -23,32 +24,33 @@ export function GenericCategoryPage({
   title,
   description,
   activeSection,
+  slug,
   variants,
 }: GenericCategoryPageProps) {
   const renderContent = () => {
-    // e.g. activeSection: "core-components-buttons" -> ["core", "components", "buttons"]
-    // we want to filter by the third part "buttons" if it exists, or show all
-    const parts = activeSection.split("-");
-    const filterTerm = parts.length > 2 ? parts[2] : null;
-    const subFilterTerm = parts.length > 3 ? parts.slice(3).join("-") : null;
+    // slug is [title, category, subcategory]
+    const [_titleSlug, categorySlug, subcategorySlug] = slug;
 
     // Helper to kebab-case a string
     const toKebab = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
 
     const filteredVariants = variants.filter((c) => {
-      // If no filter term, show all
-      if (!filterTerm) return true;
-      
+      // If "all", show all in this title/category
+      if (categorySlug === "all") return true;
+
       // Match category/component name (e.g. "Buttons")
-      if (toKebab(c.subcategory) !== filterTerm && toKebab(c.title) !== filterTerm) {
+      if (
+        toKebab(c.category) !== categorySlug &&
+        toKebab(c.subcategory) !== categorySlug
+      ) {
         return false;
       }
-      
+
       // If we have a subcategory/variant name (e.g. "Primary Button")
-      if (subFilterTerm) {
-        return toKebab(c.title) === subFilterTerm;
+      if (subcategorySlug) {
+        return toKebab(c.title) === subcategorySlug;
       }
-      
+
       return true;
     });
 

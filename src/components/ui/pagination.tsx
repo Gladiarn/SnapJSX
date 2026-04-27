@@ -1,4 +1,3 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import type React from "react";
 
 export function Pagination({
@@ -35,7 +34,7 @@ export function Pagination({
             const val = e.target.value.replace(/[^0-9]/g, "");
             setInputValue(val);
             if (val !== "") {
-              const parsed = parseInt(val);
+              const parsed = parseInt(val, 10);
               if (parsed >= 1 && parsed <= totalPages) {
                 handlePagination(parsed);
               } else if (parsed > totalPages) {
@@ -44,8 +43,8 @@ export function Pagination({
             }
           }}
           onBlur={() => {
-            const val = parseInt(inputValue);
-            if (isNaN(val) || val < 1) {
+            const val = parseInt(inputValue, 10);
+            if (Number.isNaN(val) || val < 1) {
               setInputValue("1");
               handlePagination(1);
             } else if (val > totalPages) {

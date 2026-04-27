@@ -12,7 +12,7 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
     {
       title: "Primary Button",
       category: "Buttons",
-      subcategory: "Buttons",
+      subcategory: "Primary-Button",
       description: "Main call-to-action button.",
       size: "0.45kb",
       preview: React.createElement(
@@ -32,7 +32,7 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
     {
       title: "Basic Card",
       category: "Cards",
-      subcategory: "Cards",
+      subcategory: "Basic-Card",
       description: "Standard container with hover elevation.",
       size: "0.35kb",
       preview: React.createElement(
@@ -56,8 +56,8 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
   Loaders: [
     {
       title: "Spinner",
-      category: "Loaders",
-      subcategory: "Spinners",
+      category: "Spinners",
+      subcategory: "Spinner",
       description: "Smooth rotation loader.",
       size: "0.25kb",
       preview: React.createElement(Spinner, { size: "md" }),
@@ -66,8 +66,8 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
     },
     {
       title: "Bouncing Dots",
-      category: "Loaders",
-      subcategory: "Pulse",
+      category: "Pulse",
+      subcategory: "Bouncing-Dots",
       description: "Rhythmic bouncing dots.",
       size: "0.3kb",
       preview: React.createElement(BouncingDots, {}),

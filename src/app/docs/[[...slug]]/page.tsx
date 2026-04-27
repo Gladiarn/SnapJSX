@@ -1,10 +1,9 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 import { DocsContent } from "@/components/docs/docs-content";
 import { Sidebar } from "@/components/docs/docs-sidebar";
 import { SubNavbar } from "@/components/layout/sub-navbar";
-import { useState } from "react";
 
 export default function DocPage({
   params,
@@ -15,14 +14,19 @@ export default function DocPage({
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Derive activeSection from slug
-  // The slug format is [category, name, sub?]
+  // The slug format is [title, category, sub?]
   const activeSection = slug ? slug.join("-") : "getting-started-introduction";
 
   const findCategory = () => {
     if (!slug) return "Getting Started";
-    // Title is slug[0]
-    return slug[0].replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+    return slug[0].replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
   };
+
+  const title = slug ? slug[0].replace(/-/g, " ") : "Getting Started";
+  const subtitle =
+    slug && slug.length > 1
+      ? slug[slug.length - 1].replace(/-/g, " ")
+      : "Introduction";
 
   return (
     <div className="flex w-full min-h-screen bg-transparent">
@@ -42,17 +46,16 @@ export default function DocPage({
             <div className="text-primary font-bold text-xs tracking-[0.2em] uppercase">
               {findCategory()}
             </div>
-            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground">
-              {activeSection.split("-").pop()?.replace(/-/g, " ")}
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground capitalize">
+              {subtitle}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
-              Everything you need to know about{" "}
-              {activeSection.split("-").pop()?.replace(/-/g, " ")}{" "}
-              in SnapJSX. Copy, paste, and customize.
+              Everything you need to know about {subtitle} in {title}. Copy,
+              paste, and customize.
             </p>
           </header>
 
-          <DocsContent activeSection={activeSection} />
+          <DocsContent activeSection={activeSection} slug={slug || []} />
         </div>
       </main>
     </div>
