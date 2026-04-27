@@ -1,5 +1,5 @@
-import { memo, useMemo } from "react";
 import type React from "react";
+import { memo, useMemo } from "react";
 import { ComponentCard } from "@/components/ui/component-card";
 
 export interface ComponentVariant {

@@ -32,16 +32,16 @@ export const DocsContent = memo(function DocsContent({
     }
   }, [activeSection]);
 
-  if (staticContent) return staticContent;
-
   // 2. Registry-Driven Dynamic Routing
-  const [titleSlug, categorySlug, ..._rest] = slug;
+  const [titleSlug, _categorySlug, ..._rest] = slug;
 
   const categoryKey = useMemo(() => {
     return Object.keys(RegistryHub).find(
       (key) => key.toLowerCase().replace(/\s+/g, "-") === titleSlug,
     );
   }, [titleSlug]);
+
+  if (staticContent) return staticContent;
 
   if (categoryKey && RegistryHub[categoryKey]) {
     return (
