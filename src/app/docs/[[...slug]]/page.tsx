@@ -1,10 +1,10 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use } from "react";
 import { DocsContent } from "@/components/docs/docs-content";
 import { Sidebar } from "@/components/docs/docs-sidebar";
 import { SubNavbar } from "@/components/layout/sub-navbar";
-import { type SidebarItem, useDocsStore } from "@/lib/store";
+import { useState } from "react";
 
 export default function DocPage({
   params,
@@ -12,41 +12,21 @@ export default function DocPage({
   params: Promise<{ slug?: string[] }>;
 }) {
   const { slug } = use(params);
-  const [activeSection, setActiveSection] = useState(
-    "Getting Started-Introduction",
-  );
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const { sidebarData } = useDocsStore();
 
-  useEffect(() => {
-    if (slug && slug.length > 0) {
-      const lastSlug = slug[slug.length - 1];
-      const formatted =
-        lastSlug.charAt(0).toUpperCase() + lastSlug.slice(1).replace(/-/g, " ");
-      setActiveSection(formatted);
-    }
-  }, [slug]);
+  // Derive activeSection from slug
+  // The slug format is [category, name, sub?]
+  const activeSection = slug ? slug.join("-") : "getting-started-introduction";
 
   const findCategory = () => {
-    for (const section of sidebarData) {
-      if (
-        section.items.some(
-          (item: SidebarItem) =>
-            item.name === activeSection ||
-            item.subItems?.includes(activeSection),
-        )
-      ) {
-        return section.category || section.title;
-      }
-    }
-    return "Documentation";
+    if (!slug) return "Getting Started";
+    // Title is slug[0]
+    return slug[0].replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
   };
 
   return (
     <div className="flex w-full min-h-screen bg-transparent">
       <Sidebar
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
         isOpen={isSidebarOpen}
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
       />
@@ -63,15 +43,11 @@ export default function DocPage({
               {findCategory()}
             </div>
             <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground">
-              {activeSection.includes("-")
-                ? activeSection.split("-")[1]
-                : activeSection}
+              {activeSection.split("-").pop()?.replace(/-/g, " ")}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
               Everything you need to know about{" "}
-              {activeSection.includes("-")
-                ? activeSection.split("-")[1]
-                : activeSection}{" "}
+              {activeSection.split("-").pop()?.replace(/-/g, " ")}{" "}
               in SnapJSX. Copy, paste, and customize.
             </p>
           </header>

@@ -11,34 +11,23 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDocsStore } from "@/lib/store";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface SidebarProps {
-  activeSection: string;
-  onSectionChange: (section: string) => void;
   isOpen: boolean;
   onToggle: () => void;
 }
 
 export function Sidebar({
-  activeSection,
-  onSectionChange,
   isOpen,
   onToggle,
 }: SidebarProps) {
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
   const { sidebarData } = useDocsStore();
-
-  useEffect(() => {
-    const handleSectionChange = (event: Event) => {
-      const customEvent = event as CustomEvent<string>;
-      onSectionChange(customEvent.detail);
-    };
-    window.addEventListener("sidebar-change", handleSectionChange);
-    return () =>
-      window.removeEventListener("sidebar-change", handleSectionChange);
-  }, [onSectionChange]);
+  const pathname = usePathname();
 
   const toggleGroup = (name: string) => {
     setOpenGroups((prev) => ({ ...prev, [name]: !prev[name] }));
@@ -64,6 +53,8 @@ export function Sidebar({
         return null;
     }
   };
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <aside
@@ -108,40 +99,37 @@ export function Sidebar({
                         </button>
                         {openGroups[item.name] && (
                           <ul className="pl-4 mt-1 space-y-1">
-                            {item.subItems.map((sub) => (
-                              <li key={sub}>
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    onSectionChange(`${section.title}-${sub}`)
-                                  }
-                                  className={`w-full text-left px-2 py-1 rounded-md text-xs transition-colors ${
-                                    activeSection === `${section.title}-${sub}`
-                                      ? "bg-primary/10 text-primary font-medium"
-                                      : "text-muted-foreground hover:text-foreground"
-                                  }`}
-                                >
-                                  {sub}
-                                </button>
-                              </li>
-                            ))}
+                            {item.subItems.map((sub) => {
+                              const path = `/docs/${section.title.toLowerCase().replace(/\s+/g, '-')}/${item.name.toLowerCase().replace(/\s+/g, '-')}/${sub.toLowerCase().replace(/\s+/g, '-')}`;
+                              return (
+                                <li key={sub}>
+                                  <Link
+                                    href={path}
+                                    className={`block w-full text-left px-2 py-1 rounded-md text-xs transition-colors ${
+                                      isActive(path)
+                                        ? "bg-primary/10 text-primary font-medium"
+                                        : "text-muted-foreground hover:text-foreground"
+                                    }`}
+                                  >
+                                    {sub}
+                                  </Link>
+                                </li>
+                              );
+                            })}
                           </ul>
                         )}
                       </div>
                     ) : (
-                      <button
-                        type="button"
-                        onClick={() =>
-                          onSectionChange(`${section.title}-${item.name}`)
-                        }
-                        className={`w-full text-left px-2 py-1.5 rounded-md text-sm transition-colors ${
-                          activeSection === `${section.title}-${item.name}`
+                      <Link
+                        href={`/docs/${section.title.toLowerCase().replace(/\s+/g, '-')}/${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                        className={`block w-full text-left px-2 py-1.5 rounded-md text-sm transition-colors ${
+                          isActive(`/docs/${section.title.toLowerCase().replace(/\s+/g, '-')}/${item.name.toLowerCase().replace(/\s+/g, '-')}`)
                             ? "bg-primary/10 text-primary font-medium border border-primary/20"
                             : "text-foreground hover:bg-muted"
                         }`}
                       >
                         {item.name}
-                      </button>
+                      </Link>
                     )}
                   </li>
                 ))}
