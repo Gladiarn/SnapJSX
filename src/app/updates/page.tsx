@@ -7,6 +7,17 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.7",
+      date: "April 27, 2026",
+      title: "Navigation UX: Persistent Sidebar Accordions",
+      summary:
+        "Enhanced sidebar navigation by ensuring category accordions persist when a sub-item is active.",
+      details: [
+        "Updated sidebar logic to initialize 'open' state based on the active path, automatically expanding categories when their children are navigated to.",
+        "Improved navigation flow by preventing category collapse during route transitions, ensuring a consistent and expected state.",
+      ],
+    },
+    {
       version: "v0.1.6",
       date: "April 27, 2026",
       title: "Performance Optimization: Routing & Rendering",

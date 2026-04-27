@@ -22,9 +22,24 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
-  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
   const { sidebarData } = useDocsStore();
   const pathname = usePathname();
+
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>(() => {
+    const initialOpen: Record<string, boolean> = {};
+    sidebarData.forEach((section) => {
+      section.items.forEach((item) => {
+        const isActiveSubItem = item.subItems.some((sub) => {
+          const path = `/docs/${section.title.toLowerCase().replace(/\s+/g, "-")}/${item.name.toLowerCase().replace(/\s+/g, "-")}/${sub.toLowerCase().replace(/\s+/g, "-")}`;
+          return pathname === path;
+        });
+        if (isActiveSubItem) {
+          initialOpen[item.name] = true;
+        }
+      });
+    });
+    return initialOpen;
+  });
 
   const toggleGroup = (name: string) => {
     setOpenGroups((prev) => ({ ...prev, [name]: !prev[name] }));
