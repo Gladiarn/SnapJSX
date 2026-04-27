@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import * as React from "react";
+import { SearchModal } from "./search-modal";
 
 // Simple social icon components to avoid issues with Lucide imports
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -49,13 +50,28 @@ export function Navbar() {
   const pathname = usePathname();
   const [mounted, setMounted] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
+
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setIsSearchOpen((open) => !open);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
   }, []);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <div className="flex items-center gap-8">
           <Link
@@ -88,18 +104,17 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           {/* Minimalist Search */}
-          <div className="hidden md:flex items-center gap-2 h-9 w-48 xl:w-64 rounded-md border border-input bg-background/50 px-3 text-sm text-muted-foreground hover:bg-accent transition-colors focus-within:ring-1 focus-within:ring-ring">
+          <button
+            type="button"
+            onClick={() => setIsSearchOpen(true)}
+            className="hidden md:flex items-center gap-2 h-9 w-48 xl:w-64 rounded-md border border-input bg-background/50 px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-all focus-within:ring-1 focus-within:ring-ring"
+          >
             <Search className="h-4 w-4 shrink-0" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="bg-transparent border-none outline-none w-full text-foreground"
-              onChange={(e) => console.log(e.target.value)}
-            />
+            <span className="flex-1 text-left">Search...</span>
             <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100">
               <Command className="h-2.5 w-2.5" /> K
             </kbd>
-          </div>
+          </button>
 
           <div className="hidden md:block h-4 w-[1px] bg-border mx-1" />
 
