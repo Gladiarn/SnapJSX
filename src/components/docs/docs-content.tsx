@@ -1,5 +1,4 @@
 import { memo, useMemo } from "react";
-import { GuideCard } from "@/components/ui/guide-card";
 import { GUIDES } from "@/content/guides";
 import { RegistryHub } from "@/lib/registry-hub";
 import { ComponentPlaceholder } from "./sections/component-placeholder";
@@ -41,24 +40,6 @@ export const DocsContent = memo(function DocsContent({
   // Handle Guides Section
   const guideContent = useMemo(() => {
     if (titleSlug === "guide") {
-      if (categorySlug === "all" || !categorySlug) {
-        return (
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl font-black tracking-tight">All Guides</h2>
-              <p className="text-lg text-muted-foreground">
-                Explore all tutorials and deep-dives.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {GUIDES.map((guide) => (
-                <GuideCard key={guide.id} guide={guide} />
-              ))}
-            </div>
-          </div>
-        );
-      }
-
       // Map sidebar item name (kebab-cased) to guide slug
       const guide = GUIDES.find(
         (g) =>

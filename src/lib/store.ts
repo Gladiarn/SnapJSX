@@ -36,7 +36,6 @@ export const useDocsStore = create<DocsStore>((set) => ({
       title: "Guide",
       category: "Tutorials",
       items: [
-        { name: "All", subItems: [] },
         { name: "Philosophy", subItems: [] },
         { name: "Registry Architecture", subItems: [] },
         { name: "Customization", subItems: [] },
