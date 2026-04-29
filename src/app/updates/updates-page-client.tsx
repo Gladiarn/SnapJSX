@@ -97,6 +97,150 @@ export function UpdatesPageClient() {
           "Brand Matching: Primary color thumb.",
         ],
       },
+      {
+        version: "v0.1.9",
+        date: "April 28, 2026",
+        title: "UI/UX: Breadcrumb Refactoring",
+        summary:
+          "Refined sub-navbar navigation path to use explicit page titles and subtitles.",
+        category: "UI/UX",
+        icon: Zap,
+        details: [
+          "Updated SubNavbar to accept 'title' and 'subtitle' props from the DocPage.",
+          "Ensured breadcrumbs only display sub-titles that differ from the category title.",
+        ],
+      },
+      {
+        version: "v0.1.8",
+        date: "April 28, 2026",
+        title: "UI/UX: SubNavbar Breadcrumb Refinement",
+        summary:
+          "Refactored the sub-navigation breadcrumbs for better visual hierarchy.",
+        category: "UI/UX",
+        icon: Zap,
+        details: [
+          "Updated SubNavbar to parse activeSection slugs.",
+          "Applied capitalization styling to breadcrumb segments.",
+        ],
+      },
+      {
+        version: "v0.1.7",
+        date: "April 27, 2026",
+        title: "Navigation UX: Persistent Sidebar Accordions",
+        summary:
+          "Enhanced sidebar navigation by ensuring category accordions persist.",
+        category: "Navigation",
+        icon: Layers,
+        details: [
+          "Updated sidebar logic to initialize 'open' state based on active path.",
+          "Improved navigation flow by preventing category collapse during transitions.",
+        ],
+      },
+      {
+        version: "v0.1.6",
+        date: "April 27, 2026",
+        title: "Performance Optimization: Routing & Rendering",
+        summary: "Optimized documentation navigation responsiveness.",
+        category: "Performance",
+        icon: Zap,
+        details: [
+          "Implemented React.memo and useMemo across DocsContent.",
+          "Optimized registry lookup logic.",
+          "Refactored variant filtering into a stable memoized hook.",
+        ],
+      },
+      {
+        version: "v0.1.5",
+        date: "April 27, 2026",
+        title: "Advanced Routing & Search Modal Refinement",
+        summary:
+          "Refined deep-linking architecture and streamlined navigation paths.",
+        category: "Architecture",
+        icon: Box,
+        details: [
+          "Implemented native support for '/docs/{title}/all' routes.",
+          "Refactored Search Modal URL construction.",
+          "Synchronized search results with primary routing engine.",
+        ],
+      },
+      {
+        version: "v0.1.4",
+        date: "April 27, 2026",
+        title: "Search Modal Implementation",
+        summary:
+          "Engineered a high-performance, registry-driven Command Palette.",
+        category: "Features",
+        icon: Terminal,
+        details: [
+          "Initial Implementation: Architected global Search Modal.",
+          "Routing Engine: Custom event-based synchronization.",
+          "Stability: Coupled search engine to central sidebar store.",
+        ],
+      },
+      {
+        version: "v0.1.3",
+        date: "April 26, 2026",
+        title: "Architecture Stabilization",
+        summary:
+          "Completed comprehensive refactor of documentation architecture.",
+        category: "Architecture",
+        icon: Box,
+        details: [
+          "Registry Hub: Consolidated UI block definitions.",
+          "Generic Rendering: Replaced category-specific pages with GenericCategoryPage.",
+          "Accessibility: Resolved all A11y warnings.",
+        ],
+      },
+      {
+        version: "v0.1.2",
+        date: "April 26, 2026",
+        title: "UI Performance & Routing Stability",
+        summary:
+          "Refined navigation routing and optimized component animations.",
+        category: "Performance",
+        icon: Zap,
+        details: [
+          "Replaced Framer Motion code viewer animations with CSS transitions.",
+          "Strictly coupled sidebar navigation to component registry.",
+        ],
+      },
+      {
+        version: "v0.1.1",
+        date: "April 26, 2026",
+        title: "Registry-Driven Documentation",
+        summary:
+          "Refactored documentation architecture to be fully registry-driven.",
+        category: "Docs",
+        icon: Layers,
+        details: [
+          "Implemented GenericCategoryPage for scalable showcasing.",
+          "Automated sidebar navigation with explicit 'All' tabs.",
+        ],
+      },
+      {
+        version: "v0.1.0",
+        date: "April 25, 2026",
+        title: "Initial Launch & Setup",
+        summary: "SnapJSX foundation is laid with unified branding.",
+        category: "Release",
+        icon: Sparkles,
+        details: [
+          "Implemented responsive Navbar with search-first approach.",
+          "Built dynamic, collapsible Documentation sidebar.",
+        ],
+      },
+      {
+        version: "v0.0.9",
+        date: "April 20, 2026",
+        title: "Core Design System",
+        summary: "Basic layout primitives and landing page sections completed.",
+        category: "Design",
+        icon: Layers,
+        details: [
+          "Global dark mode configuration with next-themes.",
+          "Setup Tailwind CSS typography and branding constants.",
+        ],
+      },
     ],
     [],
   );
@@ -104,7 +248,7 @@ export function UpdatesPageClient() {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [inputValue, setInputValue] = useState("1");
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
 
   const totalPages = Math.ceil(updatesLog.length / itemsPerPage);
   const paginatedUpdates = useMemo(
@@ -128,23 +272,23 @@ export function UpdatesPageClient() {
 
   return (
     <main className="container mx-auto max-w-6xl px-4 py-24">
-      {/* Header - Matching Guide Page Style */}
-      <header className="mb-20">
+      {/* Header - Centered Layout with Guide Page Typography */}
+      <header className="mb-24 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
           <Sparkles className="w-3 h-3" />
           Release History
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
           Latest <span className="text-primary">Updates</span>
         </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl">
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           Tracking the evolution of SnapJSX, from architectural shifts to
           feature releases and performance optimizations.
         </p>
       </header>
 
-      {/* Updates List - Cleaner, Less Bulky */}
-      <div className="space-y-4 mb-12">
+      {/* Updates List */}
+      <div className="space-y-6 mb-16">
         {paginatedUpdates.map((update) => {
           const Icon = update.icon || Zap;
           const isOpen = openItems[update.version];
@@ -152,53 +296,63 @@ export function UpdatesPageClient() {
           return (
             <div
               key={update.version}
-              className={`group border border-border/50 rounded-2xl transition-all duration-200 ${
+              className={`group border border-border/50 rounded-3xl transition-all duration-300 ${
                 isOpen
-                  ? "bg-card/30 border-primary/20"
-                  : "bg-transparent hover:border-primary/10"
+                  ? "bg-card/40 border-primary/30 shadow-[0_0_40px_-15px_rgba(255,215,0,0.1)]"
+                  : "bg-transparent hover:border-primary/20 hover:bg-card/20"
               }`}
             >
               <button
                 type="button"
                 onClick={() => toggleItem(update.version)}
-                className="w-full text-left p-6 md:px-8"
+                className="w-full text-left p-8"
               >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div className="flex items-center gap-5">
-                    <div className="w-10 h-10 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
-                      <Icon className="w-5 h-5" />
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="flex items-center gap-6">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-105">
+                      <Icon className="w-7 h-7" />
                     </div>
                     <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-primary font-mono font-bold text-sm">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-primary font-mono font-black text-base tracking-tight">
                           {update.version}
                         </span>
-                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-muted/50 px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-muted/50 px-2 py-0.5 rounded-md">
                           {update.category}
                         </span>
                       </div>
-                      <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                      <h3 className="text-xl md:text-2xl font-black text-foreground group-hover:text-primary transition-colors tracking-tight">
                         {update.title}
                       </h3>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between md:justify-end gap-6">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                      <Calendar className="w-3.5 h-3.5" />
+                  <div className="flex items-center justify-between md:justify-end gap-8">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                      <Calendar className="w-4 h-4 text-primary/60" />
                       {update.date}
                     </div>
-                    <ChevronDown
-                      className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${isOpen ? "rotate-180 text-primary" : ""}`}
-                    />
+                    <div
+                      className={`w-8 h-8 rounded-full border border-border flex items-center justify-center transition-all duration-300 ${isOpen ? "bg-primary border-primary text-primary-foreground" : "group-hover:border-primary group-hover:text-primary"}`}
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {!isOpen && (
-                  <p className="mt-4 text-sm text-muted-foreground line-clamp-1 ml-0 md:ml-16">
-                    {update.summary}
-                  </p>
-                )}
+                <AnimatePresence initial={false}>
+                  {!isOpen && (
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="mt-6 text-base text-muted-foreground line-clamp-2 md:ml-20 font-medium leading-relaxed"
+                    >
+                      {update.summary}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </button>
 
               <AnimatePresence>
@@ -207,19 +361,20 @@ export function UpdatesPageClient() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3, ease: "circOut" }}
+                    className="overflow-hidden"
                   >
-                    <div className="px-6 pb-8 md:px-8 md:ml-16 border-t border-border/50 pt-6">
-                      <p className="text-sm text-foreground/80 mb-6 font-medium leading-relaxed">
+                    <div className="px-8 pb-10 md:ml-20 border-t border-border/50 pt-8">
+                      <p className="text-lg text-foreground/90 mb-8 font-semibold leading-relaxed">
                         {update.summary}
                       </p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
                         {update.details.map((detail) => (
                           <div
                             key={detail}
-                            className="flex gap-3 text-xs text-muted-foreground leading-relaxed"
+                            className="flex gap-4 text-sm text-muted-foreground leading-relaxed font-medium group/item"
                           >
-                            <span className="text-primary mt-1 shrink-0">
+                            <span className="text-primary mt-1 shrink-0 transition-transform group-hover/item:scale-125">
                               ✦
                             </span>
                             {detail}
@@ -235,7 +390,7 @@ export function UpdatesPageClient() {
         })}
       </div>
 
-      <div className="flex justify-center border-t border-border/50 pt-12">
+      <div className="flex justify-center pt-8">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -245,18 +400,31 @@ export function UpdatesPageClient() {
         />
       </div>
 
-      {/* Simplified CTA */}
-      <div className="mt-24 p-12 rounded-[2.5rem] bg-gradient-to-b from-primary/5 to-transparent border border-primary/10 text-center">
-        <h2 className="text-2xl font-bold mb-4">Stay Informed</h2>
-        <p className="text-muted-foreground mb-8 max-w-md mx-auto text-sm">
-          SnapJSX is evolving. Follow our GitHub for real-time progress.
+      {/* CTA Section */}
+      <div className="mt-32 p-16 rounded-[4rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-150" />
+
+        <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+          Stay in the <span className="text-primary">Loop.</span>
+        </h2>
+        <p className="text-xl text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
+          The SnapJSX ecosystem is evolving rapidly. Follow our progress as we
+          redefine component registries.
         </p>
-        <button
-          type="button"
-          className="px-8 py-3 bg-foreground text-background rounded-xl font-bold hover:scale-105 transition-transform active:scale-95 text-sm"
-        >
-          Follow on GitHub
-        </button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button
+            type="button"
+            className="px-10 py-4 bg-primary text-primary-foreground rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-primary/20 active:scale-95"
+          >
+            Follow on GitHub
+          </button>
+          <button
+            type="button"
+            className="px-10 py-4 bg-card border border-border rounded-2xl font-black uppercase tracking-widest hover:bg-muted transition-all active:scale-95"
+          >
+            Join Discord
+          </button>
+        </div>
       </div>
     </main>
   );
