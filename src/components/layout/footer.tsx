@@ -3,19 +3,40 @@ import Link from "next/link";
 const FOOTER_LINKS = [
   {
     title: "SnapJSX",
-    links: ["Components", "Blocks", "Icons", "Templates"], // 4 links
+    links: [
+      { name: "Components", href: "/components" },
+      { name: "Blocks", href: "/blocks" },
+      { name: "Guides", href: "/guide" },
+      { name: "Showcase", href: "/showcase" },
+    ],
   },
   {
     title: "Resources",
-    links: ["Guide", "API Reference", "Showcase", "Blog", "Roadmap"], // 5 links
+    links: [
+      { name: "Documentation", href: "/docs/getting-started/introduction" },
+      { name: "Quick Start", href: "/docs/getting-started/quick-start" },
+      { name: "Updates", href: "/updates" },
+      { name: "Roadmap", href: "/roadmap" },
+    ],
   },
   {
     title: "Community",
-    links: ["GitHub", "Discord", "Twitter", "Contributing"], // 4 links
+    links: [
+      { name: "GitHub", href: "https://github.com/Gladiarn" },
+      { name: "Discord", href: "#" },
+      { name: "Twitter", href: "#" },
+      { name: "Contributing", href: "/docs/getting-started/introduction" },
+    ],
   },
   {
     title: "Legal & Support",
-    links: ["Privacy", "Terms", "License", "Security", "Status"], // 5 links
+    links: [
+      { name: "Privacy", href: "#" },
+      { name: "Terms", href: "#" },
+      { name: "License", href: "#" },
+      { name: "Security", href: "#" },
+      { name: "Status", href: "#" },
+    ],
   },
 ];
 
@@ -29,12 +50,12 @@ export function Footer() {
               <h4 className="font-bold mb-4">{section.title}</h4>
               <ul className="space-y-2">
                 {section.links.map((link) => (
-                  <li key={link}>
+                  <li key={link.name}>
                     <Link
-                      href="#"
+                      href={link.href}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {link}
+                      {link.name}
                     </Link>
                   </li>
                 ))}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
@@ -17,8 +18,65 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SnapJSX",
-  description: "Barebone JSX for Modern Apps. Copy. Paste. Complete.",
+  metadataBase: new URL("https://snapjsx.com"),
+  title: {
+    default: "SnapJSX - Barebone JSX for Modern Apps",
+    template: "%s | SnapJSX",
+  },
+  description:
+    "High-performance, zero-dependency JSX components for React and Next.js. Copy, paste, and take full control of your UI.",
+  keywords: [
+    "React",
+    "Next.js",
+    "JSX",
+    "Tailwind CSS",
+    "UI Components",
+    "Component Registry",
+    "Web Development",
+  ],
+  authors: [{ name: "SnapJSX Team" }],
+  creator: "SnapJSX",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://snapjsx.com",
+    title: "SnapJSX - Barebone JSX for Modern Apps",
+    description:
+      "High-performance, zero-dependency JSX components for React and Next.js. Copy, paste, and take full control of your UI.",
+    siteName: "SnapJSX",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SnapJSX",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SnapJSX - Barebone JSX for Modern Apps",
+    description:
+      "High-performance, zero-dependency JSX components for React and Next.js. Copy, paste, and take full control of your UI.",
+    images: ["/og-image.png"],
+    creator: "@snapjsx",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +90,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-foreground font-sans antialiased relative`}
         suppressHydrationWarning
       >
+        <Analytics />
         <div className="absolute inset-0 -z-10 grid-background" />
         <ThemeProvider
           attribute="class"

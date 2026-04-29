@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { MaintenancePlaceholder } from "@/components/ui/core/maintenance/maintenance-placeholder";
+
+export const metadata: Metadata = {
+  title: "Blocks",
+  description:
+    "Pre-assembled, functional component blocks for building modern web applications faster. Just copy and paste into your project.",
+};
 
 export default function BlocksPage() {
   return (

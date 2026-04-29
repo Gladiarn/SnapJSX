@@ -1,5 +1,12 @@
 import { Sparkles } from "lucide-react";
+import type { Metadata } from "next";
 import { MaintenancePlaceholder } from "@/components/ui/core/maintenance/maintenance-placeholder";
+
+export const metadata: Metadata = {
+  title: "Showcase",
+  description:
+    "Explore amazing projects built with SnapJSX. Get inspired by how others use our zero-dependency component registry.",
+};
 
 export default function ShowcasePage() {
   return (
