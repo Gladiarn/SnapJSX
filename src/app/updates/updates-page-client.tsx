@@ -14,10 +14,24 @@ import { useMemo, useState } from "react";
 import { Pagination } from "@/components/ui/pagination";
 
 export function UpdatesPageClient() {
-  const updatesLog = useMemo(
-    () => [
-      {
-        version: "v0.1.15",
+  const updatesLog = useMemo(() => [
+    {
+      version: "v0.1.16",
+      date: "May 1, 2026",
+      title: "UI/UX: Updates Page Performance & Aesthetic Refinement",
+      summary: "Refined the Updates page for better performance, information density, and design consistency with the global design system.",
+      category: "UI/UX",
+      icon: Layers,
+      details: [
+        "Header Alignment: Restored centered header with typography strictly aligned to the Guides section.",
+        "Performance Tuning: Implemented useMemo for log data and optimized animation models to eliminate layout lag.",
+        "Layout Precision: Tightened vertical spacing between content cards and pagination.",
+        "Aesthetic Balance: Scaled down the global CTA section to improve visual hierarchy and professional density.",
+      ],
+    },
+    {
+      version: "v0.1.15",
+
         date: "April 30, 2026",
         title: "SEO: Visibility & Discovery Optimization",
         summary:
@@ -288,7 +302,7 @@ export function UpdatesPageClient() {
       </header>
 
       {/* Updates List */}
-      <div className="space-y-6 mb-16">
+      <div className="space-y-6">
         {paginatedUpdates.map((update) => {
           const Icon = update.icon || Zap;
           const isOpen = openItems[update.version];
