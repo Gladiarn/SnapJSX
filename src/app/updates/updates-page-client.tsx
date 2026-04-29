@@ -390,7 +390,7 @@ export function UpdatesPageClient() {
         })}
       </div>
 
-      <div className="flex justify-center pt-8">
+      <div className="flex justify-center pt-2">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -400,32 +400,30 @@ export function UpdatesPageClient() {
         />
       </div>
 
-      {/* CTA Section */}
-      <div className="mt-32 p-16 rounded-[4rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
+      {/* CTA Section - Scaled Down for better balance */}
+      <div className="mt-24 p-12 md:p-14 rounded-[3.5rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-150" />
 
-        <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
-          Stay in the <span className="text-primary">Loop.</span>
-        </h2>
-        <p className="text-xl text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
-          The SnapJSX ecosystem is evolving rapidly. Follow our progress as we
-          redefine component registries.
+        <h2 className="text-2xl md:text-4xl font-black mb-4 tracking-tight">Stay in the <span className="text-primary">Loop.</span></h2>
+        <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
+          The SnapJSX ecosystem is evolving rapidly. Follow our progress as we redefine component registries.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
           <button
             type="button"
-            className="px-10 py-4 bg-primary text-primary-foreground rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-primary/20 active:scale-95"
+            className="px-8 py-3.5 bg-primary text-primary-foreground rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-primary/20 active:scale-95 text-xs"
           >
             Follow on GitHub
           </button>
           <button
             type="button"
-            className="px-10 py-4 bg-card border border-border rounded-2xl font-black uppercase tracking-widest hover:bg-muted transition-all active:scale-95"
+            className="px-8 py-3.5 bg-card border border-border rounded-2xl font-black uppercase tracking-widest hover:bg-muted transition-all active:scale-95 text-xs"
           >
             Join Discord
           </button>
         </div>
       </div>
+
     </main>
   );
 }
