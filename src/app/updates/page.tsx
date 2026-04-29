@@ -7,6 +7,46 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.14",
+      date: "April 30, 2026",
+      title: "Documentation: UI Refinement & Technical Scaling",
+      summary:
+        "Polished the documentation layout for guides and verified the system's scalability with comprehensive foundational content.",
+      details: [
+        "Layout Refinement: Implemented conditional header rendering to remove redundant titles on Guide pages, creating a cleaner, content-first reading experience.",
+        "Navigation Streamlining: Removed the 'All' category from the Guide sidebar to focus the navigation on specific, high-value technical articles.",
+        "Content Expansion: Successfully scaled the Guide manifest to include deep-dives into Architecture, Accessibility, and Performance, confirming the robustness of the data-driven rendering engine.",
+        "Registry Synchronization: Ensured seamless routing between the global Search Modal and the newly expanded Guide sections.",
+      ],
+    },
+    {
+      version: "v0.1.13",
+      date: "April 28, 2026",
+      title: "Architecture: Dynamic Guide Content System",
+      summary:
+        "Engineered a scalable, data-driven system for rendering complex guide content within the documentation framework.",
+      details: [
+        "Content Model: Enhanced the Guides manifest to support multi-section content, including formatted text and syntax-highlighted code blocks.",
+        "GenericArticlePage: Implemented a generic rendering engine for guides that includes automatic Table of Contents (TOC), sticky navigation, and scroll-sync IDs.",
+        "Scalable Routing: Integrated Guides into the documentation catch-all routes, enabling dynamic path resolution (e.g., /docs/guides/philosophy) without manual file creation.",
+        "Sidebar Store: Updated the global sidebar store to automatically index and display guides, ensuring a unified documentation experience.",
+        "UX Refinement: Standardized guide links across the application to ensure seamless transitions between the main Guide page and deep-dive technical articles.",
+      ],
+    },
+    {
+      version: "v0.1.12",
+      date: "April 28, 2026",
+      title: "Content Expansion: Professional Developer Guides",
+      summary:
+        "Launched a comprehensive Guides system to master the SnapJSX architecture and design patterns.",
+      details: [
+        "Architecture: Implemented a scalable, data-driven 'Guides' system using a centralized content manifest (guides.ts).",
+        "UI Design: Crafted a modern, non-empty 'Guide' page featuring featured content, categorical filtering, and search functionality.",
+        "Modular Components: Created reusable 'GuideCard' and 'FeaturedGuide' components with gold-themed hover effects and Framer Motion animations.",
+        "Categorization: Structured content into 'Foundations', 'Architecture', 'Styling', and 'Advanced' sections for intuitive learning paths.",
+      ],
+    },
+    {
       version: "v0.1.11",
       date: "April 28, 2026",
       title: "UI/UX: Enhanced Navigation & Breadcrumbs",

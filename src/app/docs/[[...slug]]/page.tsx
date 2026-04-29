@@ -43,18 +43,20 @@ export default function DocPage({
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
         />
         <div className="w-full px-6 py-10 md:px-10 lg:px-16 space-y-12">
-          <header className="space-y-4 pb-4">
-            <div className="text-primary font-bold text-xs tracking-[0.2em] uppercase">
-              {findCategory()}
-            </div>
-            <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground capitalize">
-              {subtitle}
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
-              Everything you need to know about {subtitle} in {title}. Copy,
-              paste, and customize.
-            </p>
-          </header>
+          {slug?.[0] !== "guide" && (
+            <header className="space-y-4 pb-4">
+              <div className="text-primary font-bold text-xs tracking-[0.2em] uppercase">
+                {findCategory()}
+              </div>
+              <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground capitalize">
+                {subtitle}
+              </h1>
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
+                Everything you need to know about {subtitle} in {title}. Copy,
+                paste, and customize.
+              </p>
+            </header>
+          )}
 
           <DocsContent activeSection={activeSection} slug={slug || []} />
         </div>

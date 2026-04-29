@@ -1,4 +1,5 @@
 import { memo, useMemo } from "react";
+import { GUIDES } from "@/content/guides";
 import { RegistryHub } from "@/lib/registry-hub";
 import { ComponentPlaceholder } from "./sections/component-placeholder";
 import { GenericCategoryPage } from "./sections/generic-category-page";
@@ -6,6 +7,7 @@ import { Customization } from "./sections/getting-started/customization";
 import { Installation } from "./sections/getting-started/installation";
 import { Introduction } from "./sections/getting-started/introduction";
 import { QuickStart } from "./sections/getting-started/quick-start";
+import { GenericGuidePage } from "./sections/guides/generic-guide-page";
 
 interface DocsContentProps {
   activeSection: string;
@@ -33,7 +35,24 @@ export const DocsContent = memo(function DocsContent({
   }, [activeSection]);
 
   // 2. Registry-Driven Dynamic Routing
-  const [titleSlug, _categorySlug, ..._rest] = slug;
+  const [titleSlug, categorySlug, ..._rest] = slug;
+
+  // Handle Guides Section
+  const guideContent = useMemo(() => {
+    if (titleSlug === "guide") {
+      // Map sidebar item name (kebab-cased) to guide slug
+      const guide = GUIDES.find(
+        (g) =>
+          g.slug === categorySlug ||
+          g.title.toLowerCase().replace(/\s+/g, "-") === categorySlug,
+      );
+
+      if (guide) {
+        return <GenericGuidePage guide={guide} />;
+      }
+    }
+    return null;
+  }, [titleSlug, categorySlug]);
 
   const categoryKey = useMemo(() => {
     return Object.keys(RegistryHub).find(
@@ -42,6 +61,7 @@ export const DocsContent = memo(function DocsContent({
   }, [titleSlug]);
 
   if (staticContent) return staticContent;
+  if (guideContent) return guideContent;
 
   if (categoryKey && RegistryHub[categoryKey]) {
     return (
