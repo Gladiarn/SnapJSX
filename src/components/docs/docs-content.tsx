@@ -1,4 +1,6 @@
 import { memo, useMemo } from "react";
+import { GuideCard } from "@/components/ui/guide-card";
+import { GUIDES } from "@/content/guides";
 import { RegistryHub } from "@/lib/registry-hub";
 import { ComponentPlaceholder } from "./sections/component-placeholder";
 import { GenericCategoryPage } from "./sections/generic-category-page";
@@ -6,6 +8,7 @@ import { Customization } from "./sections/getting-started/customization";
 import { Installation } from "./sections/getting-started/installation";
 import { Introduction } from "./sections/getting-started/introduction";
 import { QuickStart } from "./sections/getting-started/quick-start";
+import { GenericGuidePage } from "./sections/guides/generic-guide-page";
 
 interface DocsContentProps {
   activeSection: string;
@@ -33,7 +36,36 @@ export const DocsContent = memo(function DocsContent({
   }, [activeSection]);
 
   // 2. Registry-Driven Dynamic Routing
-  const [titleSlug, _categorySlug, ..._rest] = slug;
+  const [titleSlug, categorySlug, ..._rest] = slug;
+
+  // Handle Guides Section
+  const guideContent = useMemo(() => {
+    if (titleSlug === "guides") {
+      if (categorySlug === "all" || !categorySlug) {
+        return (
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-black tracking-tight">All Guides</h2>
+              <p className="text-lg text-muted-foreground">
+                Explore all tutorials and deep-dives.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {GUIDES.map((guide) => (
+                <GuideCard key={guide.id} guide={guide} />
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      const guide = GUIDES.find((g) => g.slug === categorySlug);
+      if (guide) {
+        return <GenericGuidePage guide={guide} />;
+      }
+    }
+    return null;
+  }, [titleSlug, categorySlug]);
 
   const categoryKey = useMemo(() => {
     return Object.keys(RegistryHub).find(
@@ -42,6 +74,7 @@ export const DocsContent = memo(function DocsContent({
   }, [titleSlug]);
 
   if (staticContent) return staticContent;
+  if (guideContent) return guideContent;
 
   if (categoryKey && RegistryHub[categoryKey]) {
     return (

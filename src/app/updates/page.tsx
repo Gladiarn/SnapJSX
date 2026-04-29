@@ -7,6 +7,20 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.13",
+      date: "April 28, 2026",
+      title: "Architecture: Dynamic Guide Content System",
+      summary:
+        "Engineered a scalable, data-driven system for rendering complex guide content within the documentation framework.",
+      details: [
+        "Content Model: Enhanced the Guides manifest to support multi-section content, including formatted text and syntax-highlighted code blocks.",
+        "GenericArticlePage: Implemented a generic rendering engine for guides that includes automatic Table of Contents (TOC), sticky navigation, and scroll-sync IDs.",
+        "Scalable Routing: Integrated Guides into the documentation catch-all routes, enabling dynamic path resolution (e.g., /docs/guides/philosophy) without manual file creation.",
+        "Sidebar Store: Updated the global sidebar store to automatically index and display guides, ensuring a unified documentation experience.",
+        "UX Refinement: Standardized guide links across the application to ensure seamless transitions between the main Guide page and deep-dive technical articles.",
+      ],
+    },
+    {
       version: "v0.1.12",
       date: "April 28, 2026",
       title: "Content Expansion: Professional Developer Guides",
