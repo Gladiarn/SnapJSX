@@ -7,6 +7,19 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.14",
+      date: "April 30, 2026",
+      title: "Documentation: UI Refinement & Technical Scaling",
+      summary:
+        "Polished the documentation layout for guides and verified the system's scalability with comprehensive foundational content.",
+      details: [
+        "Layout Refinement: Implemented conditional header rendering to remove redundant titles on Guide pages, creating a cleaner, content-first reading experience.",
+        "Navigation Streamlining: Removed the 'All' category from the Guide sidebar to focus the navigation on specific, high-value technical articles.",
+        "Content Expansion: Successfully scaled the Guide manifest to include deep-dives into Architecture, Accessibility, and Performance, confirming the robustness of the data-driven rendering engine.",
+        "Registry Synchronization: Ensured seamless routing between the global Search Modal and the newly expanded Guide sections.",
+      ],
+    },
+    {
       version: "v0.1.13",
       date: "April 28, 2026",
       title: "Architecture: Dynamic Guide Content System",
