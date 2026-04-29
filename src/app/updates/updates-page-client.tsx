@@ -1,295 +1,283 @@
 "use client";
 
-import { ChevronDown, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Box,
+  Calendar,
+  ChevronDown,
+  Layers,
+  Sparkles,
+  Terminal,
+  Zap,
+} from "lucide-react";
+import { useMemo, useState } from "react";
 import { Pagination } from "@/components/ui/pagination";
 
 export function UpdatesPageClient() {
-  const [updatesLog] = useState([
+  const updatesLog = useMemo(() => [
+    {
+      version: "v0.1.16",
+      date: "May 1, 2026",
+      title: "UI/UX: Updates Page Performance & Aesthetic Refinement",
+      summary: "Refined the Updates page for better performance, information density, and design consistency with the global design system.",
+      category: "UI/UX",
+      icon: Layers,
+      details: [
+        "Header Alignment: Restored centered header with typography strictly aligned to the Guides section.",
+        "Performance Tuning: Implemented useMemo for log data and optimized animation models to eliminate layout lag.",
+        "Layout Precision: Tightened vertical spacing between content cards and pagination.",
+        "Aesthetic Balance: Scaled down the global CTA section to improve visual hierarchy and professional density.",
+      ],
+    },
     {
       version: "v0.1.15",
-      date: "April 30, 2026",
-      title: "SEO: Visibility & Discovery Optimization",
-      summary:
-        "Engineered a comprehensive SEO framework to enhance search engine visibility, social sharing, and structured data discovery.",
-      details: [
-        "Global Metadata: Implemented a robust metadata architecture in the root layout, including OpenGraph and Twitter card configurations for consistent branding across social platforms.",
-        "Dynamic Sitemap: Developed an automated sitemap generation engine that dynamically indexes the component registry and guide manifest.",
-        "Page-Specific SEO: Refactored core pages to separate client and server logic, enabling unique, descriptive metadata exports for every section of the site.",
-        "Structured Data: Integrated JSON-LD schemas (SoftwareApplication) to provide search engines with rich context about the SnapJSX ecosystem.",
-        "Crawlability: Deployed a robots.txt configuration and optimized internal linking structures in the footer for improved search engine traversal.",
-      ],
-    },
-    {
-      version: "v0.1.14",
-      date: "April 30, 2026",
-      title: "Documentation: UI Refinement & Technical Scaling",
-      summary:
-        "Polished the documentation layout for guides and verified the system's scalability with comprehensive foundational content.",
-      details: [
-        "Layout Refinement: Implemented conditional header rendering to remove redundant titles on Guide pages, creating a cleaner, content-first reading experience.",
-        "Navigation Streamlining: Removed the 'All' category from the Guide sidebar to focus the navigation on specific, high-value technical articles.",
-        "Content Expansion: Successfully scaled the Guide manifest to include deep-dives into Architecture, Accessibility, and Performance, confirming the robustness of the data-driven rendering engine.",
-        "Registry Synchronization: Ensured seamless routing between the global Search Modal and the newly expanded Guide sections.",
-      ],
-    },
-    {
-      version: "v0.1.13",
-      date: "April 28, 2026",
-      title: "Architecture: Dynamic Guide Content System",
-      summary:
-        "Engineered a scalable, data-driven system for rendering complex guide content within the documentation framework.",
-      details: [
-        "Content Model: Enhanced the Guides manifest to support multi-section content, including formatted text and syntax-highlighted code blocks.",
-        "GenericArticlePage: Implemented a generic rendering engine for guides that includes automatic Table of Contents (TOC), sticky navigation, and scroll-sync IDs.",
-        "Scalable Routing: Integrated Guides into the documentation catch-all routes, enabling dynamic path resolution (e.g., /docs/guides/philosophy) without manual file creation.",
-        "Sidebar Store: Updated the global sidebar store to automatically index and display guides, ensuring a unified documentation experience.",
-        "UX Refinement: Standardized guide links across the application to ensure seamless transitions between the main Guide page and deep-dive technical articles.",
-      ],
-    },
-    {
-      version: "v0.1.12",
-      date: "April 28, 2026",
-      title: "Content Expansion: Professional Developer Guides",
-      summary:
-        "Launched a comprehensive Guides system to master the SnapJSX architecture and design patterns.",
-      details: [
-        "Architecture: Implemented a scalable, data-driven 'Guides' system using a centralized content manifest (guides.ts).",
-        "UI Design: Crafted a modern, non-empty 'Guide' page featuring featured content, categorical filtering, and search functionality.",
-        "Modular Components: Created reusable 'GuideCard' and 'FeaturedGuide' components with gold-themed hover effects and Framer Motion animations.",
-        "Categorization: Structured content into 'Foundations', 'Architecture', 'Styling', and 'Advanced' sections for intuitive learning paths.",
-      ],
-    },
-    {
-      version: "v0.1.11",
-      date: "April 28, 2026",
-      title: "UI/UX: Enhanced Navigation & Breadcrumbs",
-      summary:
-        "Refined navigation path clarity and improved search accessibility on mobile devices.",
-      details: [
-        "SubNavbar Breadcrumbs: Refactored to use semantic 'title' and 'subtitle' props derived from page state. This provides cleaner breadcrumb paths (e.g., 'Core Components / Primary Button') compared to slug-parsing, while dynamically hiding redundant labels.",
-        "Mobile Search Integration: Added a dedicated search trigger button to the mobile navigation menu, ensuring search functionality is accessible on all device sizes.",
-        "UX Consistency: Search trigger in mobile menu automatically handles UI state by closing the menu upon invocation.",
-      ],
-    },
-    {
-      version: "v0.1.10",
-      date: "April 28, 2026",
-      title: "UI/UX: Global Scrollbar Design",
-      summary:
-        "Standardized scrollbar appearance across the application to match the site's gold theme.",
-      details: [
-        "Implemented custom thin scrollbar styles in globals.css using system variables.",
-        "Ensured scrollbar track is transparent and the thumb matches the brand 'primary' color with a subtle hover effect.",
-        "Maintained cross-browser compatibility with standard CSS scrollbar properties.",
-      ],
-    },
-    {
-      version: "v0.1.9",
-      date: "April 28, 2026",
-      title: "UI/UX: Breadcrumb Refactoring",
-      summary:
-        "Refined sub-navbar navigation path to use explicit page titles and subtitles.",
-      details: [
-        "Updated SubNavbar to accept 'title' and 'subtitle' props from the DocPage, providing cleaner and more reliable breadcrumb paths compared to string-parsing the active slug.",
-        "Ensured breadcrumbs only display sub-titles that differ from the category title, preventing redundant UI labels.",
-      ],
-    },
-    {
-      version: "v0.1.8",
-      date: "April 28, 2026",
-      title: "UI/UX: SubNavbar Breadcrumb Refinement",
-      summary:
-        "Refactored the sub-navigation breadcrumbs for better visual hierarchy and clarity.",
-      details: [
-        "Updated SubNavbar to parse activeSection slugs, replacing hyphens with '/' separators to display a breadcrumb-style navigation path.",
-        "Applied capitalization styling to breadcrumb segments for a more professional UI appearance.",
-      ],
-    },
-    {
-      version: "v0.1.7",
-      date: "April 27, 2026",
-      title: "Navigation UX: Persistent Sidebar Accordions",
-      summary:
-        "Enhanced sidebar navigation by ensuring category accordions persist when a sub-item is active.",
-      details: [
-        "Updated sidebar logic to initialize 'open' state based on the active path, automatically expanding categories when their children are navigated to.",
-        "Improved navigation flow by preventing category collapse during route transitions, ensuring a consistent and expected state.",
-      ],
-    },
-    {
-      version: "v0.1.6",
-      date: "April 27, 2026",
-      title: "Performance Optimization: Routing & Rendering",
-      summary:
-        "Optimized documentation navigation responsiveness through memoization and improved rendering logic.",
-      details: [
-        "Implemented React.memo and useMemo across DocsContent and GenericCategoryPage to prevent redundant re-renders during route transitions.",
-        "Optimized registry lookup logic by memoizing category identification, significantly reducing overhead on navigation.",
-        "Refactored variant filtering in GenericCategoryPage into a stable memoized hook, ensuring component lists only re-calculate when URL parameters change.",
-        "Maintained structural integrity and scalability while achieving a snappier, more responsive navigation experience.",
-      ],
-    },
-    {
-      version: "v0.1.5",
-      date: "April 27, 2026",
-      title: "Advanced Routing & Search Modal Refinement",
-      summary:
-        "Refined deep-linking architecture and streamlined navigation paths for enhanced developer experience.",
-      details: [
-        "Implemented native support for '/docs/{title}/all' routes, enabling users to view the entire library for a category without subcategory-level filtering.",
-        "Refactored Search Modal URL construction to follow the canonical '/docs/{title}/{category}/{subcategory}' path format, ensuring direct routing parity with the sidebar navigation.",
-        "Synchronized search results with the primary routing engine; clicking a search result now triggers native Next.js router navigation rather than custom event dispatching, fixing potential state inconsistencies.",
-        "Standardized slug processing across DocsContent and GenericCategoryPage, ensuring that URL segments are correctly parsed for both 'all' routes and granular component filtering.",
-        "Cleaned up the Search Modal component, removing unused imports and refactoring the logic for list item selection and routing, leading to improved code readability and maintainability.",
-        "Rigorous quality assurance: executed full linting (Biome) to resolve unused imports, type mismatches, and radix-missing warnings, followed by a successful production build (Next.js 16.2.4).",
-      ],
-    },
-    {
-      version: "v0.1.4",
-      date: "April 27, 2026",
-      title: "Search Modal Implementation & Performance Optimization",
-      summary:
-        "Engineered a high-performance, registry-driven Command Palette (Search Modal) and refined global navigation sync.",
-      details: [
-        "Initial Implementation: Architected a global Search Modal with a decoupled state-driven interface, allowing it to render at the root level.",
-        "Routing Engine: Implemented custom event-based synchronization between the Modal and the Sidebar to ensure atomic routing transitions without URL fragment pollution.",
-        "Performance Tuning: Eliminated React render bottlenecks by moving hover-states to CSS, optimizing list indexing with useMemo, and memoizing ResultItems.",
-        "UX Polish: Refined visual aesthetics by removing clunky transition effects in favor of instantaneous, reactive interactions.",
-        "Stability: Stabilized component indexing by tightly coupling the search engine to the central sidebar store, automatically reflecting any registry changes.",
-        "Quality Assurance: Rigorously linted for A11y, resolved strict routing issues, and verified production stability via full-stack build checks.",
-      ],
-    },
-    {
-      version: "v0.1.3",
-      date: "April 26, 2026",
-      title: "Architecture Stabilization & Registry-Driven Routing",
-      summary:
-        "Completed a comprehensive refactor of the documentation architecture for extreme scalability.",
-      details: [
-        "Registry Hub: Consolidated all UI block definitions into a centralized, type-safe registry-hub.",
-        "Generic Rendering: Replaced category-specific pages with a single, reusable 'GenericCategoryPage' engine.",
-        "Routing Precision: Standardized sidebar navigation to 'Category-Subcategory' paths for rock-solid routing.",
-        "Mobile Responsiveness: Optimized grid layouts and code viewers to account for fixed-width sidebar constraints.",
-        "Performance Tuning: Replaced heavy Framer Motion height-transitions with GPU-accelerated CSS to eliminate scroll lag.",
-        "Accessibility: Resolved all A11y warnings including missing button types and SVG titles.",
-        "Code Quality: Cleaned codebase of linting regressions (noArrayIndexKey, unused imports, explicit types).",
-        "Fullstack Readiness: Transitioned all static documentation data into a stateful pattern to facilitate future backend integration.",
-      ],
-    },
-    {
-      version: "v0.1.2",
-      date: "April 26, 2026",
-      title: "UI Performance Optimization & Routing Stability",
-      summary:
-        "Refined navigation routing and optimized component animations for a snappier feel.",
-      details: [
-        "Replaced Framer Motion code viewer animations with optimized CSS transitions to eliminate layout lag.",
-        "Strictly coupled sidebar navigation to component registry using full-path identifiers.",
-        "Fixed 'All' tab routing and ensured category-level gallery rendering.",
-        "Stabilized build processes with type-safe React.createElement patterns.",
-      ],
-    },
-    {
-      version: "v0.1.1",
-      date: "April 26, 2026",
-      title: "Registry-Driven Documentation Expansion",
-      summary:
-        "Refactored the documentation architecture to be fully registry-driven and modular.",
-      details: [
-        "Implemented GenericCategoryPage for scalable UI component showcasing.",
-        "Transitioned to a strictly scoped navigation identifier system (Category-SubItem) for precise routing.",
-        "Automated sidebar navigation with explicit 'All' tabs for every category.",
-        "Standardized component registration with local and global registry manifests.",
-      ],
-    },
-    {
-      version: "v0.1.0",
-      date: "April 25, 2026",
-      title: "Initial Launch & Component Library Setup",
-      summary:
-        "SnapJSX foundation is laid. Components grouped, documentation system scaffolded, and branding unified.",
-      details: [
-        "Implemented responsive Navbar with a search-first approach.",
-        "Established centralized 'landing-grid' background pattern.",
-        "Built a dynamic, collapsible Documentation sidebar following a structured registry pattern.",
-        "Integrated Framer Motion for smooth UI transitions.",
-        "Created a robust directory structure for landing page, layout, and documentation components.",
-      ],
-    },
-    {
-      version: "v0.0.9",
-      date: "April 20, 2026",
-      title: "Core Design System Implementation",
-      summary: "Basic layout primitives and landing page sections completed.",
-      details: [
-        "Global dark mode configuration with next-themes.",
-        "Setup Tailwind CSS typography and branding constants.",
-        "Developed Hero, Stats, and How-It-Works sections.",
-        "Introduced consistent styling using glass-morphism aesthetic.",
-      ],
-    },
-    {
-      version: "v0.0.8",
-      date: "April 15, 2026",
-      title: "Refined Navigation",
-      summary: "Improved mobile menu and navigation responsiveness.",
-      details: [
-        "Added mobile drawer.",
-        "Optimized search bar.",
-        "Improved active link state.",
-      ],
-    },
-    {
-      version: "v0.0.7",
-      date: "April 10, 2026",
-      title: "Theme Polishing",
-      summary: "Enhanced color palette and theme toggle animations.",
-      details: ["Smoother theme transitions.", "Improved contrast ratios."],
-    },
-    {
-      version: "v0.0.6",
-      date: "April 5, 2026",
-      title: "Documentation Framework",
-      summary: "Set up dynamic doc routing and sidebar.",
-      details: ["Implemented catch-all routing.", "Added sidebar resizing."],
-    },
-    {
-      version: "v0.0.5",
-      date: "March 30, 2026",
-      title: "Component Registry",
-      summary: "Started component registry infrastructure.",
-      details: ["Refactored API route handlers.", "Created component-service."],
-    },
-    {
-      version: "v0.0.4",
-      date: "March 25, 2026",
-      title: "Initial Styling",
-      summary: "Standardized Tailwind setup.",
-      details: ["Configured PostCSS.", "Added global CSS variables."],
-    },
-    {
-      version: "v0.0.3",
-      date: "March 20, 2026",
-      title: "Project Bootstrapped",
-      summary: "Initialized the Next.js project.",
-      details: ["Project scaffolded.", "TypeScript enabled."],
-    },
-  ]);
+
+        date: "April 30, 2026",
+        title: "SEO: Visibility & Discovery Optimization",
+        summary:
+          "Engineered a comprehensive SEO framework to enhance search engine visibility and discovery.",
+        category: "SEO",
+        icon: Zap,
+        details: [
+          "Global Metadata: Robust architecture in the root layout.",
+          "Dynamic Sitemap: Automated indexing of registries.",
+          "Structured Data: Integrated JSON-LD schemas.",
+          "Crawlability: Optimized robots.txt and linking.",
+        ],
+      },
+      {
+        version: "v0.1.14",
+        date: "April 30, 2026",
+        title: "Documentation: UI Refinement",
+        summary:
+          "Polished the documentation layout and verified system scalability.",
+        category: "Docs",
+        icon: Layers,
+        details: [
+          "Layout Refinement: Content-first reading experience.",
+          "Navigation Streamlining: Focused high-value articles.",
+          "Content Expansion: Scaled Guide manifest.",
+        ],
+      },
+      {
+        version: "v0.1.13",
+        date: "April 28, 2026",
+        title: "Architecture: Dynamic Guide Content",
+        summary: "Scalable system for rendering complex guide content.",
+        category: "Architecture",
+        icon: Box,
+        details: [
+          "Content Model: Multi-section content support.",
+          "GenericArticlePage: Generic rendering engine.",
+          "Scalable Routing: Catch-all routes integration.",
+        ],
+      },
+      {
+        version: "v0.1.12",
+        date: "April 28, 2026",
+        title: "Content Expansion: Professional Guides",
+        summary:
+          "Launched comprehensive Guides system for SnapJSX architecture.",
+        category: "Content",
+        icon: Terminal,
+        details: [
+          "Architecture: Scalable guides.ts manifest.",
+          "UI Design: Modern Guide page with filtering.",
+          "Modular Components: GuideCard and FeaturedGuide.",
+        ],
+      },
+      {
+        version: "v0.1.11",
+        date: "April 28, 2026",
+        title: "UI/UX: Enhanced Navigation",
+        summary:
+          "Refined navigation path clarity and improved search accessibility.",
+        category: "UI/UX",
+        icon: Zap,
+        details: [
+          "SubNavbar Breadcrumbs: Semantic title/subtitle props.",
+          "Mobile Search: Dedicated trigger in mobile menu.",
+        ],
+      },
+      {
+        version: "v0.1.10",
+        date: "April 28, 2026",
+        title: "UI/UX: Global Scrollbar Design",
+        summary: "Standardized scrollbar appearance across the application.",
+        category: "UI/UX",
+        icon: Box,
+        details: [
+          "Custom Styles: Thin scrollbar in globals.css.",
+          "Brand Matching: Primary color thumb.",
+        ],
+      },
+      {
+        version: "v0.1.9",
+        date: "April 28, 2026",
+        title: "UI/UX: Breadcrumb Refactoring",
+        summary:
+          "Refined sub-navbar navigation path to use explicit page titles and subtitles.",
+        category: "UI/UX",
+        icon: Zap,
+        details: [
+          "Updated SubNavbar to accept 'title' and 'subtitle' props from the DocPage.",
+          "Ensured breadcrumbs only display sub-titles that differ from the category title.",
+        ],
+      },
+      {
+        version: "v0.1.8",
+        date: "April 28, 2026",
+        title: "UI/UX: SubNavbar Breadcrumb Refinement",
+        summary:
+          "Refactored the sub-navigation breadcrumbs for better visual hierarchy.",
+        category: "UI/UX",
+        icon: Zap,
+        details: [
+          "Updated SubNavbar to parse activeSection slugs.",
+          "Applied capitalization styling to breadcrumb segments.",
+        ],
+      },
+      {
+        version: "v0.1.7",
+        date: "April 27, 2026",
+        title: "Navigation UX: Persistent Sidebar Accordions",
+        summary:
+          "Enhanced sidebar navigation by ensuring category accordions persist.",
+        category: "Navigation",
+        icon: Layers,
+        details: [
+          "Updated sidebar logic to initialize 'open' state based on active path.",
+          "Improved navigation flow by preventing category collapse during transitions.",
+        ],
+      },
+      {
+        version: "v0.1.6",
+        date: "April 27, 2026",
+        title: "Performance Optimization: Routing & Rendering",
+        summary: "Optimized documentation navigation responsiveness.",
+        category: "Performance",
+        icon: Zap,
+        details: [
+          "Implemented React.memo and useMemo across DocsContent.",
+          "Optimized registry lookup logic.",
+          "Refactored variant filtering into a stable memoized hook.",
+        ],
+      },
+      {
+        version: "v0.1.5",
+        date: "April 27, 2026",
+        title: "Advanced Routing & Search Modal Refinement",
+        summary:
+          "Refined deep-linking architecture and streamlined navigation paths.",
+        category: "Architecture",
+        icon: Box,
+        details: [
+          "Implemented native support for '/docs/{title}/all' routes.",
+          "Refactored Search Modal URL construction.",
+          "Synchronized search results with primary routing engine.",
+        ],
+      },
+      {
+        version: "v0.1.4",
+        date: "April 27, 2026",
+        title: "Search Modal Implementation",
+        summary:
+          "Engineered a high-performance, registry-driven Command Palette.",
+        category: "Features",
+        icon: Terminal,
+        details: [
+          "Initial Implementation: Architected global Search Modal.",
+          "Routing Engine: Custom event-based synchronization.",
+          "Stability: Coupled search engine to central sidebar store.",
+        ],
+      },
+      {
+        version: "v0.1.3",
+        date: "April 26, 2026",
+        title: "Architecture Stabilization",
+        summary:
+          "Completed comprehensive refactor of documentation architecture.",
+        category: "Architecture",
+        icon: Box,
+        details: [
+          "Registry Hub: Consolidated UI block definitions.",
+          "Generic Rendering: Replaced category-specific pages with GenericCategoryPage.",
+          "Accessibility: Resolved all A11y warnings.",
+        ],
+      },
+      {
+        version: "v0.1.2",
+        date: "April 26, 2026",
+        title: "UI Performance & Routing Stability",
+        summary:
+          "Refined navigation routing and optimized component animations.",
+        category: "Performance",
+        icon: Zap,
+        details: [
+          "Replaced Framer Motion code viewer animations with CSS transitions.",
+          "Strictly coupled sidebar navigation to component registry.",
+        ],
+      },
+      {
+        version: "v0.1.1",
+        date: "April 26, 2026",
+        title: "Registry-Driven Documentation",
+        summary:
+          "Refactored documentation architecture to be fully registry-driven.",
+        category: "Docs",
+        icon: Layers,
+        details: [
+          "Implemented GenericCategoryPage for scalable showcasing.",
+          "Automated sidebar navigation with explicit 'All' tabs.",
+        ],
+      },
+      {
+        version: "v0.1.0",
+        date: "April 25, 2026",
+        title: "Initial Launch & Setup",
+        summary: "SnapJSX foundation is laid with unified branding.",
+        category: "Release",
+        icon: Sparkles,
+        details: [
+          "Implemented responsive Navbar with search-first approach.",
+          "Built dynamic, collapsible Documentation sidebar.",
+        ],
+      },
+      {
+        version: "v0.0.9",
+        date: "April 20, 2026",
+        title: "Core Design System",
+        summary: "Basic layout primitives and landing page sections completed.",
+        category: "Design",
+        icon: Layers,
+        details: [
+          "Global dark mode configuration with next-themes.",
+          "Setup Tailwind CSS typography and branding constants.",
+        ],
+      },
+    ],
+    [],
+  );
+
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [inputValue, setInputValue] = useState("1");
   const itemsPerPage = 5;
 
   const totalPages = Math.ceil(updatesLog.length / itemsPerPage);
-  const paginatedUpdates = updatesLog.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
+  const paginatedUpdates = useMemo(
+    () =>
+      updatesLog.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage,
+      ),
+    [currentPage, updatesLog],
   );
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
     setInputValue(page.toString());
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const toggleItem = (version: string) => {
@@ -298,73 +286,158 @@ export function UpdatesPageClient() {
 
   return (
     <main className="container mx-auto max-w-6xl px-4 py-24">
-      <header className="mb-20">
+      {/* Header - Centered Layout with Guide Page Typography */}
+      <header className="mb-24 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
           <Sparkles className="w-3 h-3" />
           Release History
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
-          Development Log
+        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
+          Latest <span className="text-primary">Updates</span>
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           Tracking the evolution of SnapJSX, from architectural shifts to
-          feature releases.
+          feature releases and performance optimizations.
         </p>
       </header>
 
-      <div className="relative border-l-2 border-border ml-2 space-y-12">
-        {paginatedUpdates.map((update) => (
-          <div key={update.version} className="relative pl-8">
-            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-background bg-primary ring-2 ring-primary/20" />
-            <div className="bg-card/50 rounded-3xl p-8 border border-border/50 hover:border-primary/30 transition-colors duration-200 will-change-transform">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-primary font-mono font-bold text-lg">
-                  {update.version}
-                </span>
-                <span className="text-sm text-muted-foreground font-medium">
-                  {update.date}
-                </span>
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">
-                {update.title}
-              </h3>
-              <p className="text-muted-foreground mb-6">{update.summary}</p>
-              {openItems[update.version] && (
-                <ul className="space-y-3 mb-6 border-t border-border/50 pt-6 animate-in slide-in-from-top-2">
-                  {update.details.map((detail) => (
-                    <li
-                      key={detail}
-                      className="flex gap-3 text-sm text-foreground/80"
-                    >
-                      <span className="text-primary mt-1">✦</span> {detail}
-                    </li>
-                  ))}
-                </ul>
-              )}
+      {/* Updates List */}
+      <div className="space-y-6">
+        {paginatedUpdates.map((update) => {
+          const Icon = update.icon || Zap;
+          const isOpen = openItems[update.version];
+
+          return (
+            <div
+              key={update.version}
+              className={`group border border-border/50 rounded-3xl transition-all duration-300 ${
+                isOpen
+                  ? "bg-card/40 border-primary/30 shadow-[0_0_40px_-15px_rgba(255,215,0,0.1)]"
+                  : "bg-transparent hover:border-primary/20 hover:bg-card/20"
+              }`}
+            >
               <button
                 type="button"
                 onClick={() => toggleItem(update.version)}
-                className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider hover:text-primary/80 transition-colors"
+                className="w-full text-left p-8"
               >
-                {openItems[update.version]
-                  ? "Hide technical logs"
-                  : "Read full technical logs"}
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${openItems[update.version] ? "rotate-180" : ""}`}
-                />
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="flex items-center gap-6">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-105">
+                      <Icon className="w-7 h-7" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-primary font-mono font-black text-base tracking-tight">
+                          {update.version}
+                        </span>
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-muted/50 px-2 py-0.5 rounded-md">
+                          {update.category}
+                        </span>
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-black text-foreground group-hover:text-primary transition-colors tracking-tight">
+                        {update.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between md:justify-end gap-8">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                      <Calendar className="w-4 h-4 text-primary/60" />
+                      {update.date}
+                    </div>
+                    <div
+                      className={`w-8 h-8 rounded-full border border-border flex items-center justify-center transition-all duration-300 ${isOpen ? "bg-primary border-primary text-primary-foreground" : "group-hover:border-primary group-hover:text-primary"}`}
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <AnimatePresence initial={false}>
+                  {!isOpen && (
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="mt-6 text-base text-muted-foreground line-clamp-2 md:ml-20 font-medium leading-relaxed"
+                    >
+                      {update.summary}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </button>
+
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "circOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-8 pb-10 md:ml-20 border-t border-border/50 pt-8">
+                      <p className="text-lg text-foreground/90 mb-8 font-semibold leading-relaxed">
+                        {update.summary}
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+                        {update.details.map((detail) => (
+                          <div
+                            key={detail}
+                            className="flex gap-4 text-sm text-muted-foreground leading-relaxed font-medium group/item"
+                          >
+                            <span className="text-primary mt-1 shrink-0 transition-transform group-hover/item:scale-125">
+                              ✦
+                            </span>
+                            {detail}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handlePagination={handlePagination}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-      />
+      <div className="flex justify-center pt-2">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePagination={handlePagination}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+        />
+      </div>
+
+      {/* CTA Section - Scaled Down for better balance */}
+      <div className="mt-24 p-12 md:p-14 rounded-[3.5rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-150" />
+
+        <h2 className="text-2xl md:text-4xl font-black mb-4 tracking-tight">Stay in the <span className="text-primary">Loop.</span></h2>
+        <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
+          The SnapJSX ecosystem is evolving rapidly. Follow our progress as we redefine component registries.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+          <button
+            type="button"
+            className="px-8 py-3.5 bg-primary text-primary-foreground rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-primary/20 active:scale-95 text-xs"
+          >
+            Follow on GitHub
+          </button>
+          <button
+            type="button"
+            className="px-8 py-3.5 bg-card border border-border rounded-2xl font-black uppercase tracking-widest hover:bg-muted transition-all active:scale-95 text-xs"
+          >
+            Join Discord
+          </button>
+        </div>
+      </div>
+
     </main>
   );
 }
