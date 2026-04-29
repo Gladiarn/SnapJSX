@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
@@ -89,6 +90,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-foreground font-sans antialiased relative`}
         suppressHydrationWarning
       >
+        <Analytics />
         <div className="absolute inset-0 -z-10 grid-background" />
         <ThemeProvider
           attribute="class"
