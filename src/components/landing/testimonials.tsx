@@ -7,7 +7,7 @@ const TESTIMONIALS = [
   {
     quote:
       "SnapJSX saved me hours of styling. It’s like having a design system in my pocket.",
-    author: "Alex Rivera",
+    author: "Alex River",
     role: "Senior Frontend Engineer",
   },
   {
