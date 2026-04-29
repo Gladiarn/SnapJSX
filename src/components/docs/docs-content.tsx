@@ -40,7 +40,7 @@ export const DocsContent = memo(function DocsContent({
 
   // Handle Guides Section
   const guideContent = useMemo(() => {
-    if (titleSlug === "guides") {
+    if (titleSlug === "guide") {
       if (categorySlug === "all" || !categorySlug) {
         return (
           <div className="space-y-8">
@@ -59,7 +59,13 @@ export const DocsContent = memo(function DocsContent({
         );
       }
 
-      const guide = GUIDES.find((g) => g.slug === categorySlug);
+      // Map sidebar item name (kebab-cased) to guide slug
+      const guide = GUIDES.find(
+        (g) =>
+          g.slug === categorySlug ||
+          g.title.toLowerCase().replace(/\s+/g, "-") === categorySlug,
+      );
+
       if (guide) {
         return <GenericGuidePage guide={guide} />;
       }

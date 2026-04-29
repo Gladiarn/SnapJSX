@@ -33,8 +33,8 @@ export const useDocsStore = create<DocsStore>((set) => ({
       ],
     },
     {
-      title: "Guides",
-      category: "Learning",
+      title: "Guide",
+      category: "Tutorials",
       items: [
         { name: "All", subItems: [] },
         { name: "Philosophy", subItems: [] },

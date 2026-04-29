@@ -20,7 +20,7 @@ export function GuideCard({ guide }: GuideCardProps) {
       transition={{ duration: 0.5 }}
     >
       <Link
-        href={`/docs/guides/${guide.slug}`}
+        href={`/docs/guide/${guide.slug}`}
         className="group relative flex flex-col h-full bg-card/50 border border-border/50 rounded-3xl p-8 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_-12px_rgba(255,215,0,0.1)]"
       >
         <div className="flex items-center justify-between mb-6">
@@ -63,7 +63,7 @@ export function FeaturedGuide({ guide }: GuideCardProps) {
       className="relative mb-16"
     >
       <Link
-        href={`/docs/guides/${guide.slug}`}
+        href={`/docs/guide/${guide.slug}`}
         className="group relative flex flex-col md:flex-row gap-8 bg-gradient-to-br from-card/80 to-background border border-primary/20 rounded-[2.5rem] p-8 md:p-12 hover:border-primary/40 transition-all duration-500 hover:shadow-[0_0_50px_-12px_rgba(255,215,0,0.15)] overflow-hidden"
       >
         {/* Decorative elements */}
