@@ -7,6 +7,19 @@ import { Pagination } from "@/components/ui/pagination";
 export default function UpdatesPage() {
   const [updatesLog] = useState([
     {
+      version: "v0.1.12",
+      date: "April 28, 2026",
+      title: "Content Expansion: Professional Developer Guides",
+      summary:
+        "Launched a comprehensive Guides system to master the SnapJSX architecture and design patterns.",
+      details: [
+        "Architecture: Implemented a scalable, data-driven 'Guides' system using a centralized content manifest (guides.ts).",
+        "UI Design: Crafted a modern, non-empty 'Guide' page featuring featured content, categorical filtering, and search functionality.",
+        "Modular Components: Created reusable 'GuideCard' and 'FeaturedGuide' components with gold-themed hover effects and Framer Motion animations.",
+        "Categorization: Structured content into 'Foundations', 'Architecture', 'Styling', and 'Advanced' sections for intuitive learning paths.",
+      ],
+    },
+    {
       version: "v0.1.11",
       date: "April 28, 2026",
       title: "UI/UX: Enhanced Navigation & Breadcrumbs",
