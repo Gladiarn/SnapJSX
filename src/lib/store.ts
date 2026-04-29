@@ -41,6 +41,8 @@ export const useDocsStore = create<DocsStore>((set) => ({
         { name: "Customization", subItems: [] },
         { name: "Animations", subItems: [] },
         { name: "Accessibility", subItems: [] },
+        { name: "Best Practices", subItems: [] },
+        { name: "Performance", subItems: [] },
       ],
     },
     {
