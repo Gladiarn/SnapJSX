@@ -3,11 +3,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FeaturedGuide, GuideCard } from "@/components/ui/guide-card";
+import { ComponentCard } from "@/components/ui/component-card";
 import { Pagination } from "@/components/ui/pagination";
-import { GUIDES } from "@/content/guides";
+import { RegistryHub } from "@/lib/registry-hub";
 
-export function GuidePageClient() {
+export function ComponentsPageClient() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [isMoreOpen, setIsMoreOpen] = useState(false);
@@ -16,37 +16,42 @@ export function GuidePageClient() {
   const itemsPerPage = 9;
   const moreRef = useRef<HTMLDivElement>(null);
 
-  const featuredGuide = useMemo(() => GUIDES.find((g) => g.featured), []);
+  // Flatten RegistryHub into a single list of components
+  const allComponents = useMemo(() => {
+    return Object.entries(RegistryHub).flatMap(([group, variants]) =>
+      variants.map((v) => ({ ...v, group })),
+    );
+  }, []);
 
   // Extract unique categories for filtering
   const categories = useMemo(() => {
-    const cats = new Set(GUIDES.map((g) => g.category));
+    const cats = new Set(allComponents.map((c) => c.category));
     return ["All", ...Array.from(cats)].sort();
-  }, []);
+  }, [allComponents]);
 
   const visibleCategories = useMemo(() => categories.slice(0, 5), [categories]);
   const hiddenCategories = useMemo(() => categories.slice(5), [categories]);
 
-  const filteredGuides = useMemo(() => {
-    return GUIDES.filter((guide) => {
+  const filteredComponents = useMemo(() => {
+    return allComponents.filter((comp) => {
       const matchesQuery =
-        guide.title.toLowerCase().includes(query.toLowerCase()) ||
-        guide.description.toLowerCase().includes(query.toLowerCase());
+        comp.title.toLowerCase().includes(query.toLowerCase()) ||
+        comp.description.toLowerCase().includes(query.toLowerCase());
 
       const matchesCategory =
-        activeCategory === "All" || guide.category === activeCategory;
+        activeCategory === "All" || comp.category === activeCategory;
 
-      return matchesQuery && matchesCategory && !guide.featured;
+      return matchesQuery && matchesCategory;
     });
-  }, [query, activeCategory]);
+  }, [query, activeCategory, allComponents]);
 
-  const totalPages = Math.ceil(filteredGuides.length / itemsPerPage);
-  const paginatedGuides = useMemo(() => {
-    return filteredGuides.slice(
+  const totalPages = Math.ceil(filteredComponents.length / itemsPerPage);
+  const paginatedComponents = useMemo(() => {
+    return filteredComponents.slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage,
     );
-  }, [filteredGuides, currentPage]);
+  }, [filteredComponents, currentPage]);
 
   const handlePagination = (page: number) => {
     setCurrentPage(page);
@@ -74,33 +79,28 @@ export function GuidePageClient() {
 
   return (
     <main className="container mx-auto max-w-6xl px-4 py-24">
-      {/* Header - Centered Layout */}
+      {/* Header - Centered Layout matching Guide/Updates Page pattern */}
       <header className="mb-20 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
           <Sparkles className="w-3 h-3" />
-          Guides & Tutorials
+          Component Registry
         </div>
         <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
-          Master <span className="text-primary">SnapJSX.</span>
+          The <span className="text-primary">Library.</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Deep-dives into the architecture, styling patterns, and best practices
-          designed to help you build lightning-fast interfaces.
+          High-performance, zero-dependency React components. Standardized
+          architecture. Perfectly styled with Tailwind CSS.
         </p>
       </header>
 
-      {/* Featured Section */}
-      {!query && activeCategory === "All" && featuredGuide && (
-        <FeaturedGuide guide={featuredGuide} />
-      )}
-
-      {/* Filter Section - Matching Components Page logic */}
+      {/* Filter Section - Matching Guide Page Layout */}
       <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-between">
         <div className="relative w-full md:max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search guides..."
+            placeholder="Search components..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full pl-12 pr-4 py-3 bg-card/50 border border-border/50 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
@@ -184,17 +184,26 @@ export function GuidePageClient() {
         </div>
       </div>
 
-      {/* Grid Section */}
-      {paginatedGuides.length > 0 ? (
+      {/* Grid Section - Matching Spacing pattern */}
+      {paginatedComponents.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {paginatedGuides.map((guide) => (
-            <GuideCard key={guide.id} guide={guide} />
+          {paginatedComponents.map((comp) => (
+            <ComponentCard
+              key={`${comp.group}-${comp.title}`}
+              title={comp.title}
+              category={comp.category}
+              description={comp.description}
+              size={comp.size || "0.0kb"}
+              preview={comp.preview}
+              codeJsx={comp.codeJsx}
+              codeHtml={comp.codeHtml}
+            />
           ))}
         </div>
       ) : (
         <div className="py-24 text-center border border-dashed border-border rounded-[2.5rem]">
           <p className="text-muted-foreground">
-            No guides found matching your criteria.
+            No components found matching your criteria.
           </p>
         </div>
       )}
@@ -210,17 +219,20 @@ export function GuidePageClient() {
       )}
 
       {/* Bottom CTA */}
-      <div className="mt-32 p-12 rounded-[3rem] bg-gradient-to-b from-primary/5 to-transparent border border-primary/10 text-center">
-        <h2 className="text-2xl font-bold mb-4">Want to contribute?</h2>
-        <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-          SnapJSX is community-driven. If you've mastered a pattern, share it
-          with the community.
+      <div className="mt-32 p-16 rounded-[4rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-150" />
+        <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+          Need a <span className="text-primary">Custom</span> Component?
+        </h2>
+        <p className="text-xl text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
+          Can't find what you're looking for? Reach out or check our blocks for
+          complex layouts.
         </p>
         <button
           type="button"
-          className="px-8 py-3 bg-foreground text-background rounded-xl font-bold hover:scale-105 transition-transform active:scale-95"
+          className="px-10 py-4 bg-primary text-primary-foreground rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-primary/20 active:scale-95"
         >
-          Submit a Guide
+          Request Component
         </button>
       </div>
     </main>
