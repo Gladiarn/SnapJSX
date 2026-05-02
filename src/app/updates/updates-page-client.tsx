@@ -14,23 +14,25 @@ import { useMemo, useState } from "react";
 import { Pagination } from "@/components/ui/pagination";
 
 export function UpdatesPageClient() {
-  const updatesLog = useMemo(() => [
-    {
-      version: "v0.1.16",
-      date: "May 1, 2026",
-      title: "UI/UX: Updates Page Performance & Aesthetic Refinement",
-      summary: "Refined the Updates page for better performance, information density, and design consistency with the global design system.",
-      category: "UI/UX",
-      icon: Layers,
-      details: [
-        "Header Alignment: Restored centered header with typography strictly aligned to the Guides section.",
-        "Performance Tuning: Implemented useMemo for log data and optimized animation models to eliminate layout lag.",
-        "Layout Precision: Tightened vertical spacing between content cards and pagination.",
-        "Aesthetic Balance: Scaled down the global CTA section to improve visual hierarchy and professional density.",
-      ],
-    },
-    {
-      version: "v0.1.15",
+  const updatesLog = useMemo(
+    () => [
+      {
+        version: "v0.1.16",
+        date: "May 1, 2026",
+        title: "UI/UX: Updates Page Performance & Aesthetic Refinement",
+        summary:
+          "Refined the Updates page for better performance, information density, and design consistency with the global design system.",
+        category: "UI/UX",
+        icon: Layers,
+        details: [
+          "Header Alignment: Restored centered header with typography strictly aligned to the Guides section.",
+          "Performance Tuning: Implemented useMemo for log data and optimized animation models to eliminate layout lag.",
+          "Layout Precision: Tightened vertical spacing between content cards and pagination.",
+          "Aesthetic Balance: Scaled down the global CTA section to improve visual hierarchy and professional density.",
+        ],
+      },
+      {
+        version: "v0.1.15",
 
         date: "April 30, 2026",
         title: "SEO: Visibility & Discovery Optimization",
@@ -418,9 +420,12 @@ export function UpdatesPageClient() {
       <div className="mt-24 p-12 md:p-14 rounded-[3.5rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-150" />
 
-        <h2 className="text-2xl md:text-4xl font-black mb-4 tracking-tight">Stay in the <span className="text-primary">Loop.</span></h2>
+        <h2 className="text-2xl md:text-4xl font-black mb-4 tracking-tight">
+          Stay in the <span className="text-primary">Loop.</span>
+        </h2>
         <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
-          The SnapJSX ecosystem is evolving rapidly. Follow our progress as we redefine component registries.
+          The SnapJSX ecosystem is evolving rapidly. Follow our progress as we
+          redefine component registries.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
           <button
@@ -437,7 +442,6 @@ export function UpdatesPageClient() {
           </button>
         </div>
       </div>
-
     </main>
   );
 }
