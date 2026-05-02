@@ -17,6 +17,22 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.17",
+        date: "May 2, 2026",
+        title: "Registry: Dynamic Components Gallery & Unified Navigation",
+        summary:
+          "Successfully transformed the Components page into a high-performance, registry-driven gallery with a scalable filtering and pagination system.",
+        category: "Features",
+        icon: Box,
+        details: [
+          "Components Registry: Implemented a fully dynamic gallery that pulls real-time data from the RegistryHub, including live previews and code snippets.",
+          "Scalable Filtering: Engineered a hybrid category menu that displays 5 core capsules and automatically tucks additional categories into a 'More' dropdown to handle infinite growth.",
+          "Unified Design: Achieved 100% typographic and layout consistency between the Components and Guides pages, including search bar dimensions and capsule padding.",
+          "Pagination Engine: Integrated a standardized 9-item pagination system across all registry-driven pages to improve performance and scannability.",
+          "Interaction Polish: Optimized the 'More' menu with absolute positioning and zero-shadow aesthetics for a cleaner glassmorphism feel.",
+        ],
+      },
+      {
         version: "v0.1.16",
         date: "May 1, 2026",
         title: "UI/UX: Updates Page Performance & Aesthetic Refinement",
