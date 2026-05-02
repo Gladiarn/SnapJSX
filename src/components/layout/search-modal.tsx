@@ -109,19 +109,34 @@ export function SearchModal() {
 
   const { filteredGroups, flattenedItems } = useMemo(() => {
     const index: SearchItem[] = [];
+    const toKebab = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
+
     sidebarData.forEach((section) => {
       section.items.forEach((item) => {
-        item.subItems.forEach((sub) => {
-          if (sub === "All") return;
+        if (item.subItems.length === 0) {
+          // Index the item itself (e.g., for Guides/Philosophy)
           index.push({
-            title: sub,
-            description: `${sub} in ${item.name}`,
-            url: `/docs/${section.title.toLowerCase().replace(/\s+/g, "-")}/${item.name.toLowerCase().replace(/\s+/g, "-")}/${sub.toLowerCase().replace(/\s+/g, "-")}`,
-            sectionPath: `${section.title}-${sub}`,
+            title: item.name,
+            description: `${item.name} in ${section.title}`,
+            url: `/docs/${toKebab(section.title)}/${toKebab(item.name)}`,
+            sectionPath: `${section.title}-${item.name}`,
             category: section.title,
             icon: <FileCode className="w-4 h-4" />,
           });
-        });
+        } else {
+          // Index sub-items (e.g., for Components/Buttons/Primary Button)
+          item.subItems.forEach((sub) => {
+            if (sub === "All") return;
+            index.push({
+              title: sub,
+              description: `${sub} in ${item.name}`,
+              url: `/docs/${toKebab(section.title)}/${toKebab(item.name)}/${toKebab(sub)}`,
+              sectionPath: `${section.title}-${sub}`,
+              category: section.title,
+              icon: <FileCode className="w-4 h-4" />,
+            });
+          });
+        }
       });
     });
 
