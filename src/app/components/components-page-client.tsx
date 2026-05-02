@@ -13,7 +13,7 @@ export function ComponentsPageClient() {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [inputValue, setInputValue] = useState("1");
-  const itemsPerPage = 3;
+  const itemsPerPage = 9;
   const moreRef = useRef<HTMLDivElement>(null);
 
   // Flatten RegistryHub into a single list of components
