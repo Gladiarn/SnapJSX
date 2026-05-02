@@ -78,20 +78,29 @@ export function ComponentsPageClient() {
   }, []);
 
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-24">
-      {/* Header - Centered Layout matching Guide/Updates Page pattern */}
-      <header className="mb-20 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
-          <Sparkles className="w-3 h-3" />
-          Component Registry
+    <main className="container mx-auto max-w-6xl px-4 py-24 relative">
+      {/* Premium Background Decor */}
+      <div className="absolute top-0 left-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+
+      {/* Header - Left Aligned Registry Style */}
+      <header className="mb-24 flex flex-col md:flex-row items-start md:items-center gap-12">
+        <div className="flex-1 space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest">
+            <Sparkles className="w-3 h-3" />
+            Component Registry
+          </div>
+          <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none">
+            The <span className="text-primary">Library.</span>
+          </h1>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
-          The <span className="text-primary">Library.</span>
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          High-performance, zero-dependency React components. Standardized
-          architecture. Perfectly styled with Tailwind CSS.
-        </p>
+
+        <div className="flex-1 relative pl-8 border-l-2 border-primary/30 py-2">
+          <p className="text-xl text-muted-foreground leading-relaxed font-medium max-w-md italic">
+            "High-performance, zero-dependency React components. Standardized
+            architecture. Perfectly styled with Tailwind CSS."
+          </p>
+          <div className="mt-4 h-1 w-12 bg-primary/50" />
+        </div>
       </header>
 
       {/* Filter Section - Matching Guide Page Layout */}
@@ -154,7 +163,7 @@ export function ComponentsPageClient() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-2xl p-2 z-50 overflow-hidden"
+                      className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-2xl shadow-2xl p-2 z-50 overflow-hidden"
                     >
                       <div className="max-h-64 overflow-y-auto custom-scrollbar">
                         {hiddenCategories.map((category) => (

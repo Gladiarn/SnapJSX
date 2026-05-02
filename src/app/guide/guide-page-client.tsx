@@ -73,17 +73,30 @@ export function GuidePageClient() {
   }, []);
 
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-24">
-      {/* Header - Centered Layout */}
-      <header className="mb-20 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
-          <Sparkles className="w-3 h-3" />
-          Guides & Tutorials
+    <main className="container mx-auto max-w-6xl px-4 py-24 relative">
+      {/* Premium Background Decor */}
+      <div className="absolute top-0 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+
+      {/* Header - Centered Focus Style */}
+      <header className="mb-24 text-center">
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="h-px w-12 bg-primary/30" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest">
+            <Sparkles className="w-3 h-3" />
+            Guides & Tutorials
+          </div>
+          <div className="h-px w-12 bg-primary/30" />
         </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
-          Master <span className="text-primary">SnapJSX.</span>
+
+        <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-none">
+          Master{" "}
+          <span className="relative inline-block text-primary">
+            SnapJSX.
+            <div className="absolute -bottom-2 left-0 w-full h-2 bg-primary/20 -skew-x-12" />
+          </span>
         </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">
           Deep-dives into the architecture, styling patterns, and best practices
           designed to help you build lightning-fast interfaces.
         </p>
