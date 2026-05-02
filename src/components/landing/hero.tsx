@@ -30,7 +30,7 @@ export function Hero() {
       className="relative overflow-hidden pt-24 pb-24 md:pt-32 md:pb-32"
     >
       {/* Premium Background Lights - Subtle integration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[400px] w-[600px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[400px] w-[600px] rounded-full bg-primary/2 blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto flex max-w-[1152px] flex-col items-center px-4 text-center">
         <motion.div

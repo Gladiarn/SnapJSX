@@ -75,7 +75,7 @@ export function GuidePageClient() {
   return (
     <main className="container mx-auto max-w-6xl px-4 py-24 relative">
       {/* Premium Background Decor */}
-      <div className="absolute top-0 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/2 blur-[100px] pointer-events-none" />
 
       {/* Header - Centered Focus Style */}
       <header className="mb-24 text-center">
