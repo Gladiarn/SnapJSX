@@ -17,6 +17,21 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.19",
+        date: "May 3, 2026",
+        title: "Search: Intelligent Multi-Level Indexing",
+        summary:
+          "Upgraded the global Search Modal logic to provide 100% coverage across all documentation levels, including standalone guides and complex component trees.",
+        category: "Search",
+        icon: Terminal,
+        details: [
+          "Enhanced Indexer: Implemented dynamic discovery for two-level navigation items, ensuring 'Guide' and 'Getting Started' sections are now fully searchable.",
+          "Scalable Architecture: Zero-hardcoding approach ensures that any new records in the global store are automatically indexed with correct kebab-case routing.",
+          "Smart Fallbacks: Integrated default icon assignment for new categories to maintain visual integrity during rapid registry expansion.",
+          "Performance: Optimized search memoization to maintain sub-millisecond response times even with an expanding content index.",
+        ],
+      },
+      {
         version: "v0.1.18",
         date: "May 3, 2026",
         title: "Showcase: Interactive Gallery & Performance Engineering",
