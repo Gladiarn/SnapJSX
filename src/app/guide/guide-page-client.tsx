@@ -90,7 +90,7 @@ export function GuidePageClient() {
 
         <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-none">
           Master{" "}
-          <span className="relative inline-block">
+          <span className="relative inline-block text-primary">
             SnapJSX.
             <div className="absolute -bottom-2 left-0 w-full h-2 bg-primary/20 -skew-x-12" />
           </span>

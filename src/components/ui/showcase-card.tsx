@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, Play } from "lucide-react";
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import type { ShowcaseProject } from "@/content/showcase";
 
 interface ShowcaseCardProps {
@@ -26,41 +26,45 @@ const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export function ShowcaseCard({ project }: ShowcaseCardProps) {
+export const ShowcaseCard = memo(function ShowcaseCard({
+  project,
+}: ShowcaseCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    setIsPlaying(true);
     videoRef.current
       ?.play()
       .catch((err) => console.log("Video play failed:", err));
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setIsPlaying(false);
     if (videoRef.current) {
       videoRef.current.pause();
+      // biome-ignore lint/correctness/noSelfAssign: video currentTime reset
       videoRef.current.currentTime = 0;
     }
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative aspect-[16/10] overflow-hidden rounded-[2.5rem] bg-card border border-border/50 transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_50px_-12px_rgba(255,215,0,0.15)]"
+      className="group relative aspect-[16/10] overflow-hidden rounded-[2.5rem] bg-card border border-border/50 transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_50px_-12px_rgba(255,215,0,0.15)] will-change-transform"
     >
       {/* Video/Thumbnail Background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-muted">
         {/* biome-ignore lint/performance/noImgElement: intentional usage for complex overlay transitions */}
         <img
           src={project.thumbnail}
           alt={project.title}
-          className={`h-full w-full object-cover transition-opacity duration-500 ${isHovered ? "opacity-0" : "opacity-100"}`}
+          className="h-full w-full object-cover transition-opacity duration-500 group-hover:opacity-0"
+          loading="lazy"
         />
         <video
           ref={videoRef}
@@ -68,7 +72,7 @@ export function ShowcaseCard({ project }: ShowcaseCardProps) {
           loop
           muted
           playsInline
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${isPlaying ? "opacity-100" : "opacity-0"}`}
         />
       </div>
 
@@ -81,7 +85,7 @@ export function ShowcaseCard({ project }: ShowcaseCardProps) {
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10">
         <div className="space-y-4">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 transition-transform duration-500 group-hover:-translate-y-1">
             {project.tags.map((tag) => (
               <span
                 key={tag}
@@ -97,18 +101,18 @@ export function ShowcaseCard({ project }: ShowcaseCardProps) {
               <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight">
                 {project.title}
               </h3>
-              {!isHovered && (
-                <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 flex items-center justify-center text-primary animate-pulse">
-                  <Play className="w-4 h-4 fill-primary" />
-                </div>
-              )}
+              <div
+                className={`w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 flex items-center justify-center text-primary transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100 animate-pulse"}`}
+              >
+                <Play className="w-4 h-4 fill-primary" />
+              </div>
             </div>
 
-            <p className="text-white/60 text-sm md:text-base font-medium leading-relaxed max-w-lg line-clamp-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <p className="text-white/60 text-sm md:text-base font-medium leading-relaxed max-w-lg line-clamp-2 opacity-0 transition-all duration-500 group-hover:opacity-100">
               {project.description}
             </p>
 
-            <div className="flex items-center gap-6 pt-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <div className="flex items-center gap-6 pt-4 opacity-0 transition-all duration-500 group-hover:opacity-100">
               {project.link && (
                 <a
                   href={project.link}
@@ -135,7 +139,7 @@ export function ShowcaseCard({ project }: ShowcaseCardProps) {
       </div>
 
       {/* Author Badge */}
-      <div className="absolute top-8 left-8 flex items-center gap-3">
+      <div className="absolute top-8 left-8 flex items-center gap-3 transition-transform duration-500 group-hover:translate-x-1">
         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-yellow-500 p-[1px]">
           <div className="w-full h-full rounded-full bg-black flex items-center justify-center text-[10px] font-bold text-primary">
             {project.author
@@ -150,4 +154,4 @@ export function ShowcaseCard({ project }: ShowcaseCardProps) {
       </div>
     </motion.div>
   );
-}
+});
