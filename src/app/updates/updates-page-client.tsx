@@ -17,6 +17,22 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.18",
+        date: "May 3, 2026",
+        title: "Showcase: Interactive Gallery & Performance Engineering",
+        summary:
+          "Launched a high-impact Community Showcase featuring interactive video cards and optimized for extreme scroll performance.",
+        category: "Features",
+        icon: Sparkles,
+        details: [
+          "Showcase Architecture: Created a scalable data-driven manifest for community projects with support for video previews and deep-linking.",
+          "Interactive Video Cards: Engineered custom 'ShowcaseCard' components that seamlessly transition from thumbnails to autoplaying videos on hover.",
+          "Asymmetrical Layout: Implemented a unique, split-header layout signature that distinguishes the Showcase from other pages while maintaining brand consistency.",
+          "Performance Optimization: Offloaded hover animations to GPU-accelerated CSS and implemented React.memo to eliminate scroll-time lag and redundant re-renders.",
+          "Visual Depth: Integrated premium background decorative elements and gold-themed lighting to elevate the 'soul' of the showcase gallery.",
+        ],
+      },
+      {
         version: "v0.1.17",
         date: "May 2, 2026",
         title: "Registry: Dynamic Components Gallery & Unified Navigation",
