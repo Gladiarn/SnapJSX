@@ -82,9 +82,9 @@ export function ComponentsPageClient() {
           />
         </div>
 
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
+        <div className="flex items-center gap-2 w-full md:w-auto">
           <SlidersHorizontal className="w-4 h-4 text-muted-foreground mr-2 shrink-0" />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap md:flex-nowrap">
             {visibleCategories.map((category) => (
               <button
                 key={category}
