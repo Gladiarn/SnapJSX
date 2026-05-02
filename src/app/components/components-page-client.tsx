@@ -2,6 +2,7 @@
 
 import { ChevronDown, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ComponentCard } from "@/components/ui/component-card";
 import { RegistryHub } from "@/lib/registry-hub";
 
@@ -52,9 +53,9 @@ export function ComponentsPageClient() {
   }, []);
 
   return (
-    <main className="container mx-auto max-w-7xl px-4 py-24">
-      {/* Header - Centered Layout */}
-      <header className="mb-24 text-center">
+    <main className="container mx-auto max-w-6xl px-4 py-24">
+      {/* Header - Centered Layout matching Guide/Updates Page pattern */}
+      <header className="mb-20 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
           <Sparkles className="w-3 h-3" />
           Component Registry
@@ -68,22 +69,22 @@ export function ComponentsPageClient() {
         </p>
       </header>
 
-      {/* Filter Section */}
-      <div className="flex flex-col lg:flex-row gap-8 mb-16 items-center justify-between border-b border-border/50 pb-12">
-        <div className="relative w-full max-w-lg">
+      {/* Filter Section - Matching Guide Page Layout */}
+      <div className="flex flex-col md:flex-row gap-6 mb-12 items-center justify-between">
+        <div className="relative w-full md:max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search components..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 bg-card/50 border border-border/50 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all shadow-sm"
+            className="w-full pl-12 pr-4 py-3 bg-card/50 border border-border/50 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
           />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
           <SlidersHorizontal className="w-4 h-4 text-muted-foreground mr-2 shrink-0" />
-          <div className="flex items-center gap-2 flex-wrap justify-center">
+          <div className="flex items-center gap-2">
             {visibleCategories.map((category) => (
               <button
                 key={category}
@@ -92,10 +93,10 @@ export function ComponentsPageClient() {
                   setActiveCategory(category);
                   setIsMoreOpen(false);
                 }}
-                className={`px-5 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                   activeCategory === category
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105"
-                    : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted"
                 }`}
               >
                 {category}
@@ -107,7 +108,7 @@ export function ComponentsPageClient() {
                 <button
                   type="button"
                   onClick={() => setIsMoreOpen(!isMoreOpen)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                     hiddenCategories.includes(activeCategory)
                       ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                       : "bg-muted/50 text-muted-foreground hover:bg-muted"
@@ -117,40 +118,50 @@ export function ComponentsPageClient() {
                     ? activeCategory
                     : "More"}
                   <ChevronDown
-                    className={`w-3 h-3 transition-transform ${isMoreOpen ? "rotate-180" : ""}`}
+                    className={`w-3 h-3 transition-transform duration-200 ${isMoreOpen ? "rotate-180" : ""}`}
                   />
                 </button>
 
-                {isMoreOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in zoom-in duration-200">
-                    {hiddenCategories.map((category) => (
-                      <button
-                        key={category}
-                        type="button"
-                        onClick={() => {
-                          setActiveCategory(category);
-                          setIsMoreOpen(false);
-                        }}
-                        className={`w-full text-left px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                          activeCategory === category
-                            ? "bg-primary/10 text-primary"
-                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                        }`}
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {isMoreOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-2xl shadow-2xl p-2 z-50 overflow-hidden"
+                    >
+                      <div className="max-h-64 overflow-y-auto custom-scrollbar">
+                        {hiddenCategories.map((category) => (
+                          <button
+                            key={category}
+                            type="button"
+                            onClick={() => {
+                              setActiveCategory(category);
+                              setIsMoreOpen(false);
+                            }}
+                            className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                              activeCategory === category
+                                ? "bg-primary/10 text-primary"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            }`}
+                          >
+                            {category}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             )}
           </div>
         </div>
       </div>
 
-      {/* Grid Section */}
+      {/* Grid Section - Matching Spacing pattern */}
       {filteredComponents.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredComponents.map((comp) => (
             <ComponentCard
               key={`${comp.group}-${comp.title}`}
@@ -165,13 +176,9 @@ export function ComponentsPageClient() {
           ))}
         </div>
       ) : (
-        <div className="py-32 text-center border-2 border-dashed border-border rounded-[3rem] bg-card/20">
-          <div className="w-16 h-16 bg-muted/50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Search className="w-8 h-8 text-muted-foreground opacity-50" />
-          </div>
-          <h3 className="text-xl font-bold mb-2">No components found</h3>
+        <div className="py-24 text-center border border-dashed border-border rounded-[2.5rem]">
           <p className="text-muted-foreground">
-            Try adjusting your search or category filters.
+            No components found matching your criteria.
           </p>
         </div>
       )}
