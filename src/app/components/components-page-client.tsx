@@ -1,15 +1,19 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ComponentCard } from "@/components/ui/component-card";
+import { Pagination } from "@/components/ui/pagination";
 import { RegistryHub } from "@/lib/registry-hub";
 
 export function ComponentsPageClient() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [inputValue, setInputValue] = useState("1");
+  const itemsPerPage = 9;
   const moreRef = useRef<HTMLDivElement>(null);
 
   // Flatten RegistryHub into a single list of components
@@ -40,6 +44,27 @@ export function ComponentsPageClient() {
       return matchesQuery && matchesCategory;
     });
   }, [query, activeCategory, allComponents]);
+
+  const totalPages = Math.ceil(filteredComponents.length / itemsPerPage);
+  const paginatedComponents = useMemo(() => {
+    return filteredComponents.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage,
+    );
+  }, [filteredComponents, currentPage]);
+
+  const handlePagination = (page: number) => {
+    setCurrentPage(page);
+    setInputValue(page.toString());
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  // Reset to page 1 when query or category changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional reset on filter change
+  useEffect(() => {
+    setCurrentPage(1);
+    setInputValue("1");
+  }, [query, activeCategory]);
 
   // Handle click outside for "More" dropdown
   useEffect(() => {
@@ -160,9 +185,9 @@ export function ComponentsPageClient() {
       </div>
 
       {/* Grid Section - Matching Spacing pattern */}
-      {filteredComponents.length > 0 ? (
+      {paginatedComponents.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredComponents.map((comp) => (
+          {paginatedComponents.map((comp) => (
             <ComponentCard
               key={`${comp.group}-${comp.title}`}
               title={comp.title}
@@ -181,6 +206,16 @@ export function ComponentsPageClient() {
             No components found matching your criteria.
           </p>
         </div>
+      )}
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePagination={handlePagination}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+        />
       )}
 
       {/* Bottom CTA */}

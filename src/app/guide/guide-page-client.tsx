@@ -1,15 +1,19 @@
 "use client";
 
-import { Search, SlidersHorizontal, Sparkles, ChevronDown } from "lucide-react";
-import { useMemo, useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, Search, SlidersHorizontal, Sparkles } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FeaturedGuide, GuideCard } from "@/components/ui/guide-card";
+import { Pagination } from "@/components/ui/pagination";
 import { GUIDES } from "@/content/guides";
 
 export function GuidePageClient() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [inputValue, setInputValue] = useState("1");
+  const itemsPerPage = 9;
   const moreRef = useRef<HTMLDivElement>(null);
 
   const featuredGuide = useMemo(() => GUIDES.find((g) => g.featured), []);
@@ -34,6 +38,27 @@ export function GuidePageClient() {
 
       return matchesQuery && matchesCategory && !guide.featured;
     });
+  }, [query, activeCategory]);
+
+  const totalPages = Math.ceil(filteredGuides.length / itemsPerPage);
+  const paginatedGuides = useMemo(() => {
+    return filteredGuides.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage,
+    );
+  }, [filteredGuides, currentPage]);
+
+  const handlePagination = (page: number) => {
+    setCurrentPage(page);
+    setInputValue(page.toString());
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
+  // Reset to page 1 when query or category changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional reset on filter change
+  useEffect(() => {
+    setCurrentPage(1);
+    setInputValue("1");
   }, [query, activeCategory]);
 
   // Handle click outside for "More" dropdown
@@ -160,9 +185,9 @@ export function GuidePageClient() {
       </div>
 
       {/* Grid Section */}
-      {filteredGuides.length > 0 ? (
+      {paginatedGuides.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredGuides.map((guide) => (
+          {paginatedGuides.map((guide) => (
             <GuideCard key={guide.id} guide={guide} />
           ))}
         </div>
@@ -172,6 +197,16 @@ export function GuidePageClient() {
             No guides found matching your criteria.
           </p>
         </div>
+      )}
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePagination={handlePagination}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+        />
       )}
 
       {/* Bottom CTA */}
