@@ -129,7 +129,7 @@ export function ComponentsPageClient() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-2xl shadow-2xl p-2 z-50 overflow-hidden"
+                      className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-2xl p-2 z-50 overflow-hidden"
                     >
                       <div className="max-h-64 overflow-y-auto custom-scrollbar">
                         {hiddenCategories.map((category) => (
