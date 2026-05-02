@@ -303,20 +303,26 @@ export function UpdatesPageClient() {
   };
 
   return (
-    <main className="container mx-auto max-w-6xl px-4 py-24">
-      {/* Header - Centered Layout with Guide Page Typography */}
+    <main className="container mx-auto max-w-6xl px-4 py-24 relative">
+      {/* Premium Background Decor */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[400px] w-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+
+      {/* Header - Centered Dynamic Timeline Style */}
       <header className="mb-24 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-8">
           <Sparkles className="w-3 h-3" />
           Release History
         </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
-          Latest <span className="text-primary">Updates</span>
+        <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-none">
+          Project <span className="text-primary">Logs.</span>
         </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Tracking the evolution of SnapJSX, from architectural shifts to
-          feature releases and performance optimizations.
-        </p>
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium">
+            Tracking the evolution of SnapJSX, from architectural shifts to
+            feature releases and performance optimizations.
+          </p>
+          <div className="h-px w-48 bg-gradient-to-r from-transparent via-primary/40 to-transparent mt-4" />
+        </div>
       </header>
 
       {/* Updates List */}
@@ -422,7 +428,7 @@ export function UpdatesPageClient() {
         })}
       </div>
 
-      <div className="flex justify-center pt-2">
+      <div className="flex justify-center pt-8">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -432,8 +438,8 @@ export function UpdatesPageClient() {
         />
       </div>
 
-      {/* CTA Section - Scaled Down for better balance */}
-      <div className="mt-24 p-12 md:p-14 rounded-[3.5rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
+      {/* CTA Section */}
+      <div className="mt-32 p-12 md:p-14 rounded-[3.5rem] bg-gradient-to-br from-primary/10 via-card/50 to-transparent border border-primary/10 text-center relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -mr-32 -mt-32 transition-transform duration-1000 group-hover:scale-150" />
 
         <h2 className="text-2xl md:text-4xl font-black mb-4 tracking-tight">
