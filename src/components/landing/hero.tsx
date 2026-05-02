@@ -14,11 +14,11 @@ export function Hero() {
   };
 
   const item: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
@@ -27,60 +27,64 @@ export function Hero() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="relative overflow-hidden pt-32 pb-24 md:pt-48 md:pb-40"
+      className="relative overflow-hidden pt-24 pb-24 md:pt-32 md:pb-32"
     >
-      {/* Premium Background Lights - Matching the rest of the site */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-[800px] rounded-full bg-primary/10 blur-[120px] pointer-events-none opacity-50" />
-      <div className="absolute bottom-0 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+      {/* Premium Background Lights - Subtle integration */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[400px] w-[600px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto flex max-w-6xl flex-col items-center px-4 text-center">
+      <div className="container mx-auto flex max-w-[1152px] flex-col items-center px-4 text-center">
         <motion.div
           variants={item}
-          className="mb-8 flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-sm"
+          className="mb-8 flex items-center gap-2 rounded-full bg-primary/5 border border-primary/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-primary backdrop-blur-sm"
         >
           <Sparkles className="h-3.5 w-3.5" />
-          <span>The Zero Dependency Registry</span>
+          <span>Zero Dependencies</span>
         </motion.div>
 
         <motion.h1
           variants={item}
-          className="mb-8 text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter leading-[0.85]"
+          className="mb-8 text-5xl font-black tracking-tight sm:text-6xl md:text-7xl leading-tight"
         >
-          Copy. Paste. <br />
-          <span className="relative inline-block text-primary">
+          Copy. Paste.{" "}
+          <span className="text-primary relative inline-block">
             Complete.
-            <div className="absolute -bottom-2 left-0 w-full h-3 bg-primary/20 -skew-x-12 -z-10" />
+            <div className="absolute -bottom-1 left-0 w-full h-1.5 bg-primary/20 -skew-x-12" />
+          </span>
+          <br />
+          <span className="text-muted-foreground">
+            Barebone JSX for Modern Apps.
           </span>
         </motion.h1>
 
         <motion.div
           variants={item}
-          className="space-y-8 flex flex-col items-center"
+          className="flex flex-col items-center space-y-8"
         >
-          <p className="max-w-2xl text-xl md:text-2xl text-muted-foreground leading-relaxed font-medium">
-            High-performance, barebone JSX components for modern apps. Take full
-            ownership of your UI with zero framework bloat.
+          <p className="max-w-[672px] text-lg text-muted-foreground md:text-xl font-medium leading-relaxed">
+            Beautifully designed components that you can copy and paste into
+            your apps. Accessible. Customizable. Open Source.
           </p>
 
+          {/* The signature gold line - Creative but simple */}
           <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         </motion.div>
 
         <motion.div
           variants={item}
-          className="mt-12 flex flex-col gap-4 sm:flex-row items-center"
+          className="mt-12 flex flex-col gap-4 sm:flex-row"
         >
           <Link
             href="/components"
-            className="flex h-14 items-center justify-center gap-3 rounded-2xl bg-primary px-10 text-xs font-black uppercase tracking-widest text-primary-foreground shadow-xl shadow-primary/20 hover:scale-105 transition-all active:scale-95"
+            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 hover:scale-105 transition-all active:scale-95"
           >
-            Explore Library
+            Browse Components
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
             href="/guide"
-            className="flex h-14 items-center justify-center rounded-2xl border border-border bg-card/50 px-10 text-xs font-black uppercase tracking-widest hover:bg-accent transition-all active:scale-95"
+            className="flex h-12 items-center justify-center rounded-xl border border-border bg-card/50 px-8 text-sm font-bold hover:bg-accent transition-all active:scale-95"
           >
-            How it works
+            Learn More
           </Link>
         </motion.div>
       </div>
