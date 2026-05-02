@@ -41,20 +41,41 @@ export function ShowcasePageClient() {
       <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
-      {/* Header - Centered Layout with Guide Page Typography */}
-      <header className="mb-24 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium uppercase tracking-widest mb-6">
-          <Trophy className="w-3 h-3" />
-          Community Showcase
+      {/* Header - Unique Asymmetrical Split Layout */}
+      <header className="mb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+        <div className="max-w-2xl text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-[0.2em] mb-8"
+          >
+            <Trophy className="w-3.5 h-3.5" />
+            Community Showcase
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.9]"
+          >
+            Built with <br />
+            <span className="text-primary">SnapJSX.</span>
+          </motion.h1>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
-          Built with <span className="text-primary">SnapJSX.</span>
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Explore the next generation of web interfaces. From minimalist
-          portfolios to complex dashboards, see how developers are pushing the
-          boundaries of JSX.
-        </p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="max-w-md lg:text-right space-y-6"
+        >
+          <p className="text-xl text-muted-foreground leading-relaxed font-medium">
+            Explore the next generation of web interfaces. From minimalist
+            portfolios to complex dashboards, see how developers are pushing the
+            boundaries of JSX.
+          </p>
+          <div className="h-1 w-24 bg-primary lg:ml-auto" />
+        </motion.div>
       </header>
 
       {/* Featured Project Section - Adds 'Soul' and Visual Interest */}
