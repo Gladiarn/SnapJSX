@@ -17,6 +17,22 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.20",
+        date: "May 3, 2026",
+        title: "Design: Visual Signature Headers & Atmospheric Refinement",
+        summary:
+          "Unified the premium design language across the entire ecosystem with unique layout signatures and sophisticated atmospheric lighting.",
+        category: "UI/UX",
+        icon: Layers,
+        details: [
+          "Signature Headers: Implemented distinct visual 'signatures' for every main page using variations of the primary gold accent line (vertical, asymmetrical, and centered patterns).",
+          "Showcase Innovation: Engineered a unique asymmetrical split-header for the Showcase page to distinguish it as a creative hub while maintaining brand parity.",
+          "Hero Evolution: Refined the landing page hero section for better balance, simplifying the typography and integrating a subtle version of the new skewed gold signature.",
+          "Atmospheric Tuning: Toned down the background decorative light intensity site-wide (from 5% to 2% opacity) to achieve a more understated and professional premium feel.",
+          "Layout Cohesion: Standardized H1 typographic scales and background decorative placements across Components, Guides, Showcase, and Updates.",
+        ],
+      },
+      {
         version: "v0.1.19",
         date: "May 3, 2026",
         title: "Search: Intelligent Multi-Level Indexing",
@@ -336,7 +352,7 @@ export function UpdatesPageClient() {
   return (
     <main className="container mx-auto max-w-6xl px-4 py-24 relative">
       {/* Premium Background Decor */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[400px] w-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[400px] w-[600px] rounded-full bg-primary/2 blur-[120px] pointer-events-none" />
 
       {/* Header - Centered Dynamic Timeline Style */}
       <header className="mb-24 text-center">
