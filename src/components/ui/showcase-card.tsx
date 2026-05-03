@@ -43,7 +43,6 @@ export const ShowcaseCard = memo(function ShowcaseCard({
     setIsPlaying(false);
     if (videoRef.current) {
       videoRef.current.pause();
-      // biome-ignore lint/correctness/noSelfAssign: video currentTime reset
       videoRef.current.currentTime = 0;
     }
   };

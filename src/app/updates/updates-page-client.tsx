@@ -17,6 +17,22 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.21",
+        date: "May 4, 2026",
+        title: "Blocks: Pre-assembled Modules & Ecosystem Standardization",
+        summary:
+          "Launched the high-level Blocks registry and synchronized the global CTA architecture across all key pages for a unified premium experience.",
+        category: "Features",
+        icon: Box,
+        details: [
+          "Blocks Ecosystem: Engineered a new 'BlocksHub' registry architecture for high-level UI sections like SaaS heroes and marketing modules.",
+          "SaaS Hero Launch: Implemented the first premium block module featuring responsive typography, dashboard mockups, and animated interactions.",
+          "BlockCard Innovation: Developed a specialized card with immersive scaling, decorative grid backgrounds, and a full-screen live preview modal.",
+          "CTA Standardization: Synchronized the 'Bottom CTA' card design across Components, Blocks, and Guides, ensuring perfect parity in background lighting, typography, and button physics.",
+          "Layout Alignment: Unified search bar dimensions and category capsule padding site-wide to maintain a consistent 1.0 UX baseline.",
+        ],
+      },
+      {
         version: "v0.1.20",
         date: "May 3, 2026",
         title: "Design: Visual Signature Headers & Atmospheric Refinement",
