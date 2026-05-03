@@ -1,0 +1,8 @@
+{
+  "name": "SaasHero",
+  "category": "Marketing",
+  "type": "Block",
+  "description": "High-converting SaaS hero section with typography, buttons, and dashboard mockup.",
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}
