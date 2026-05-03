@@ -17,6 +17,23 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.22",
+        date: "May 4, 2026",
+        title: "Library Expansion: 10+ High-Performance Core Components",
+        summary:
+          "Significantly expanded the component registry with dependency-free, high-quality UI primitives across Buttons, Inputs, Navigation, and Loaders.",
+        category: "Features",
+        icon: Zap,
+        details: [
+          "Button Suite: Added Secondary, Outline, Ghost, and Icon-less variants with refined hover physics and standardized rounding.",
+          "Input Primitives: Launched premium Text Field with integrated label logic and accessibility-first architecture.",
+          "Data Visualization: Introduced Stats Card with dynamic trend indicators and animated progress bars.",
+          "Navigation Elements: Implemented Basic Breadcrumbs and animated Simple Tabs with Framer Motion layout transitions.",
+          "Loaders & Feedback: Expanded animation suite with Ring Spinners, Skeleton loaders, Status Badges, and pulse-animated Success Alerts.",
+          "Dependency-Free: All new components engineered to work without external icon libraries, ensuring maximum copy-paste ease-of-use.",
+        ],
+      },
+      {
         version: "v0.1.21",
         date: "May 4, 2026",
         title: "Blocks: Pre-assembled Modules & Ecosystem Standardization",
