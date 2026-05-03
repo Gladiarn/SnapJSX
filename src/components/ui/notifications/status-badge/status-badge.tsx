@@ -1,5 +1,7 @@
 "use client";
 
+import type React from "react";
+
 interface StatusBadgeProps {
   children?: React.ReactNode;
   variant?: "default" | "success" | "warning" | "error" | "info";
