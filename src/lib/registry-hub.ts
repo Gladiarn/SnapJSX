@@ -277,8 +277,7 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
       size: "0.2kb",
       preview: React.createElement(
         StatusBadge,
-        { variant: "success" },
-        "Active",
+        { variant: "success", children: "Active" },
       ),
       codeJsx: `<span className="px-2.5 py-0.5 rounded-full border bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[10px] font-black uppercase tracking-widest">
   Active
