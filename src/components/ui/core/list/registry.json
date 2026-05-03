@@ -1,0 +1,16 @@
+{
+  "name": "SimpleList",
+  "category": "Lists",
+  "type": "UI Component",
+  "description": "Interactive vertical list with icons and subtle hover animations.",
+  "props": [
+    {
+      "name": "items",
+      "type": "ListItem[]",
+      "required": true,
+      "description": "List items {id, title, description, icon}."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}

@@ -1,21 +1,43 @@
-import { Sparkles } from "lucide-react";
+import {
+  AlertCircle,
+  LogOut,
+  Package,
+  Settings,
+  Sparkles,
+  User,
+} from "lucide-react";
 import React from "react";
 import type { ComponentVariant } from "@/components/docs/sections/generic-category-page";
 import { GhostButton } from "@/components/ui/buttons/ghost-button/ghost-button";
+import { LoadingButton } from "@/components/ui/buttons/loading-button/loading-button";
 import { OutlineButton } from "@/components/ui/buttons/outline-button/outline-button";
 // We import the components only for the "preview" function, not the code snippet strings.
 import { PrimaryButton } from "@/components/ui/buttons/primary-button/primary-button";
 import { SecondaryButton } from "@/components/ui/buttons/secondary-button/secondary-button";
 import { Card } from "@/components/ui/core/card/card";
+import { CardWithHeader } from "@/components/ui/core/card-with-header/card-with-header";
+import { BasicDropdown } from "@/components/ui/core/dropdown/basic-dropdown";
+import { SimpleList } from "@/components/ui/core/list/simple-list";
+import { AlertModal } from "@/components/ui/core/modal/alert-modal";
 import { StatsCard } from "@/components/ui/core/stats-card/stats-card";
+import { BasicTable } from "@/components/ui/core/table/basic-table";
+import { Checkbox } from "@/components/ui/inputs/checkbox/checkbox";
+import { RadioGroup } from "@/components/ui/inputs/radio/radio-group";
+import { NativeSelect } from "@/components/ui/inputs/select/native-select";
 import { TextField } from "@/components/ui/inputs/text-field/text-field";
+import { BarLoader } from "@/components/ui/loaders/bar-loader/bar-loader";
 import { BouncingDots } from "@/components/ui/loaders/bouncing-dots/bouncing-dots";
+import { CardSkeleton } from "@/components/ui/loaders/skeleton/card-skeleton";
 import { Skeleton } from "@/components/ui/loaders/skeleton/skeleton";
 import { Spinner } from "@/components/ui/loaders/spinner/spinner";
 import { BasicBreadcrumbs } from "@/components/ui/navigation/breadcrumbs/basic-breadcrumbs";
+import { SimpleNavbar } from "@/components/ui/navigation/navbar/simple-navbar";
+import { PillTabs } from "@/components/ui/navigation/tabs/pill-tabs";
 import { SimpleTabs } from "@/components/ui/navigation/tabs/simple-tabs";
+import { ErrorAlert } from "@/components/ui/notifications/error-alert/error-alert";
 import { StatusBadge } from "@/components/ui/notifications/status-badge/status-badge";
 import { SuccessAlert } from "@/components/ui/notifications/success-alert/success-alert";
+import { BasicToast } from "@/components/ui/notifications/toast/basic-toast";
 
 export const RegistryHub: Record<string, ComponentVariant[]> = {
   "Core Components": [
@@ -82,6 +104,26 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
 </button>`,
     },
     {
+      title: "Loading Button",
+      category: "Buttons",
+      subcategory: "Loading-Button",
+      description: "Button with integrated spinner.",
+      size: "0.55kb",
+      preview: React.createElement(
+        LoadingButton,
+        { isLoading: true },
+        "Loading",
+      ),
+      codeJsx: `<button disabled className="px-6 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold flex items-center gap-2 opacity-50">
+  <div className="h-4 w-4 rounded-full border-2 border-primary-foreground border-t-transparent animate-spin" />
+  Loading
+</button>`,
+      codeHtml: `<button disabled class="px-6 py-2.5 rounded-xl bg-[#ffd700] text-[#0a0a0a] font-bold flex items-center gap-2 opacity-50">
+  <div class="h-4 w-4 rounded-full border-2 border-black border-t-transparent animate-spin"></div>
+  Loading
+</button>`,
+    },
+    {
       title: "Basic Card",
       category: "Cards",
       subcategory: "Basic-Card",
@@ -101,6 +143,36 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
   <h3 class="text-xl font-bold mb-1">Card Title</h3>
   <p class="text-sm text-gray-500 mb-4">Subtitle</p>
   <p class="text-sm text-gray-600">Card content</p>
+</div>`,
+    },
+    {
+      title: "Card with Header",
+      category: "Cards",
+      subcategory: "Card with Header",
+      description: "Container with structured header.",
+      size: "0.5kb",
+      preview: React.createElement(
+        CardWithHeader,
+        { title: "Header Title", subtitle: "Categorized" },
+        "Card body content goes here.",
+      ),
+      codeJsx: `<div className="bg-card border border-border rounded-[2rem] overflow-hidden">
+  <div className="px-8 py-6 border-b border-border flex justify-between items-center">
+    <div>
+      <h3 className="text-lg font-bold">Header Title</h3>
+      <p className="text-[10px] uppercase font-black text-muted-foreground">Categorized</p>
+    </div>
+  </div>
+  <div className="p-8 text-sm text-muted-foreground">Card body content...</div>
+</div>`,
+      codeHtml: `<div class="bg-white border border-gray-200 rounded-[2rem] overflow-hidden">
+  <div class="px-8 py-6 border-b border-gray-100 flex justify-between items-center">
+    <div>
+      <h3 class="text-lg font-bold">Header Title</h3>
+      <p class="text-[10px] uppercase font-black text-gray-400">Categorized</p>
+    </div>
+  </div>
+  <div class="p-8 text-sm text-gray-500">Card body content...</div>
 </div>`,
     },
     {
@@ -141,6 +213,69 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
 </div>`,
     },
     {
+      title: "Alert Modal",
+      category: "Modals",
+      subcategory: "Alert Modal",
+      description: "Critical confirmation dialog.",
+      size: "1.2kb",
+      preview: React.createElement(AlertModal, {
+        isOpen: true,
+        onClose: () => {},
+        title: "Are you sure?",
+        description:
+          "This action cannot be undone. This will permanently delete your account.",
+      }),
+      codeJsx: `<AlertModal 
+  isOpen={true} 
+  title="Are you sure?" 
+  description="This action cannot be undone."
+  onConfirm={() => {}}
+  onClose={() => {}}
+/>`,
+      codeHtml: `<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+  <div class="bg-white border border-gray-200 rounded-[2.5rem] shadow-2xl p-8 max-w-lg w-full text-center">
+    <h3 class="text-2xl font-black tracking-tight mb-2">Are you sure?</h3>
+    <p class="text-sm text-gray-500 mb-8">This action cannot be undone.</p>
+    <div class="flex gap-3">
+      <button class="flex-1 px-6 py-2.5 rounded-xl border border-gray-200 font-bold">Cancel</button>
+      <button class="flex-1 px-6 py-2.5 rounded-xl bg-[#ffd700] font-bold">Confirm</button>
+    </div>
+  </div>
+</div>`,
+    },
+    {
+      title: "Basic Dropdown",
+      category: "Dropdowns",
+      subcategory: "Basic Dropdown",
+      description: "Minimalist animated menu.",
+      size: "0.8kb",
+      preview: React.createElement(BasicDropdown, {
+        label: "Options",
+        items: [
+          { id: "1", label: "Edit Profile", icon: User },
+          { id: "2", label: "Settings", icon: Settings },
+          { id: "3", label: "Logout", icon: LogOut },
+        ],
+      }),
+      codeJsx: `<BasicDropdown 
+  label="Options" 
+  items={[
+    { id: '1', label: 'Edit Profile', icon: User },
+    { id: '2', label: 'Settings', icon: Settings },
+    { id: '3', label: 'Logout', icon: LogOut }
+  ]} 
+/>`,
+      codeHtml: `<div class="relative">
+  <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-gray-200 font-bold text-[10px] uppercase tracking-widest">
+    Options <span>↓</span>
+  </button>
+  <div class="absolute mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-xl p-2">
+    <button class="w-full text-left px-4 py-2 text-[10px] font-bold uppercase hover:bg-gray-50 transition-colors">Edit Profile</button>
+    <button class="w-full text-left px-4 py-2 text-[10px] font-bold uppercase hover:bg-gray-50 transition-colors">Settings</button>
+  </div>
+</div>`,
+    },
+    {
       title: "Text Fields",
       category: "Inputs",
       subcategory: "Text Fields",
@@ -165,6 +300,184 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
     placeholder="Enter your username"
     class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#ffd700]/50 transition-all"
   />
+</div>`,
+    },
+    {
+      title: "Checkboxes",
+      category: "Inputs",
+      subcategory: "Checkboxes",
+      description: "Animated toggle for options.",
+      size: "0.4kb",
+      preview: React.createElement(Checkbox, {
+        label: "Accept terms",
+        checked: true,
+      }),
+      codeJsx: `<label className="flex items-center gap-3 cursor-pointer group">
+  <div className="w-5 h-5 rounded-md border-2 border-primary bg-primary flex items-center justify-center">
+    <Check className="w-3.5 h-3.5 text-primary-foreground stroke-[3px]" />
+  </div>
+  <span className="text-sm font-medium group-hover:text-primary transition-colors">Accept terms</span>
+</label>`,
+      codeHtml: `<label class="flex items-center gap-3 cursor-pointer group">
+  <div class="w-5 h-5 rounded-md border-2 border-[#ffd700] bg-[#ffd700] flex items-center justify-center">
+    <svg class="w-3.5 h-3.5 text-black">...</svg>
+  </div>
+  <span class="text-sm font-medium transition-colors hover:text-[#ffd700]">Accept terms</span>
+</label>`,
+    },
+    {
+      title: "Radio Group",
+      category: "Inputs",
+      subcategory: "Radio",
+      description: "Animated selection list.",
+      size: "0.6kb",
+      preview: React.createElement(RadioGroup, {
+        options: [
+          { id: "1", label: "Option One" },
+          { id: "2", label: "Option Two" },
+        ],
+      }),
+      codeJsx: `<RadioGroup 
+  options={[
+    { id: '1', label: 'Option One' },
+    { id: '2', label: 'Option Two' }
+  ]} 
+/>`,
+      codeHtml: `<div class="space-y-3">
+  <label class="flex items-center gap-3 cursor-pointer group">
+    <div class="w-5 h-5 rounded-full border-2 border-[#ffd700] flex items-center justify-center">
+      <div class="w-2.5 h-2.5 rounded-full bg-[#ffd700]"></div>
+    </div>
+    <span class="text-sm font-medium">Option One</span>
+  </label>
+</div>`,
+    },
+    {
+      title: "Native Select",
+      category: "Inputs",
+      subcategory: "Select",
+      description: "Styled native dropdown.",
+      size: "0.4kb",
+      preview: React.createElement(NativeSelect, {
+        label: "Category",
+        options: [
+          { value: "1", label: "Electronics" },
+          { value: "2", label: "Fashion" },
+          { value: "3", label: "Home" },
+        ],
+      }),
+      codeJsx: `<NativeSelect 
+  label="Category" 
+  options={[
+    { value: '1', label: 'Electronics' },
+    { value: '2', label: 'Fashion' }
+  ]} 
+/>`,
+      codeHtml: `<div class="flex flex-col gap-2">
+  <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Category</label>
+  <div class="relative">
+    <select class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm appearance-none">
+      <option>Electronics</option>
+      <option>Fashion</option>
+    </select>
+  </div>
+</div>`,
+    },
+  ],
+
+  Forms: [
+    {
+      title: "Basic Input",
+      category: "Forms",
+      subcategory: "Text Fields",
+      description: "Standard text input.",
+      size: "0.4kb",
+      preview: React.createElement(TextField, {
+        label: "Email",
+        placeholder: "john@example.com",
+      }),
+      codeJsx: `<TextField label="Email" placeholder="john@example.com" />`,
+      codeHtml: `<div class="flex flex-col gap-2 w-full">
+  <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Email</label>
+  <input type="text" placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm" />
+</div>`,
+    },
+    {
+      title: "Basic Checkbox",
+      category: "Forms",
+      subcategory: "Checkboxes",
+      description: "Simple toggle component.",
+      size: "0.3kb",
+      preview: React.createElement(Checkbox, {
+        label: "Subscribe to newsletter",
+        checked: true,
+      }),
+      codeJsx: `<Checkbox label="Subscribe to newsletter" checked={true} />`,
+      codeHtml: `<label class="flex items-center gap-3 cursor-pointer">
+  <div class="w-5 h-5 rounded-md border-2 border-[#ffd700] bg-[#ffd700] flex items-center justify-center">
+    <svg class="w-3.5 h-3.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+    </svg>
+  </div>
+  <span class="text-sm font-medium">Subscribe to newsletter</span>
+</label>`,
+    },
+    {
+      title: "Radio Group",
+      category: "Forms",
+      subcategory: "Radio",
+      description: "Animated selection list.",
+      size: "0.6kb",
+      preview: React.createElement(RadioGroup, {
+        options: [
+          { id: "1", label: "Option One" },
+          { id: "2", label: "Option Two" },
+        ],
+      }),
+      codeJsx: `<RadioGroup 
+  options={[
+    { id: '1', label: 'Option One' },
+    { id: '2', label: 'Option Two' }
+  ]} 
+/>`,
+      codeHtml: `<div class="space-y-3">
+  <label class="flex items-center gap-3 cursor-pointer group">
+    <div class="w-5 h-5 rounded-full border-2 border-[#ffd700] flex items-center justify-center">
+      <div class="w-2.5 h-2.5 rounded-full bg-[#ffd700]"></div>
+    </div>
+    <span class="text-sm font-medium">Option One</span>
+  </label>
+</div>`,
+    },
+    {
+      title: "Native Select",
+      category: "Forms",
+      subcategory: "Select",
+      description: "Styled native dropdown.",
+      size: "0.4kb",
+      preview: React.createElement(NativeSelect, {
+        label: "Category",
+        options: [
+          { value: "1", label: "Electronics" },
+          { value: "2", label: "Fashion" },
+          { value: "3", label: "Home" },
+        ],
+      }),
+      codeJsx: `<NativeSelect 
+  label="Category" 
+  options={[
+    { value: '1', label: 'Electronics' },
+    { value: '2', label: 'Fashion' }
+  ]} 
+/>`,
+      codeHtml: `<div class="flex flex-col gap-2">
+  <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Category</label>
+  <div class="relative">
+    <select class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm appearance-none">
+      <option>Electronics</option>
+      <option>Fashion</option>
+    </select>
+  </div>
 </div>`,
     },
   ],
@@ -207,6 +520,20 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
       codeHtml: `<div class="relative h-10 w-10 flex items-center justify-center">
   <div class="absolute inset-0 rounded-full border-2 border-[#ffd700]/20"></div>
   <div class="absolute inset-0 rounded-full border-t-2 border-[#ffd700] animate-spin"></div>
+</div>`,
+    },
+    {
+      title: "Bar Loader",
+      category: "Progress",
+      subcategory: "Bar Loader",
+      description: "Dynamic vertical bar animation.",
+      size: "0.5kb",
+      preview: React.createElement(BarLoader, {}),
+      codeJsx: `<BarLoader />`,
+      codeHtml: `<div class="flex items-center gap-1 h-8">
+  <div class="w-1.5 h-6 bg-[#ffd700] rounded-full animate-bounce"></div>
+  <div class="w-1.5 h-8 bg-[#ffd700] rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+  <div class="w-1.5 h-4 bg-[#ffd700] rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
 </div>`,
     },
     {
@@ -266,6 +593,20 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
       codeJsx: `<div className="w-32 h-4 bg-muted/50 rounded-md animate-pulse"></div>`,
       codeHtml: `<div class="w-32 h-4 bg-gray-100 rounded-md animate-pulse"></div>`,
     },
+    {
+      title: "Card Skeleton",
+      category: "Skeleton",
+      subcategory: "Card Skeleton",
+      description: "Placeholder for card content.",
+      size: "0.7kb",
+      preview: React.createElement(CardSkeleton, { className: "w-80" }),
+      codeJsx: `<CardSkeleton />`,
+      codeHtml: `<div class="p-8 bg-white border border-gray-100 rounded-[2rem] space-y-4">
+  <div class="h-6 w-1/3 bg-gray-100 rounded-md animate-pulse"></div>
+  <div class="h-4 w-full bg-gray-100 rounded-md animate-pulse"></div>
+  <div class="h-4 w-4/5 bg-gray-100 rounded-md animate-pulse"></div>
+</div>`,
+    },
   ],
 
   Notifications: [
@@ -275,10 +616,10 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
       subcategory: "Status Badge",
       description: "Small pill for states and tags.",
       size: "0.2kb",
-      preview: React.createElement(
-        StatusBadge,
-        { variant: "success", children: "Active" },
-      ),
+      preview: React.createElement(StatusBadge, {
+        variant: "success",
+        children: "Active",
+      }),
       codeJsx: `<span className="px-2.5 py-0.5 rounded-full border bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[10px] font-black uppercase tracking-widest">
   Active
 </span>`,
@@ -315,9 +656,82 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
   </p>
 </div>`,
     },
+    {
+      title: "Error Alert",
+      category: "Alerts",
+      subcategory: "Error Alert",
+      description: "Critical feedback notification.",
+      size: "0.4kb",
+      preview: React.createElement(ErrorAlert, {
+        title: "Submission Failed",
+        description: "Please check your network connection.",
+      }),
+      codeJsx: `<div className="flex flex-col p-4 rounded-2xl bg-destructive/10 border border-destructive/20 text-destructive w-full">
+  <div className="flex items-center gap-3 mb-1">
+    <div className="w-2 h-2 rounded-full bg-destructive animate-pulse"></div>
+    <h4 className="text-sm font-black uppercase tracking-widest">Submission Failed</h4>
+  </div>
+  <p className="text-xs font-medium text-destructive/80 leading-relaxed ml-5">
+    Please check your network connection.
+  </p>
+</div>`,
+      codeHtml: `<div class="flex flex-col p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 w-full">
+  <div class="flex items-center gap-3 mb-1">
+    <div class="w-2 h-2 rounded-full bg-red-500"></div>
+    <h4 class="text-sm font-bold uppercase tracking-widest">Submission Failed</h4>
+  </div>
+  <p class="text-xs font-medium text-red-500/80 leading-relaxed ml-5">
+    Please check your network connection.
+  </p>
+</div>`,
+    },
+    {
+      title: "Basic Toast",
+      category: "Toasts",
+      subcategory: "Basic Toast",
+      description: "Floating feedback notification.",
+      size: "0.6kb",
+      preview: React.createElement(BasicToast, {
+        message: "Settings saved successfully!",
+        duration: 999999,
+      }),
+      codeJsx: `<BasicToast message="Settings saved successfully!" />`,
+      codeHtml: `<div class="fixed bottom-8 right-8 flex items-center gap-4 px-6 py-4 bg-white border border-gray-200 rounded-2xl shadow-2xl">
+  <div class="w-8 h-8 rounded-xl bg-[#ffd700]/10 flex items-center justify-center text-[#ffd700]">i</div>
+  <p class="text-sm font-bold">Settings saved successfully!</p>
+</div>`,
+    },
   ],
 
   Navigation: [
+    {
+      title: "Simple Navbar",
+      category: "Navbar",
+      subcategory: "Simple Navbar",
+      description: "Standardized top navigation.",
+      size: "1.1kb",
+      preview: React.createElement(SimpleNavbar, {
+        links: [
+          { label: "Products", href: "#" },
+          { label: "Pricing", href: "#" },
+          { label: "Docs", href: "#" },
+        ],
+      }),
+      codeJsx: `<SimpleNavbar 
+  links={[
+    { label: 'Products', href: '/products' },
+    { label: 'Pricing', href: '/pricing' }
+  ]} 
+/>`,
+      codeHtml: `<nav class="flex items-center justify-between px-8 h-20 bg-white border-b border-gray-100">
+  <div class="text-2xl font-black">SnapJSX<span class="text-[#ffd700]">.</span></div>
+  <div class="flex gap-8">
+    <a class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Products</a>
+    <a class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Pricing</a>
+  </div>
+  <button class="px-5 py-2 rounded-xl bg-[#ffd700] text-black text-[10px] font-bold uppercase tracking-widest">Get Started</button>
+</nav>`,
+    },
     {
       title: "Basic Breadcrumbs",
       category: "Breadcrumbs",
@@ -368,6 +782,123 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
   <button class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest bg-[#ffd700] text-[#0a0a0a]">Profile</button>
   <button class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest text-gray-500">Settings</button>
   <button class="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest text-gray-500">Billing</button>
+</div>`,
+    },
+    {
+      title: "Pill Tabs",
+      category: "Tabs",
+      subcategory: "Pill Tabs",
+      description: "Rounded navigation tabs.",
+      size: "0.7kb",
+      preview: React.createElement(PillTabs, {
+        tabs: [
+          { id: "1", label: "Overview" },
+          { id: "2", label: "Integration" },
+          { id: "3", label: "API" },
+        ],
+      }),
+      codeJsx: `<div className="flex items-center gap-2 p-1 bg-muted/30 rounded-full w-fit">
+  <button className="px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest bg-primary text-primary-foreground shadow-lg shadow-primary/20">Overview</button>
+  <button className="px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest text-muted-foreground">Integration</button>
+  <button className="px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest text-muted-foreground">API</button>
+</div>`,
+      codeHtml: `<div class="flex items-center gap-2 p-1 bg-gray-100 rounded-full w-fit">
+  <button class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#ffd700] text-[#0a0a0a]">Overview</button>
+  <button class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-500">Integration</button>
+  <button class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-500">API</button>
+</div>`,
+    },
+  ],
+
+  "Data Display": [
+    {
+      title: "Basic Table",
+      category: "Tables",
+      subcategory: "Basic Table",
+      description: "Structured data presentation.",
+      size: "1.4kb",
+      preview: React.createElement(BasicTable, {
+        columns: [
+          { key: "name", header: "Name" },
+          { key: "role", header: "Role" },
+          { key: "status", header: "Status" },
+        ],
+        data: [
+          { name: "John Doe", role: "Developer", status: "Active" },
+          { name: "Jane Smith", role: "Designer", status: "Online" },
+          { name: "Alex Johnson", role: "Product", status: "Away" },
+        ],
+      }),
+      codeJsx: `<BasicTable 
+  columns={[
+    { key: 'name', header: 'Name' },
+    { key: 'status', header: 'Status' }
+  ]} 
+  data={[
+    { name: 'John Doe', status: 'Active' }
+  ]} 
+/>`,
+      codeHtml: `<div class="w-full border border-gray-100 rounded-[2rem] overflow-hidden bg-white">
+  <table class="w-full text-left">
+    <thead>
+      <tr class="border-b border-gray-50 text-[10px] font-black uppercase">
+        <th class="px-8 py-5">Name</th>
+        <th class="px-8 py-5">Status</th>
+      </tr>
+    </thead>
+    <tbody class="text-sm">
+      <tr class="hover:bg-gray-50">
+        <td class="px-8 py-5">John Doe</td>
+        <td class="px-8 py-5">Active</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`,
+    },
+    {
+      title: "Simple List",
+      category: "Lists",
+      subcategory: "Simple List",
+      description: "Vertical interactive items.",
+      size: "1.0kb",
+      preview: React.createElement(SimpleList, {
+        items: [
+          {
+            id: "1",
+            title: "Analytics",
+            description: "Real-time data tracking",
+            icon: Sparkles,
+          },
+          {
+            id: "2",
+            title: "Storage",
+            description: "Cloud file management",
+            icon: Package,
+          },
+          {
+            id: "3",
+            title: "Security",
+            description: "End-to-end encryption",
+            icon: AlertCircle,
+          },
+        ],
+      }),
+      codeJsx: `<SimpleList 
+  items={[
+    { id: '1', title: 'Analytics', icon: Sparkles },
+    { id: '2', title: 'Security', icon: Shield }
+  ]} 
+/>`,
+      codeHtml: `<div class="space-y-3">
+  <div class="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-2xl">
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 bg-[#ffd700]/10 rounded-xl"></div>
+      <div>
+        <h4 class="text-sm font-bold">Analytics</h4>
+        <p class="text-xs text-gray-500">Real-time data tracking</p>
+      </div>
+    </div>
+  </div>
 </div>`,
     },
   ],

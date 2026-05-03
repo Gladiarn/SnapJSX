@@ -1,0 +1,22 @@
+{
+  "name": "BasicDropdown",
+  "category": "Dropdowns",
+  "type": "UI Component",
+  "description": "Compact dropdown menu with micro-interactions and accessibility support.",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "description": "Trigger button label."
+    },
+    {
+      "name": "items",
+      "type": "DropdownItem[]",
+      "required": true,
+      "description": "Menu items {id, label, icon, onClick}."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "CardSkeleton",
+  "category": "Skeleton",
+  "type": "UI Component",
+  "description": "Pre-structured skeleton layout matching the standard Card component.",
+  "props": [],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

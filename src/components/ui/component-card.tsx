@@ -43,7 +43,7 @@ export function ComponentCard({
       </div>
 
       {/* Preview Area */}
-      <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-background border border-border flex items-center justify-center mb-4">
+      <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-background border border-border flex items-center justify-center mb-4 [transform:translateZ(0)]">
         <div
           className="absolute inset-0 opacity-[0.04] dark:opacity-[0.08]"
           style={{

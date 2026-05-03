@@ -1,0 +1,22 @@
+{
+  "name": "SimpleNavbar",
+  "category": "Navbar",
+  "type": "UI Component",
+  "description": "Standardized top navigation bar with logo, links, and action buttons.",
+  "props": [
+    {
+      "name": "logo",
+      "type": "string",
+      "default": "SnapJSX",
+      "description": "Brand text or logo component."
+    },
+    {
+      "name": "links",
+      "type": "NavLink[]",
+      "required": true,
+      "description": "Array of navigation links {label, href}."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}

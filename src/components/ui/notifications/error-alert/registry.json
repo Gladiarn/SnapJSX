@@ -1,0 +1,22 @@
+{
+  "name": "ErrorAlert",
+  "category": "Alerts",
+  "type": "UI Component",
+  "description": "Attention-grabbing alert for errors and critical messages.",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "required": true,
+      "description": "Alert title."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "description": "Detailed error message."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

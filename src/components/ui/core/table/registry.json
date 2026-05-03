@@ -1,0 +1,22 @@
+{
+  "name": "BasicTable",
+  "category": "Tables",
+  "type": "UI Component",
+  "description": "Clean, structured table for displaying tabular data with hover effects.",
+  "props": [
+    {
+      "name": "columns",
+      "type": "Column[]",
+      "required": true,
+      "description": "Column definitions {key, header}."
+    },
+    {
+      "name": "data",
+      "type": "any[]",
+      "required": true,
+      "description": "Data array to render."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

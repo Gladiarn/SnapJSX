@@ -1,0 +1,22 @@
+{
+  "name": "RadioGroup",
+  "category": "Inputs",
+  "type": "UI Component",
+  "description": "Custom animated radio buttons for single-choice selections.",
+  "props": [
+    {
+      "name": "options",
+      "type": "RadioOption[]",
+      "required": true,
+      "description": "Array of radio options {id, label}."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "description": "Controlled value."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

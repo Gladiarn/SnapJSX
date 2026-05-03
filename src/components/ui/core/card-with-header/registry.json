@@ -1,0 +1,28 @@
+{
+  "name": "CardWithHeader",
+  "category": "Cards",
+  "type": "UI Component",
+  "description": "Advanced card layout with a structured header and optional actions.",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "required": true,
+      "description": "Main heading for the card."
+    },
+    {
+      "name": "subtitle",
+      "type": "string",
+      "required": false,
+      "description": "Secondary small text below title."
+    },
+    {
+      "name": "action",
+      "type": "ReactNode",
+      "required": false,
+      "description": "Optional component (like a button) in the top right."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Checkbox",
+  "category": "Inputs",
+  "type": "UI Component",
+  "description": "Animated checkbox with custom styling and smooth transitions.",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "description": "Label text displayed next to the checkbox."
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "description": "Controlled checked state."
+    },
+    {
+      "name": "onChange",
+      "type": "function",
+      "required": false,
+      "description": "Change event handler."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}
