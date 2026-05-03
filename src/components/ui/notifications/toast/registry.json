@@ -1,0 +1,22 @@
+{
+  "name": "BasicToast",
+  "category": "Toasts",
+  "type": "UI Component",
+  "description": "Floating corner notification for ephemeral system messages.",
+  "props": [
+    {
+      "name": "message",
+      "type": "string",
+      "required": true,
+      "description": "The message to display."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": "3000",
+      "description": "Time in ms before auto-dismissal."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}

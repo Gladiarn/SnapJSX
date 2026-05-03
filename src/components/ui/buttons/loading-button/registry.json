@@ -1,0 +1,34 @@
+{
+  "name": "LoadingButton",
+  "category": "Buttons",
+  "type": "UI Component",
+  "description": "Button with an integrated loading spinner and disabled state management.",
+  "props": [
+    {
+      "name": "children",
+      "type": "ReactNode",
+      "required": true,
+      "description": "Button label or content."
+    },
+    {
+      "name": "isLoading",
+      "type": "boolean",
+      "default": "false",
+      "description": "Shows the loading spinner and disables interaction."
+    },
+    {
+      "name": "onClick",
+      "type": "function",
+      "required": false,
+      "description": "Click event handler."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": "false",
+      "description": "Disables user interaction."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}

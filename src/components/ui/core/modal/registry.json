@@ -1,0 +1,34 @@
+{
+  "name": "AlertModal",
+  "category": "Modals",
+  "type": "UI Component",
+  "description": "Centered modal dialog for alerts and confirmations with backdrop blur.",
+  "props": [
+    {
+      "name": "isOpen",
+      "type": "boolean",
+      "required": true,
+      "description": "Visibility state of the modal."
+    },
+    {
+      "name": "onClose",
+      "type": "function",
+      "required": true,
+      "description": "Close event handler."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": true,
+      "description": "Modal heading."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "description": "Warning or informative message."
+    }
+  ],
+  "dependencies": ["framer-motion", "lucide-react"],
+  "variants": ["Default"]
+}

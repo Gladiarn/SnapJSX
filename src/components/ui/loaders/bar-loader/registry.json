@@ -1,0 +1,9 @@
+{
+  "name": "BarLoader",
+  "category": "Progress",
+  "type": "UI Component",
+  "description": "Dynamic vertical bar animation for loading states.",
+  "props": [],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}

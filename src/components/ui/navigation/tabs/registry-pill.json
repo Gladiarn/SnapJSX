@@ -1,0 +1,28 @@
+{
+  "name": "PillTabs",
+  "category": "Tabs",
+  "type": "UI Component",
+  "description": "Pill-style navigation with shared layout animations.",
+  "props": [
+    {
+      "name": "tabs",
+      "type": "Tab[]",
+      "required": true,
+      "description": "Array of tab objects {id, label}."
+    },
+    {
+      "name": "activeTab",
+      "type": "string",
+      "required": false,
+      "description": "Controlled active tab ID."
+    },
+    {
+      "name": "onChange",
+      "type": "function",
+      "required": false,
+      "description": "Tab change event handler."
+    }
+  ],
+  "dependencies": ["framer-motion"],
+  "variants": ["Default"]
+}
