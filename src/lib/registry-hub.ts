@@ -326,33 +326,6 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
 </label>`,
     },
     {
-      title: "Radio Group",
-      category: "Inputs",
-      subcategory: "Radio",
-      description: "Animated selection list.",
-      size: "0.6kb",
-      preview: React.createElement(RadioGroup, {
-        options: [
-          { id: "1", label: "Option One" },
-          { id: "2", label: "Option Two" },
-        ],
-      }),
-      codeJsx: `<RadioGroup 
-  options={[
-    { id: '1', label: 'Option One' },
-    { id: '2', label: 'Option Two' }
-  ]} 
-/>`,
-      codeHtml: `<div class="space-y-3">
-  <label class="flex items-center gap-3 cursor-pointer group">
-    <div class="w-5 h-5 rounded-full border-2 border-[#ffd700] flex items-center justify-center">
-      <div class="w-2.5 h-2.5 rounded-full bg-[#ffd700]"></div>
-    </div>
-    <span class="text-sm font-medium">Option One</span>
-  </label>
-</div>`,
-    },
-    {
       title: "Native Select",
       category: "Inputs",
       subcategory: "Select",
