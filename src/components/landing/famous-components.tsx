@@ -1,43 +1,39 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { useMemo } from "react";
 import { ComponentCard } from "@/components/ui/component-card";
+import { RegistryHub } from "@/lib/registry-hub";
 
-const FAMOUS_COMPONENTS = [
-  {
-    title: "Glass Morphism Card",
-    category: "UI",
-    description: "Frosted glass effect with sleek borders.",
-    size: "2.4kb",
-    preview: (
-      <div className="h-24 w-40 rounded-lg bg-background/50 border border-border shadow-lg backdrop-blur-md flex items-center justify-center">
-        <div className="h-8 w-8 rounded-full bg-primary/20 animate-pulse" />
-      </div>
-    ),
-    codeJsx: `function GlassCard() { return <div className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/20">...</div> }`,
-    codeHtml: `<div class="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/20">...</div>`,
-  },
-  {
-    title: "Infinite Scroll List",
-    category: "LOGIC",
-    description: "Smooth, virtualized list for heavy data.",
-    size: "4.1kb",
-    preview: <div className="h-16 w-32 bg-muted/50 rounded-lg" />,
-    codeJsx: `function ScrollList() { return <ul>...</ul> }`,
-    codeHtml: `<ul>...</ul>`,
-  },
-  {
-    title: "Radial Context Menu",
-    category: "UX",
-    description: "Modern circular menu for quick actions.",
-    size: "3.2kb",
-    preview: <div className="h-16 w-16 rounded-full bg-primary/20" />,
-    codeJsx: `function RadialMenu() { return <div className="rounded-full">...</div> }`,
-    codeHtml: `<div class="rounded-full">...</div>`,
-  },
+// Mock usage data that will eventually come from a backend
+const COMPONENT_STATS = [
+  { title: "Primary Button", copyCount: 1240 },
+  { title: "Alert Modal", copyCount: 850 },
+  { title: "Simple Navbar", copyCount: 720 },
+  { title: "Stats Card", copyCount: 450 },
+  { title: "Basic Dropdown", copyCount: 380 },
+  { title: "Pill Tabs", copyCount: 290 },
 ];
 
 export function FamousComponents() {
+  // 1. Flatten the RegistryHub to get a single list of components
+  const allComponents = useMemo(() => {
+    return Object.values(RegistryHub).flat();
+  }, []);
+
+  // 2. Identify top 3 components based on copyCount
+  const famousComponents = useMemo(() => {
+    // Sort stats by copyCount descending and take top 3
+    const topStats = [...COMPONENT_STATS]
+      .sort((a, b) => b.copyCount - a.copyCount)
+      .slice(0, 3);
+
+    // Match titles with RegistryHub components
+    return topStats
+      .map((stat) => allComponents.find((comp) => comp.title === stat.title))
+      .filter((comp): comp is Exclude<typeof comp, undefined> => !!comp);
+  }, [allComponents]);
+
   const container: Variants = {
     hidden: { opacity: 0 },
     show: {
@@ -60,10 +56,11 @@ export function FamousComponents() {
       <div className="container mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-            Famous Components
+            Most Copied Components
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Our most loved snippets, optimized for performance and style.
+            The building blocks developers love most. Standardized, accessible,
+            and ready to drop into your project.
           </p>
         </div>
 
@@ -74,9 +71,17 @@ export function FamousComponents() {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
         >
-          {FAMOUS_COMPONENTS.map((comp) => (
+          {famousComponents.map((comp) => (
             <motion.div key={comp.title} variants={item}>
-              <ComponentCard {...comp} />
+              <ComponentCard
+                title={comp.title}
+                category={comp.category}
+                description={comp.description}
+                size={comp.size || "0.0kb"}
+                preview={comp.preview}
+                codeJsx={comp.codeJsx}
+                codeHtml={comp.codeHtml}
+              />
             </motion.div>
           ))}
         </motion.div>
