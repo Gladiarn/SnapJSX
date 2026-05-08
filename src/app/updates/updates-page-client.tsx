@@ -6,6 +6,7 @@ import {
   Calendar,
   ChevronDown,
   Layers,
+  Search,
   Sparkles,
   Terminal,
   Zap,
@@ -16,6 +17,36 @@ import { Pagination } from "@/components/ui/pagination";
 export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
+      {
+        version: "v0.1.26",
+        date: "May 8, 2026",
+        title: "Landing: Data-Driven 'Famous Components' & Performance",
+        summary:
+          "Finalized today's session with a major landing page refactor and a full-scale content expansion across the entire ecosystem.",
+        category: "UI/UX",
+        icon: Sparkles,
+        details: [
+          "Dynamic Famous Components: Refactored the landing page showcase to automatically display the Top 3 most-copied components using a new mock-tracking architecture.",
+          "Blocks Library Surge: Tripled the high-level blocks library with new Feature, Pricing, and Testimonial sections—all 100% self-contained.",
+          "Zero-Regression State: Achieved a 100% clean build state with all cross-file type errors and accessibility warnings resolved.",
+          "Standardized Exports: Unified all registry modules to provide pure JSX implementations, removing library-specific dependencies for users.",
+        ],
+      },
+      {
+        version: "v0.1.25",
+        date: "May 8, 2026",
+        title: "Docs: Functional Sidebar Search & Discovery",
+        summary:
+          "Successfully transformed the documentation sidebar search from a static UI element into a high-performance filtering engine.",
+        category: "Features",
+        icon: Search,
+        details: [
+          "Reactive Filtering: Implemented real-time search logic that filters sections, items, and sub-items dynamically as the user types.",
+          "Automatic Expansion: Configured the sidebar to automatically expand relevant groups when a match is found within their sub-items.",
+          "Discovery UX: Added a 'No results found' state and optimized the typographic hierarchy of search results for better scannability.",
+          "Performance: Leveraged React.useMemo to ensure sub-millisecond filtering times even with an expanding documentation index.",
+        ],
+      },
       {
         version: "v0.1.24",
         date: "May 8, 2026",
