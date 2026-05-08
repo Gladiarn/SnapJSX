@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDocsStore } from "@/lib/store";
 
 interface SidebarProps {
@@ -24,6 +24,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const { sidebarData } = useDocsStore();
   const pathname = usePathname();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>(() => {
     const initialOpen: Record<string, boolean> = {};
@@ -40,6 +41,48 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
     });
     return initialOpen;
   });
+
+  // Filter logic
+  const filteredData = useMemo(() => {
+    if (!searchQuery.trim()) return sidebarData;
+
+    const query = searchQuery.toLowerCase();
+
+    return sidebarData
+      .map((section) => {
+        const filteredItems = section.items
+          .map((item) => {
+            const matchesItem = item.name.toLowerCase().includes(query);
+            const filteredSubItems = item.subItems.filter((sub) =>
+              sub.toLowerCase().includes(query),
+            );
+
+            if (matchesItem || filteredSubItems.length > 0) {
+              // If we have a match, ensure this group is open
+              if (searchQuery.trim()) {
+                setOpenGroups((prev) => ({ ...prev, [item.name]: true }));
+              }
+              return {
+                ...item,
+                subItems: matchesItem ? item.subItems : filteredSubItems,
+              };
+            }
+            return null;
+          })
+          .filter((item): item is NonNullable<typeof item> => item !== null);
+
+        if (
+          filteredItems.length > 0 ||
+          section.title.toLowerCase().includes(query)
+        ) {
+          return { ...section, items: filteredItems };
+        }
+        return null;
+      })
+      .filter(
+        (section): section is NonNullable<typeof section> => section !== null,
+      );
+  }, [sidebarData, searchQuery]);
 
   const toggleGroup = (name: string) => {
     setOpenGroups((prev) => ({ ...prev, [name]: !prev[name] }));
@@ -82,12 +125,14 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
           <input
             type="text"
             placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full px-3 py-2 bg-muted border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
           />
         </div>
 
         <nav className="space-y-6">
-          {sidebarData.map((section, idx) => (
+          {filteredData.map((section, idx) => (
             <div key={section.title} className="px-2">
               {idx > 0 && <div className="border-t border-border/50 mb-6" />}
               <div className="flex items-center gap-2 mb-3 text-muted-foreground text-xs tracking-wide font-medium uppercase">
@@ -150,6 +195,11 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
               </ul>
             </div>
           ))}
+          {filteredData.length === 0 && (
+            <div className="px-2 py-4 text-center">
+              <p className="text-xs text-muted-foreground">No results found.</p>
+            </div>
+          )}
         </nav>
       </div>
     </aside>

@@ -17,6 +17,21 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.25",
+        date: "May 8, 2026",
+        title: "Docs: Functional Sidebar Search & Discovery",
+        summary:
+          "Successfully transformed the documentation sidebar search from a static UI element into a high-performance filtering engine.",
+        category: "Features",
+        icon: Search,
+        details: [
+          "Reactive Filtering: Implemented real-time search logic that filters sections, items, and sub-items dynamically as the user types.",
+          "Automatic Expansion: Configured the sidebar to automatically expand relevant groups when a match is found within their sub-items.",
+          "Discovery UX: Added a 'No results found' state and optimized the typographic hierarchy of search results for better scannability.",
+          "Performance: Leveraged React.useMemo to ensure sub-millisecond filtering times even with an expanding documentation index.",
+        ],
+      },
+      {
         version: "v0.1.24",
         date: "May 8, 2026",
         title: "Blocks Expansion: Premium Marketing Modules",
