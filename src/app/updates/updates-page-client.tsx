@@ -6,6 +6,7 @@ import {
   Calendar,
   ChevronDown,
   Layers,
+  Search,
   Sparkles,
   Terminal,
   Zap,
@@ -16,6 +17,21 @@ import { Pagination } from "@/components/ui/pagination";
 export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
+      {
+        version: "v0.1.26",
+        date: "May 8, 2026",
+        title: "Landing: Data-Driven 'Famous Components' & Performance",
+        summary:
+          "Finalized today's session with a major landing page refactor and a full-scale content expansion across the entire ecosystem.",
+        category: "UI/UX",
+        icon: Sparkles,
+        details: [
+          "Dynamic Famous Components: Refactored the landing page showcase to automatically display the Top 3 most-copied components using a new mock-tracking architecture.",
+          "Blocks Library Surge: Tripled the high-level blocks library with new Feature, Pricing, and Testimonial sections—all 100% self-contained.",
+          "Zero-Regression State: Achieved a 100% clean build state with all cross-file type errors and accessibility warnings resolved.",
+          "Standardized Exports: Unified all registry modules to provide pure JSX implementations, removing library-specific dependencies for users.",
+        ],
+      },
       {
         version: "v0.1.25",
         date: "May 8, 2026",
