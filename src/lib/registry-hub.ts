@@ -225,13 +225,28 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
         description:
           "This action cannot be undone. This will permanently delete your account.",
       }),
-      codeJsx: `<AlertModal 
-  isOpen={true} 
-  title="Are you sure?" 
-  description="This action cannot be undone."
-  onConfirm={() => {}}
-  onClose={() => {}}
-/>`,
+      codeJsx: `<div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+  <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+  <div className="relative w-full max-w-lg bg-card border border-border rounded-[2.5rem] shadow-2xl p-8 overflow-hidden">
+    <div className="flex flex-col items-center text-center space-y-4">
+      <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+        <AlertCircle className="w-6 h-6" />
+      </div>
+      <h3 className="text-2xl font-black tracking-tight">Are you sure?</h3>
+      <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+        This action cannot be undone. This will permanently delete your account.
+      </p>
+    </div>
+    <div className="flex flex-col sm:flex-row gap-3 mt-10">
+      <button className="flex-1 px-6 py-2.5 rounded-2xl border border-input font-bold text-sm hover:bg-accent transition-all">
+        Cancel
+      </button>
+      <button className="flex-1 px-6 py-2.5 rounded-2xl bg-primary text-primary-foreground font-bold text-sm shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+        Confirm
+      </button>
+    </div>
+  </div>
+</div>`,
       codeHtml: `<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
   <div class="bg-white border border-gray-200 rounded-[2.5rem] shadow-2xl p-8 max-w-lg w-full text-center">
     <h3 class="text-2xl font-black tracking-tight mb-2">Are you sure?</h3>
@@ -257,14 +272,27 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           { id: "3", label: "Logout", icon: LogOut },
         ],
       }),
-      codeJsx: `<BasicDropdown 
-  label="Options" 
-  items={[
-    { id: '1', label: 'Edit Profile', icon: User },
-    { id: '2', label: 'Settings', icon: Settings },
-    { id: '3', label: 'Logout', icon: LogOut }
-  ]} 
-/>`,
+      codeJsx: `<div className="relative">
+  <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-card border border-border font-bold text-xs uppercase tracking-widest hover:border-primary/50 transition-all">
+    Options
+    <ChevronDown className="w-4 h-4" />
+  </button>
+
+  <div className="absolute z-50 mt-2 w-48 bg-card border border-border rounded-2xl shadow-xl p-2 overflow-hidden">
+    <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-medium text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all text-left">
+      <User className="w-4 h-4" />
+      Edit Profile
+    </button>
+    <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-medium text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all text-left">
+      <Settings className="w-4 h-4" />
+      Settings
+    </button>
+    <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-medium text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all text-left">
+      <LogOut className="w-4 h-4" />
+      Logout
+    </button>
+  </div>
+</div>`,
       codeHtml: `<div class="relative">
   <button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-gray-200 font-bold text-[10px] uppercase tracking-widest">
     Options <span>↓</span>
@@ -339,13 +367,19 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           { value: "3", label: "Home" },
         ],
       }),
-      codeJsx: `<NativeSelect 
-  label="Category" 
-  options={[
-    { value: '1', label: 'Electronics' },
-    { value: '2', label: 'Fashion' }
-  ]} 
-/>`,
+      codeJsx: `<div className="flex flex-col gap-2 w-full">
+  <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Category</label>
+  <div className="relative">
+    <select className="w-full appearance-none px-4 py-3 rounded-xl bg-card border border-border text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all pr-10">
+      <option value="1">Electronics</option>
+      <option value="2">Fashion</option>
+      <option value="3">Home</option>
+    </select>
+    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground">
+      <ChevronDown className="w-4 h-4" />
+    </div>
+  </div>
+</div>`,
       codeHtml: `<div class="flex flex-col gap-2">
   <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Category</label>
   <div class="relative">
@@ -369,7 +403,14 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
         label: "Email",
         placeholder: "john@example.com",
       }),
-      codeJsx: `<TextField label="Email" placeholder="john@example.com" />`,
+      codeJsx: `<div className="flex flex-col gap-2 w-full">
+  <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Email</label>
+  <input 
+    type="email" 
+    placeholder="john@example.com"
+    className="w-full px-4 py-3 rounded-xl bg-card border border-border text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+  />
+</div>`,
       codeHtml: `<div class="flex flex-col gap-2 w-full">
   <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Email</label>
   <input type="text" placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm" />
@@ -385,7 +426,12 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
         label: "Subscribe to newsletter",
         checked: true,
       }),
-      codeJsx: `<Checkbox label="Subscribe to newsletter" checked={true} />`,
+      codeJsx: `<label className="flex items-center gap-3 cursor-pointer group">
+  <div className="w-5 h-5 rounded-md border-2 border-primary bg-primary flex items-center justify-center transition-colors">
+    <Check className="w-3.5 h-3.5 text-primary-foreground stroke-[3px]" />
+  </div>
+  <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Subscribe to newsletter</span>
+</label>`,
       codeHtml: `<label class="flex items-center gap-3 cursor-pointer">
   <div class="w-5 h-5 rounded-md border-2 border-[#ffd700] bg-[#ffd700] flex items-center justify-center">
     <svg class="w-3.5 h-3.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -407,12 +453,21 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           { id: "2", label: "Option Two" },
         ],
       }),
-      codeJsx: `<RadioGroup 
-  options={[
-    { id: '1', label: 'Option One' },
-    { id: '2', label: 'Option Two' }
-  ]} 
-/>`,
+      codeJsx: `<div className="space-y-3">
+  <label className="flex items-center gap-3 cursor-pointer group">
+    <div className="relative flex items-center justify-center">
+      <div className="w-5 h-5 rounded-full border-2 border-primary transition-all" />
+      <div className="absolute w-2.5 h-2.5 rounded-full bg-primary" />
+    </div>
+    <span className="text-sm font-medium text-foreground">Option One</span>
+  </label>
+  <label className="flex items-center gap-3 cursor-pointer group">
+    <div className="relative flex items-center justify-center">
+      <div className="w-5 h-5 rounded-full border-2 border-border/50 group-hover:border-primary/50 transition-all" />
+    </div>
+    <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Option Two</span>
+  </label>
+</div>`,
       codeHtml: `<div class="space-y-3">
   <label class="flex items-center gap-3 cursor-pointer group">
     <div class="w-5 h-5 rounded-full border-2 border-[#ffd700] flex items-center justify-center">
@@ -436,13 +491,19 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           { value: "3", label: "Home" },
         ],
       }),
-      codeJsx: `<NativeSelect 
-  label="Category" 
-  options={[
-    { value: '1', label: 'Electronics' },
-    { value: '2', label: 'Fashion' }
-  ]} 
-/>`,
+      codeJsx: `<div className="flex flex-col gap-2 w-full">
+  <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">Category</label>
+  <div className="relative">
+    <select className="w-full appearance-none px-4 py-3 rounded-xl bg-card border border-border text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all pr-10">
+      <option value="1">Electronics</option>
+      <option value="2">Fashion</option>
+      <option value="3">Home</option>
+    </select>
+    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground">
+      <ChevronDown className="w-4 h-4" />
+    </div>
+  </div>
+</div>`,
       codeHtml: `<div class="flex flex-col gap-2">
   <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Category</label>
   <div class="relative">
@@ -502,7 +563,11 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
       description: "Dynamic vertical bar animation.",
       size: "0.5kb",
       preview: React.createElement(BarLoader, {}),
-      codeJsx: `<BarLoader />`,
+      codeJsx: `<div className="flex items-center gap-1 h-8">
+  <div className="w-1.5 h-6 bg-primary rounded-full animate-bounce"></div>
+  <div className="w-1.5 h-8 bg-primary rounded-full animate-bounce [animation-delay:0.1s]"></div>
+  <div className="w-1.5 h-4 bg-primary rounded-full animate-bounce [animation-delay:0.2s]"></div>
+</div>`,
       codeHtml: `<div class="flex items-center gap-1 h-8">
   <div class="w-1.5 h-6 bg-[#ffd700] rounded-full animate-bounce"></div>
   <div class="w-1.5 h-8 bg-[#ffd700] rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
@@ -573,7 +638,21 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
       description: "Placeholder for card content.",
       size: "0.7kb",
       preview: React.createElement(CardSkeleton, { className: "w-80" }),
-      codeJsx: `<CardSkeleton />`,
+      codeJsx: `<div className="bg-card border border-border/50 rounded-[2rem] p-8 space-y-6 w-80">
+  <div className="space-y-3">
+    <div className="w-1/3 h-6 bg-muted/50 rounded-md animate-pulse"></div>
+    <div className="w-1/2 h-4 bg-muted/50 rounded-md animate-pulse"></div>
+  </div>
+  <div className="space-y-2">
+    <div className="w-full h-4 bg-muted/50 rounded-md animate-pulse"></div>
+    <div className="w-full h-4 bg-muted/50 rounded-md animate-pulse"></div>
+    <div className="w-4/5 h-4 bg-muted/50 rounded-md animate-pulse"></div>
+  </div>
+  <div className="pt-4 flex gap-3">
+    <div className="w-24 h-10 bg-muted/50 rounded-xl animate-pulse"></div>
+    <div className="w-24 h-10 bg-muted/50 rounded-xl animate-pulse"></div>
+  </div>
+</div>`,
       codeHtml: `<div class="p-8 bg-white border border-gray-100 rounded-[2rem] space-y-4">
   <div class="h-6 w-1/3 bg-gray-100 rounded-md animate-pulse"></div>
   <div class="h-4 w-full bg-gray-100 rounded-md animate-pulse"></div>
@@ -589,10 +668,13 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
       subcategory: "Status Badge",
       description: "Small pill for states and tags.",
       size: "0.2kb",
-      preview: React.createElement(StatusBadge, {
-        variant: "success",
-        children: "Active",
-      }),
+      preview: React.createElement(
+        StatusBadge,
+        {
+          variant: "success",
+        },
+        "Active",
+      ),
       codeJsx: `<span className="px-2.5 py-0.5 rounded-full border bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[10px] font-black uppercase tracking-widest">
   Active
 </span>`,
@@ -668,7 +750,15 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
         message: "Settings saved successfully!",
         duration: 999999,
       }),
-      codeJsx: `<BasicToast message="Settings saved successfully!" />`,
+      codeJsx: `<div className="fixed bottom-8 right-8 z-[100] flex items-center gap-4 px-6 py-4 bg-card border border-border rounded-2xl shadow-2xl">
+  <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+    <Info className="w-4 h-4" />
+  </div>
+  <p className="text-sm font-bold text-foreground">Settings saved successfully!</p>
+  <button className="ml-2 text-muted-foreground hover:text-foreground transition-colors">
+    <X className="w-4 h-4" />
+  </button>
+</div>`,
       codeHtml: `<div class="fixed bottom-8 right-8 flex items-center gap-4 px-6 py-4 bg-white border border-gray-200 rounded-2xl shadow-2xl">
   <div class="w-8 h-8 rounded-xl bg-[#ffd700]/10 flex items-center justify-center text-[#ffd700]">i</div>
   <p class="text-sm font-bold">Settings saved successfully!</p>
@@ -690,12 +780,23 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           { label: "Docs", href: "#" },
         ],
       }),
-      codeJsx: `<SimpleNavbar 
-  links={[
-    { label: 'Products', href: '/products' },
-    { label: 'Pricing', href: '/pricing' }
-  ]} 
-/>`,
+      codeJsx: `<nav className="fixed top-0 left-0 right-0 z-40 px-8 h-20 flex items-center justify-between bg-background/80 backdrop-blur-md border-b border-border/50">
+  <div className="text-2xl font-black tracking-tighter text-foreground">
+    SnapJSX<span className="text-primary">.</span>
+  </div>
+
+  <div className="hidden md:flex items-center gap-8">
+    <a href="#" className="text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">Products</a>
+    <a href="#" className="text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">Pricing</a>
+    <a href="#" className="text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">Docs</a>
+  </div>
+
+  <div className="flex items-center gap-4">
+    <button className="px-5 py-2 rounded-xl bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest shadow-lg shadow-primary/20">
+      Get Started
+    </button>
+  </div>
+</nav>`,
       codeHtml: `<nav class="flex items-center justify-between px-8 h-20 bg-white border-b border-gray-100">
   <div class="text-2xl font-black">SnapJSX<span class="text-[#ffd700]">.</span></div>
   <div class="flex gap-8">
@@ -704,6 +805,71 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
   </div>
   <button class="px-5 py-2 rounded-xl bg-[#ffd700] text-black text-[10px] font-bold uppercase tracking-widest">Get Started</button>
 </nav>`,
+    },
+    {
+      title: "Pagination",
+      category: "Navigation",
+      subcategory: "Pagination",
+      description: "Standard pagination with input.",
+      size: "0.8kb",
+      preview: React.createElement(
+        "div",
+        { className: "flex justify-center items-center gap-4" },
+        React.createElement(
+          "button",
+          {
+            type: "button",
+            className: "px-4 py-2 rounded-lg bg-accent text-sm font-medium",
+          },
+          "Previous",
+        ),
+        React.createElement(
+          "div",
+          { className: "flex items-center gap-2 text-sm font-medium" },
+          "Page",
+          React.createElement("input", {
+            type: "text",
+            value: "1",
+            className:
+              "w-12 h-9 text-center rounded-md border border-input bg-background",
+          }),
+          "of 10",
+        ),
+        React.createElement(
+          "button",
+          {
+            type: "button",
+            className: "px-4 py-2 rounded-lg bg-accent text-sm font-medium",
+          },
+          "Next",
+        ),
+      ),
+      codeJsx: `<div className="flex justify-center items-center gap-4">
+  <button className="px-4 py-2 rounded-lg bg-accent text-sm font-medium hover:bg-accent/80 transition-colors disabled:opacity-50">
+    Previous
+  </button>
+
+  <div className="flex items-center gap-2 text-sm font-medium">
+    Page
+    <input
+      type="text"
+      value="1"
+      className="w-12 h-9 text-center rounded-md border border-input bg-background focus:ring-1 focus:ring-primary outline-none"
+    />
+    of 10
+  </div>
+
+  <button className="px-4 py-2 rounded-lg bg-accent text-sm font-medium hover:bg-accent/80 transition-colors disabled:opacity-50">
+    Next
+  </button>
+</div>`,
+      codeHtml: `<div class="flex justify-center items-center gap-4">
+  <button class="px-4 py-2 rounded-lg bg-gray-100 text-sm font-medium">Previous</button>
+  <div class="flex items-center gap-2 text-sm font-medium">
+    Page <input type="text" value="1" class="w-12 h-9 text-center rounded-md border border-gray-200" /> of 10
+  </div>
+  <button class="px-4 py-2 rounded-lg bg-gray-100 text-sm font-medium">Next</button>
+</div>`,
     },
     {
       title: "Basic Breadcrumbs",
@@ -802,15 +968,22 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           { name: "Alex Johnson", role: "Product", status: "Away" },
         ],
       }),
-      codeJsx: `<BasicTable 
-  columns={[
-    { key: 'name', header: 'Name' },
-    { key: 'status', header: 'Status' }
-  ]} 
-  data={[
-    { name: 'John Doe', status: 'Active' }
-  ]} 
-/>`,
+      codeJsx: `<div className="w-full overflow-hidden rounded-[2rem] border border-border/50 bg-card">
+  <table className="w-full text-left border-collapse">
+    <thead>
+      <tr className="border-b border-border/50">
+        <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-muted-foreground">Name</th>
+        <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-muted-foreground">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="group hover:bg-primary/5 transition-colors border-b border-border/20 last:border-0">
+        <td className="px-8 py-5 text-sm font-medium text-foreground">John Doe</td>
+        <td className="px-8 py-5 text-sm font-medium text-foreground">Active</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`,
       codeHtml: `<div class="w-full border border-gray-100 rounded-[2rem] overflow-hidden bg-white">
   <table class="w-full text-left">
     <thead>
@@ -856,12 +1029,20 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           },
         ],
       }),
-      codeJsx: `<SimpleList 
-  items={[
-    { id: '1', title: 'Analytics', icon: Sparkles },
-    { id: '2', title: 'Security', icon: Shield }
-  ]} 
-/>`,
+      codeJsx: `<div className="space-y-3">
+  <div className="flex items-center justify-between p-4 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all cursor-pointer group">
+    <div className="flex items-center gap-4">
+      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+        <Sparkles className="w-5 h-5" />
+      </div>
+      <div>
+        <h4 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">Analytics</h4>
+        <p className="text-xs text-muted-foreground">Real-time data tracking</p>
+      </div>
+    </div>
+    <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-all group-hover:translate-x-1" />
+  </div>
+</div>`,
       codeHtml: `<div class="space-y-3">
   <div class="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-2xl">
     <div class="flex items-center gap-4">

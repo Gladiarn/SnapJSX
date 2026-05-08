@@ -49,6 +49,7 @@ export function FAQ() {
         </div>
 
         <motion.div
+          key={category}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}

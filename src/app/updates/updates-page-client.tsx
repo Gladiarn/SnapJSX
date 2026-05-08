@@ -17,6 +17,22 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.23",
+        date: "May 8, 2026",
+        title: "Registry: Self-Contained JSX & Layout Integrity",
+        summary:
+          "Revolutionized the copying experience by providing full, self-contained JSX implementations and resolved critical layout expansion bugs.",
+        category: "Features",
+        icon: Zap,
+        details: [
+          "Self-Contained JSX: Replaced all component tags (e.g., <Pagination />) with their full JSX and Tailwind implementations in the registry, enabling zero-dependency copy-pasting.",
+          "Pagination Component: Formally integrated the Pagination component into the Navigation registry with a functional logic preview and copyable implementation.",
+          "Layout Integrity: Resolved a critical CSS Grid bug where opening the code viewer on one card caused all siblings in the row to stretch; implemented 'items-start' for surgical expansion.",
+          "Ecosystem Consistency: Synchronized the BlocksHub to ensure block-level modules are also self-contained and free of internal library dependencies.",
+          "Linting & Standards: Fixed cross-file accessibility and React.createElement linting errors to maintain a 100% build-clean state.",
+        ],
+      },
+      {
         version: "v0.1.22",
         date: "May 4, 2026",
         title: "Library Expansion: 10+ High-Performance Core Components",
