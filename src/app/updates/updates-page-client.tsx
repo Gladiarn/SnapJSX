@@ -17,6 +17,22 @@ export function UpdatesPageClient() {
   const updatesLog = useMemo(
     () => [
       {
+        version: "v0.1.24",
+        date: "May 8, 2026",
+        title: "Blocks Expansion: Premium Marketing Modules",
+        summary:
+          "Significantly expanded the blocks library with essential marketing sections, including Feature Grids, Pricing Tables, and Testimonial galleries.",
+        category: "Features",
+        icon: Box,
+        details: [
+          "Feature Grid Block: Launched an elegant 6-column feature showcase with responsive grid logic and animated entry effects.",
+          "Pricing Section Block: Implemented conversion-optimized pricing tables with 'Most Popular' highlighting and feature checkmarks.",
+          "Testimonials Block: Developed a premium social proof grid featuring absolute-positioned quote icons and author avatar logic.",
+          "Zero-Dependency JSX: All new blocks follow the standardized JSX-only copy-paste model, removing all internal component imports.",
+          "Proper HTML Support: Engineered highly compatible HTML versions for every block, utilizing comprehensive inline CSS for zero-style-leak integration.",
+        ],
+      },
+      {
         version: "v0.1.23",
         date: "May 8, 2026",
         title: "Registry: Self-Contained JSX & Layout Integrity",
