@@ -62,9 +62,10 @@ export function SaasHero() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 items-center"
           >
-            <PrimaryButton className="px-8 py-4 text-base" icon={ArrowRight}>
+            <button className="relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-base shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
               Get Started for Free
-            </PrimaryButton>
+              <ArrowRight className="w-4 h-4" />
+            </button>
             <button className="px-8 py-4 rounded-xl font-bold text-base hover:bg-muted transition-colors">
               View Showcase
             </button>

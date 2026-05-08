@@ -195,7 +195,7 @@ export function ComponentsPageClient() {
 
       {/* Grid Section - Matching Spacing pattern */}
       {paginatedComponents.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
           {paginatedComponents.map((comp) => (
             <ComponentCard
               key={`${comp.group}-${comp.title}`}

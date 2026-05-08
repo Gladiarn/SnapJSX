@@ -214,7 +214,7 @@ export function BlocksPageClient() {
 
       {/* Grid Section - 2 per row for Blocks because they are bigger */}
       {paginatedBlocks.length > 0 ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {paginatedBlocks.map((block) => (
             <BlockCard
               key={`${block.group}-${block.title}`}
