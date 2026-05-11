@@ -830,6 +830,7 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
           React.createElement("input", {
             type: "text",
             value: "1",
+            readOnly: true,
             className:
               "w-12 h-9 text-center rounded-md border border-input bg-background",
           }),
@@ -854,6 +855,7 @@ export const RegistryHub: Record<string, ComponentVariant[]> = {
     <input
       type="text"
       value="1"
+      readOnly
       className="w-12 h-9 text-center rounded-md border border-input bg-background focus:ring-1 focus:ring-primary outline-none"
     />
     of 10
